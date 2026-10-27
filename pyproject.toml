@@ -1,0 +1,9 @@
+[project]
+name = "tme-6015-assignment-2"
+version = "0.1.0"
+requires-python = ">=3.9"
+dependencies = [
+    "jupyterlab>=4.5.11",
+    "matplotlib>=3.9.4",
+    "pandas>=2.3.3",
+]
