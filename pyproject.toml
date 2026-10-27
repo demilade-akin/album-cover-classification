@@ -6,4 +6,5 @@ dependencies = [
     "jupyterlab>=4.5.11",
     "matplotlib>=3.9.4",
     "pandas>=2.3.3",
+    "requests>=2.32.5",
 ]

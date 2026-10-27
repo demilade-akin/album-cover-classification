@@ -5280,6 +5280,8 @@ dependencies = [
     { name = "matplotlib", version = "3.11.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pandas", version = "2.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
     { name = "pandas", version = "3.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "requests", version = "2.32.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
+    { name = "requests", version = "2.34.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
 ]
 
 [package.metadata]
@@ -5287,6 +5289,7 @@ requires-dist = [
     { name = "jupyterlab", specifier = ">=4.5.11" },
     { name = "matplotlib", specifier = ">=3.9.4" },
     { name = "pandas", specifier = ">=2.3.3" },
+    { name = "requests", specifier = ">=2.32.5" },
 ]
 
 [[package]]
