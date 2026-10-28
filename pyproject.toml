@@ -3,7 +3,9 @@ name = "tme-6015-assignment-2"
 version = "0.1.0"
 requires-python = ">=3.9"
 dependencies = [
+    "jupyter>=1.1.1",
     "jupyterlab>=4.5.11",
+    "lab>=8.6",
     "matplotlib>=3.9.4",
     "pandas>=2.3.3",
     "requests>=2.32.5",
