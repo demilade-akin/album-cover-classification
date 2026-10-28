@@ -1,0 +1,468 @@
+rank,year,artist,album,matched_title,matched_artist,title_ok,rg_id,releases,front_art,status
+1,1971,Marvin Gaye,What's Going On,What’s Going On,Marvin Gaye,True,c1fa4d2c-ec62-37d5-b01d-6df7f8fd2c90,49,36,ok
+2,1966,The Beach Boys,Pet Sounds,Pet Sounds,The Beach Boys,True,fdd96703-7b21-365e-bdea-38029fbeb84e,58,48,ok
+3,1971,Joni Mitchell,Blue,Blue,Joni Mitchell,True,42d725fb-a8b7-388c-8866-3b02789af326,29,24,ok
+4,1976,Stevie Wonder,Songs in the Key of Life,Songs in the Key of Life,Stevie Wonder,True,ea88b09b-fd34-33cf-a3e5-25a3a2fb4c6f,38,33,ok
+5,1969,The Beatles,Abbey Road,Abbey Road,The Beatles,True,9162580e-5df4-32de-80cc-f45a8d8a9b1d,73,55,ok
+6,1991,Nirvana,Nevermind,Nevermind,Nirvana,True,1b022e01-4da6-387b-8658-8678046e4cef,99,88,ok
+7,1977,Fleetwood Mac,Rumours,Rumours,Fleetwood Mac,True,416bb5e5-c7d1-3977-8fd7-7c9daf6c2be6,81,62,ok
+8,1984,Prince,Purple Rain,,,,,,,no match
+9,1975,Bob Dylan,Blood on the Tracks,Blood on the Tracks,Bob Dylan,True,9c1b8072-eb1d-33d2-af8c-984d46e40902,29,24,ok
+10,1998,Lauryn Hill,The Miseducation of Lauryn Hill,The Miseducation of Lauryn Hill,Lauryn Hill,True,8691d12c-abd8-385c-b1eb-d841190124f7,21,13,ok
+11,1966,The Beatles,Revolver,Revolver,The Beatles,True,72d15666-99a7-321e-b1f3-a3f8c09dff9f,70,52,ok
+12,1982,Michael Jackson,Thriller,Thriller,Michael Jackson,True,f32fab67-77dd-3937-addc-9062e28e4c37,85,65,ok
+13,1967,Aretha Franklin,I Never Loved a Man the Way I Love You,I Never Loved a Man the Way I Love You,Aretha Franklin,True,7d8f07a7-4c64-3afb-8daf-8f1d4df89a78,20,18,ok
+14,1972,The Rolling Stones,Exile on Main St.,Exile on Main St.,The Rolling Stones,True,4838a3c9-fd2b-30a5-83eb-e32545b5d7fc,56,41,ok
+15,1988,Public Enemy,It Takes a Nation of Millions to Hold Us Back,It Takes a Nation of Millions to Hold Us Back,Public Enemy,True,01921d99-9d15-3fce-8734-46e58327cfb7,28,22,ok
+16,1979,The Clash,London Calling,London Calling,The Clash,True,8d73e45e-7ca1-3cb4-ae28-6da76196c17c,46,31,ok
+17,2010,Kanye West,My Beautiful Dark Twisted Fantasy,My Beautiful Dark Twisted Fantasy,Kanye West,True,5d6e21e1-deb5-428e-bb42-c2a567f3619b,19,16,ok
+18,1965,Bob Dylan,Highway 61 Revisited,Highway 61 Revisited,Bob Dylan,True,fb48b1dc-412f-36aa-8820-1023c08c46c6,37,32,ok
+19,2015,Kendrick Lamar,To Pimp a Butterfly,To Pimp a Butterfly,Kendrick Lamar,True,d9103c72-3807-4378-9ce7-b6f3e8fdd547,23,21,ok
+20,2000,Radiohead,Kid A,Kid A,Radiohead,True,e75c0549-ad55-39e3-8025-c72c5d4a3c5d,30,23,ok
+21,1975,Bruce Springsteen,Born to Run,Born to Run,Bruce Springsteen,True,39b22944-7503-3937-8bba-09b17281cc6a,104,98,ok
+22,1994,The Notorious B.I.G.,Ready to Die,Ready to Die,The Notorious B.I.G.,True,5afcfeac-118a-35e6-af0d-35ec9003354d,19,12,ok
+23,1967,The Velvet Underground,The Velvet Underground & Nico,The Velvet Underground & Nico,The Velvet Underground,True,5cbd9d7b-597a-3c5e-bfd1-c2b364215560,48,44,ok
+24,1967,The Beatles,Sgt. Pepper's Lonely Hearts Club Band,Sgt. Pepper’s Lonely Hearts Club Band,The Beatles,True,9f7a4c28-8fa2-3113-929c-c47a9f7982c3,83,70,ok
+25,1971,Carole King,Tapestry,Tapestry,Carole King,True,6e4f39e6-3403-39d7-81c6-8e61a990d509,183,100,ok
+26,1975,Patti Smith,Horses,Horses,Patti Smith,True,ff8f533c-3cb3-3877-9209-11f433edaad2,26,16,ok
+27,1993,Wu-Tang Clan,Enter the Wu-Tang (36 Chambers),Enter the Wu‐Tang (36 Chambers),Wu‐Tang Clan,True,610fb60f-900a-3c42-ac7d-f6b6aa8035f9,20,12,ok
+28,2000,D'Angelo,Voodoo,Voodoo,D’Angelo,True,9605c075-c64c-366b-ad7f-ec98523fc162,11,9,ok
+29,1968,The Beatles,The Beatles,The Beatles,The Beatles,True,71aa4dac-b705-4b6e-be77-ecfa8c238ad0,1,1,ok
+30,1967,The Jimi Hendrix Experience,Are You Experienced,Are You Experienced,The Jimi Hendrix Experience,True,da40e720-2097-3730-8a7f-0c2ddbff4a96,56,45,ok
+31,1959,Miles Davis,Kind of Blue,Kind of Blue,Miles Davis,True,8e8a594f-2175-38c7-a871-abb68ec363e7,137,92,ok
+32,2016,Beyoncé,Lemonade,Lemonade,Beyoncé,True,c1f22e07-7bdf-4a4f-8b50-7747c1091ef6,24,19,ok
+33,2006,Amy Winehouse,Back to Black,Back to Black,Amy Winehouse,True,6eac2e57-ee50-36f8-b0c4-c4c847a2c098,48,43,ok
+34,1973,Stevie Wonder,Innervisions,Innervisions,Stevie Wonder,True,e626b377-74c5-3b97-8f16-8cef5e1c04ea,37,25,ok
+35,1965,The Beatles,Rubber Soul,Rubber Soul,The Beatles,True,dca03435-8adb-30a5-ba82-5a162267ff38,120,95,ok
+36,1979,Michael Jackson,Off the Wall,Off the Wall,Michael Jackson,True,ee749c63-5699-38e0-b565-7e84414648d9,45,32,ok
+37,1992,Dr. Dre,The Chronic,The Chronic,Dr. Dre,True,ad444843-7160-33d7-b0c9-fc99f2c14a99,32,18,ok
+38,1966,Bob Dylan,Blonde on Blonde,Blonde on Blonde,Bob Dylan,True,329fb554-2a81-3d8a-8e22-ec2c66810019,60,47,ok
+39,1980,Talking Heads,Remain in Light,Remain in Light,Talking Heads,True,f6b1b900-6108-32f0-abbd-2855af9151eb,94,88,ok
+40,1972,David Bowie,The Rise and Fall of Ziggy Stardust and the Spiders from Mars,The Rise and Fall of Ziggy Stardust and the Spiders From Mars,David Bowie,True,6c9ae3dd-32ad-472c-96be-69d0a3536261,64,41,ok
+41,1969,The Rolling Stones,Let It Bleed,Let It Bleed,The Rolling Stones,True,784c0edd-0f37-33a2-9ca5-dff87b4f999c,45,37,ok
+42,1997,Radiohead,OK Computer,OK Computer,Radiohead,True,b1392450-e666-3926-a536-22c65f834433,39,30,ok
+43,1991,A Tribe Called Quest,The Low End Theory,The Low End Theory,A Tribe Called Quest,True,c3733436-fcba-3c08-b082-d548df5c5139,19,15,ok
+44,1994,Nas,Illmatic,Illmatic,Nas,True,28298e2c-4d70-3eed-a0f5-a3280c662b3d,23,19,ok
+45,1987,Prince,Sign o' the Times,,,,,,,no match
+46,1986,Paul Simon,Graceland,Graceland,Paul Simon,True,19847822-1430-3380-9cf1-bc45545b34ac,47,44,ok
+47,1976,Ramones,Ramones,Ramones,Ramones,True,7de1e321-4a53-3feb-b83e-f1dab88bf952,23,15,ok
+48,1977,Bob Marley and the Wailers,Exodus,Exodus,Bob Marley & The Wailers,True,c5650313-60f3-34d3-92e4-300545133792,57,42,ok
+49,1998,Outkast,Aquemini,Aquemini,OutKast,True,eb655897-6cc5-3fc1-b9ed-5008eb80c682,14,8,ok
+50,2001,Jay-Z,The Blueprint,The Blueprint,Jay‐Z,True,11ae8c9c-27c1-3308-9761-edb87c8f54ea,9,9,ok
+52,1976,David Bowie,Station to Station,Station to Station,David Bowie,True,686cdbd1-b400-32d8-8cb8-9317a2e41a58,33,21,ok
+53,1968,The Jimi Hendrix Experience,Electric Ladyland,Electric Ladyland,The Jimi Hendrix Experience,True,47ba2d59-5544-34a4-b108-dc08c0956298,61,48,ok
+55,1973,Pink Floyd,The Dark Side of the Moon,The Dark Side of the Moon,Pink Floyd,True,f5093c06-23e3-404f-aeaa-40f72885ee3a,151,80,ok
+56,1993,Liz Phair,Exile in Guyville,Exile in Guyville,Liz Phair,True,c186db82-9988-367e-8486-2e38e9b6c8db,8,7,ok
+57,1969,The Band,The Band,The Band,The Band,True,ea337405-285f-3846-9049-5e3addf149fc,23,22,ok
+58,1971,Led Zeppelin,Led Zeppelin IV,[Led Zeppelin IV],Led Zeppelin,True,2e61da88-39e9-3473-81d2-c964cb394952,87,68,ok
+59,1972,Stevie Wonder,Talking Book,Talking Book,Stevie Wonder,True,58c6d809-bfa7-3b25-acf3-a99d53402b08,27,22,ok
+60,1968,Van Morrison,Astral Weeks,Astral Weeks,Van Morrison,True,7d568f14-d86e-3584-97d0-c1824599de04,23,19,ok
+61,1987,Eric B. & Rakim,Paid in Full,Paid in Full,Eric B. & Rakim,True,e124668d-731c-3d2f-bd38-facf91df5e27,10,7,ok
+62,1987,Guns N' Roses,Appetite for Destruction,Appetite for Destruction,Guns N' Roses,True,a0b94d0a-210b-4b15-bd1d-93be2196c14a,74,51,ok
+63,1977,Steely Dan,Aja,Aja,Steely Dan,True,8588c5a5-b491-37a4-8d51-2227346a072e,47,43,ok
+64,2000,Outkast,Stankonia,Stankonia,OutKast,True,00d2cd53-21c9-3738-b683-56847b7b0040,21,12,ok
+66,1965,John Coltrane,A Love Supreme,A Love Supreme,John Coltrane,True,77cf47ba-58cd-3f3d-a5f9-79bf89860421,50,42,ok
+67,1996,Jay-Z,Reasonable Doubt,Reasonable Doubt,Jaÿ‐Z,True,a7f852ba-08bc-36f1-92f3-4dc127f4b70a,12,10,ok
+68,1985,Kate Bush,Hounds of Love,Hounds of Love,Kate Bush,True,017f2a37-a78f-3578-9611-fa40408e5d90,215,10,ok
+69,1995,Alanis Morissette,Jagged Little Pill,Jagged Little Pill,Alanis Morissette,True,ee3d18ed-d6a8-37c7-a964-41bbdb6d59f1,47,36,ok
+70,1988,N.W.A,Straight Outta Compton,Straight Outta Compton,N.W.A,True,fed1608d-80b7-38d2-aeb8-c6357f0d4c23,20,15,ok
+71,2022,Beyoncé,Renaissance,RENAISSANCE,Beyoncé,True,2c385052-5083-43a2-b1e5-36566d2ae3c0,22,20,ok
+72,1972,Neil Young,Harvest,Harvest,Neil Young,True,b25419cf-71bf-3a54-8cd4-2161c61056a0,32,29,ok
+73,1991,My Bloody Valentine,Loveless,Loveless,my bloody valentine,True,cb76227e-3ac0-3002-9a10-615a5b73cc59,20,13,ok
+74,2004,Kanye West,The College Dropout,The College Dropout,Kanye West,True,8a01217e-6947-3927-a39b-6691104694f1,22,17,ok
+75,1968,Aretha Franklin,Lady Soul,Lady Soul,Aretha Franklin,True,05571372-5b11-39b7-89c5-1c02589a27c8,15,13,ok
+76,1972,Curtis Mayfield,Super Fly,,,,,,,no match
+77,1971,The Who,Who's Next,Who’s Next,The Who,True,2c56c32d-f66c-4e26-bb6b-caed0e0cffa4,1,0,ok
+79,2016,Frank Ocean,Blonde,Blonde,Frank Ocean,True,0da340a0-6ad7-4fc2-a272-6f94393a7831,5,4,ok
+80,1977,Sex Pistols,"Never Mind the Bollocks, Here's the Sex Pistols",Never Mind the Bollocks Here’s the Sex Pistols,Sex Pistols,True,e959a4b3-6306-3c45-9df6-e7241dae9ea3,55,52,ok
+81,2013,Beyoncé,Beyoncé,BEYONCÉ,Beyoncé,True,8596171e-23b2-4bdd-8f1c-11960df0ecbe,28,26,ok
+82,1971,Sly and the Family Stone,There's a Riot Goin' On,There’s a Riot Goin’ On,Sly & the Family Stone,True,d8b8448a-2634-3e92-ac86-cf55e018f825,21,14,ok
+83,1969,Dusty Springfield,Dusty in Memphis,Dusty in Memphis,Dusty Springfield,True,aac8700b-8f62-30fc-ac2a-23b6cb37e3c3,20,13,ok
+84,1980,AC/DC,Back in Black,Back in Black,AC/DC,True,d3bc1a64-7561-3787-b680-0003aa50f8f1,61,45,ok
+85,1970,John Lennon,John Lennon/Plastic Ono Band,John Lennon/Plastic Ono Band,John Lennon,True,8be83468-4917-390d-82b6-d890f058cd22,30,22,ok
+86,1967,The Doors,The Doors,The Doors,The Doors,True,8ebffd15-06c3-3b88-a761-ec18c5513287,53,40,ok
+87,1970,Miles Davis,Bitches Brew,Bitches Brew,Miles Davis,True,a9e30282-5b37-3f92-b897-b9659a1a312b,47,35,ok
+88,1971,David Bowie,Hunky Dory,Hunky Dory,David Bowie,True,743b0b2e-a23a-3182-950e-232f8cb0dfb7,38,28,ok
+89,1997,Erykah Badu,Baduizm,Baduizm,Erykah Badu,True,45536412-c62c-34fc-9524-0bac1d2542c1,12,11,ok
+90,1970,Neil Young,After the Gold Rush,After the Gold Rush,Neil Young,True,b6a3952b-9977-351c-a80a-73e023143858,28,21,ok
+91,1978,Bruce Springsteen,Darkness on the Edge of Town,Darkness on the Edge of Town,Bruce Springsteen,True,b613123b-a234-3f48-9c45-e05bf4e6b9e7,167,100,ok
+92,1967,The Jimi Hendrix Experience,Axis: Bold as Love,Axis: Bold as Love,The Jimi Hendrix Experience,True,d0b1e21e-cef6-4575-8d92-1afea1894ca3,48,27,ok
+93,1997,Missy Elliott,Supa Dupa Fly,,,,,,,no match
+94,1970,The Stooges,Fun House,Fun House,The Stooges,True,edd57263-df77-3f1a-8803-8beb5d5b1a64,25,12,ok
+95,2011,Drake,Take Care,Take Care,Drake,True,47809021-4515-4215-beea-db3f5dfb6267,11,11,ok
+96,1992,R.E.M.,Automatic for the People,Automatic for the People,R.E.M.,True,c86c6af9-d10e-3079-b34b-30b682a797eb,38,32,ok
+97,1986,Metallica,Master of Puppets,Master of Puppets,Metallica,True,3d00fb45-f8ab-3436-a8e1-b4bfc4d66913,73,48,ok
+98,1998,Lucinda Williams,Car Wheels on a Gravel Road,Car Wheels on a Gravel Road,Lucinda Williams,True,493de006-33bf-3404-9bb7-1f3b0c22ce05,10,8,ok
+99,2012,Taylor Swift,Red,Red,Taylor Swift,True,a73cecde-0923-40ad-aad1-e8c24ba6c3d2,97,91,ok
+100,1968,The Band,Music from Big Pink,Music From Big Pink,The Band,True,466fddac-8006-3e71-bbe7-7aa0f587aa88,26,25,ok
+101,1969,Led Zeppelin,Led Zeppelin,Led Zeppelin,Led Zeppelin,True,0f18ec88-aa87-38a9-8a65-f03d81763560,69,55,ok
+102,1977,The Clash,The Clash,The Clash,The Clash,True,ca91cb5a-7ecc-3c46-84a0-0d4951889374,28,20,ok
+103,1989,De La Soul,3 Feet High and Rising,3 Feet High and Rising,De La Soul,True,5243f39c-c344-3989-a0f6-2a2f75a9d827,18,17,ok
+104,1971,The Rolling Stones,Sticky Fingers,Sticky Fingers,The Rolling Stones,True,4a4213d0-f224-3d51-bcca-476f61162681,51,47,ok
+106,1994,Hole,Live Through This,Live Through This,Hole,True,fe676d05-f97c-303a-890b-da53c69e5d42,14,12,ok
+107,1977,Television,Marquee Moon,Marquee Moon,Television,True,2b9f99d8-becf-3fc3-86a6-2bdd4cef93fe,25,15,ok
+108,1999,Fiona Apple,When the Pawn...,"When the Pawn Hits the Conflicts He Thinks Like a King What He Knows Throws the Blows When He Goes to the Fight and He’ll Win the Whole Thing ’Fore He Enters the Ring There’s No Body to Batter When Your Mind Is Your Might So When You Go Solo, You Hold Your Own Hand and Remember That Depth Is the Greatest of Heights and If You Know Where You Stand, Then You Know Where to Land and If You Fall It Won’t Matter, Cuz You’ll Know That You’re Right",Fiona Apple,False,3d3ff0b9-5858-33f3-9d67-8ba5977899a8,20,11,ok
+109,1972,Lou Reed,Transformer,Transformer,Lou Reed,True,6c8345df-f822-33af-b64a-eff2e46941b9,28,26,ok
+110,1974,Joni Mitchell,Court and Spark,Court and Spark,Joni Mitchell,True,3bd19e28-698e-3b7e-a8ec-f872bf001651,22,18,ok
+111,1986,Janet Jackson,Control,Control,Janet Jackson,True,b23d3137-df51-3047-a6a5-b5efbde50f22,46,40,ok
+112,1973,Elton John,Goodbye Yellow Brick Road,Goodbye Yellow Brick Road,Elton John,True,80df0f1b-4ce7-348a-aa1b-0d31ebff111a,63,55,ok
+113,1986,The Smiths,The Queen Is Dead,The Queen Is Dead,The Smiths,True,d8dde278-482c-3cc8-a530-fea70476f3a5,34,25,ok
+114,2001,The Strokes,Is This It,Is This It,The Strokes,True,efea26d1-a016-30f6-b8e2-bc8c02336b0a,24,18,ok
+115,2012,Kendrick Lamar,"Good Kid, M.A.A.D City","good kid, m.A.A.d city",Kendrick Lamar,True,499c19c8-0dab-4824-884b-6191d145e95b,73,69,ok
+116,1989,The Cure,Disintegration,Disintegration,The Cure,True,494bf606-d2f7-36d0-8340-eadad8601d2b,32,29,ok
+117,2005,Kanye West,Late Registration,Late Registration,Kanye West,True,c563d738-3841-31ce-b29d-ec6b40fd1e7b,21,11,ok
+118,1976,Eagles,Hotel California,Hotel California,Eagles,True,836f349a-0434-3e8b-a0bc-261f77a9f99c,69,50,ok
+119,1969,Sly and the Family Stone,Stand!,Stand!,Sly and the Family Stone,True,86871123-60e4-30a5-aae3-36e810e0964b,17,11,ok
+120,1970,Van Morrison,Moondance,Moondance,Van Morrison,True,16506432-d133-3b2f-a504-dc88966dad2a,36,30,ok
+121,1978,Elvis Costello,This Year's Model,This Year’s Model,Elvis Costello,True,5e8117f4-a87f-3732-be5f-313c7e5b308d,26,16,ok
+122,1994,Nine Inch Nails,The Downward Spiral,The Downward Spiral,Nine Inch Nails,True,7c4cab8d-dead-3870-b501-93c90fd0a580,39,23,ok
+123,1969,Led Zeppelin,Led Zeppelin II,Led Zeppelin II,Led Zeppelin,True,33b4653d-006e-3cc1-8afb-386b15a6cd6e,73,59,ok
+124,1991,U2,Achtung Baby,Achtung Baby,U2,True,744c7a1b-ac79-35c4-bd92-7e2c6a24c8d8,44,33,ok
+125,1989,Beastie Boys,Paul's Boutique,Paul’s Boutique,Beastie Boys,True,b534aa01-d621-31ba-9278-38a500e3cdca,25,15,ok
+126,1994,Mary J. Blige,My Life,My Life,Mary J. Blige,True,49acb129-7958-3132-988c-bb85955b1c3c,7,6,ok
+127,1962,Ray Charles,Modern Sounds in Country and Western Music,Modern Sounds in Country and Western Music,Ray Charles,True,38671d62-32bd-399d-abbd-0f685c2fd4a3,8,6,ok
+128,1975,Queen,A Night at the Opera,A Night at the Opera,Queen,True,6b47c9a0-b9e1-3df9-a5e8-50a6ce0dbdbd,74,58,ok
+129,1979,Pink Floyd,The Wall,The Wall,Pink Floyd,True,f2026101-945b-3d05-9ef4-aa718fc3feef,95,84,ok
+130,1982,Prince,1999,1999,Prince,True,561be5b7-a39c-3866-859d-d86f30816ae7,43,36,ok
+131,1994,Portishead,Dummy,Dummy,Portishead,True,48140466-cff6-3222-bd55-63c27e43190d,20,15,ok
+133,1976,Joni Mitchell,Hejira,Hejira,Joni Mitchell,True,039f2ae4-36dd-3608-9103-67ce7f6c9288,14,13,ok
+134,1996,Fugees,The Score,The Score,Fugees (Refugee Camp),True,dd2203dd-a149-316b-ad7f-a303dc4fc459,26,22,ok
+135,1987,U2,The Joshua Tree,The Joshua Tree,U2,True,6f3e9fa6-be7a-3de8-a2b2-2072ece8a54d,66,53,ok
+136,1971,Funkadelic,Maggot Brain,Maggot Brain,Funkadelic,True,a334e612-e736-3b4f-82b4-c4dfb774983c,15,12,ok
+137,2011,Adele,21,21,Adele,True,e4174758-d333-4a8e-a31f-dd0edd51518e,30,24,ok
+139,1970,Black Sabbath,Paranoid,Paranoid,Black Sabbath,True,cc053745-c447-3566-8f27-bed5438c9133,73,53,ok
+140,1973,Bob Marley and the Wailers,Catch a Fire,Catch a Fire Sessions,Bob Marley & The Wailers,False,36f695b2-54e7-40ea-b58f-8c9a22dd7802,1,0,ok
+141,1989,Pixies,Doolittle,Doolittle,Pixies,True,1aa41b19-5a72-341b-bd91-4cf61d1dab6b,33,25,ok
+142,1984,Bruce Springsteen,Born in the U.S.A.,Born in the U.S.A.,Bruce Springsteen,True,3c39a076-8e52-38f2-8076-260d0672fb23,213,97,ok
+143,1969,The Velvet Underground,The Velvet Underground,The Velvet Underground,The Velvet Underground,True,a616dcf5-7a1f-3afe-a53b-27281c2bf75e,28,27,ok
+144,1975,Led Zeppelin,Physical Graffiti,Physical Graffiti,Led Zeppelin,True,116c9490-6af4-3827-8261-2d5b1f508fe7,47,33,ok
+145,2000,Eminem,The Marshall Mathers LP,The Marshall Mathers LP,Eminem,True,b0fa91c8-0996-38f1-ab84-797f58d7c4eb,30,25,ok
+146,1978,Blondie,Parallel Lines,Parallel Lines,Blondie,True,0c1a4d70-5926-3ae8-aa25-466fe65639fe,26,20,ok
+147,1994,Jeff Buckley,Grace,Grace,Jeff Buckley,True,ea29c347-696f-3165-986d-7bad1394b178,26,22,ok
+148,2012,Frank Ocean,Channel Orange,channel ORANGE,Frank Ocean,True,f8f4167d-897c-4b25-a171-638374d1dfa4,12,9,ok
+149,1971,John Prine,John Prine,John Prine,John Prine,True,a13154a4-14a1-3344-ae14-3bea728ebe58,14,8,ok
+150,1982,Bruce Springsteen,Nebraska,Nebraska,Bruce Springsteen,True,324aee0c-36ec-35c1-9c93-b67a1d428037,75,74,ok
+151,1987,George Michael,Faith,Faith,George Michael,True,4e61585f-f341-3174-85cf-afad8df46fbe,32,27,ok
+152,1980,The Pretenders,Pretenders,,,,,,,no match
+153,1993,PJ Harvey,Rid of Me,Rid of Me,PJ Harvey,True,c1bb54cc-751d-300c-ba29-d7502d571c2d,11,7,ok
+154,1972,Aretha Franklin,Amazing Grace,,,,,,,no match
+155,2003,Jay-Z,The Black Album,The Black Album,Jay‐Z,True,77befaa0-662e-3d84-ba45-c862e16dc109,9,6,ok
+156,1984,The Replacements,Let It Be,Let It Be,The Replacements,True,2c644807-3b5d-39d4-8c65-dec603bf3f3a,15,12,ok
+157,1995,Oasis,(What's the Story) Morning Glory?,(What’s the Story) Morning Glory?,Oasis,True,cc7e6348-cc55-31fa-aeb2-748a46a81cb3,38,28,ok
+158,2000,Erykah Badu,Mama's Gun,Mama’s Gun,Erykah Badu,True,25bdfd28-72ca-3d1f-88fc-dcf67df91720,10,8,ok
+159,1983,The Police,Synchronicity,Synchronicity,The Police,True,f6df6292-fd40-37c3-bd61-22c53abfe773,55,36,ok
+160,1991,Pearl Jam,Ten,Ten,Pearl Jam,True,cea5d18a-1924-3cda-bebc-38933834b25d,34,28,ok
+161,1969,"Crosby, Stills & Nash","Crosby, Stills & Nash","Crosby, Stills & Nash","Crosby, Stills & Nash",True,a2735d5f-27c0-3176-85df-e77f669dcca1,30,16,ok
+162,1995,Pulp,Different Class,Different Class,Pulp,True,88f69eab-8f07-343b-847c-b944ad33dfcf,21,16,ok
+165,1983,R.E.M.,Murmur,Murmur,R.E.M.,True,de790d3d-a35c-364c-a8fb-adfb73084a45,30,20,ok
+167,1990,Depeche Mode,Violator,Violator,Depeche Mode,True,71f1482e-e63f-3b2c-811b-939f62708f2a,45,44,ok
+168,1972,Steely Dan,Can't Buy a Thrill,Can’t Buy a Thrill,Steely Dan,True,9d73a864-2976-3286-b6c1-8aabc7407737,31,26,ok
+169,1977,Billy Joel,The Stranger,The Stranger,Billy Joel,True,735bcee6-6be6-3957-af15-d21ba2bd355b,49,34,ok
+170,2020,Taylor Swift,Folklore,folklore,Taylor Swift,True,f1d08326-c23b-4b43-be3b-20b33ab10bf6,87,45,ok
+171,1988,Sonic Youth,Daydream Nation,Daydream Nation,Sonic Youth,True,24769a99-8189-3d8c-947e-dbc8574dad5c,22,16,ok
+172,1970,Simon & Garfunkel,Bridge over Troubled Water,Bridge Over Troubled Water,Simon and Garfunkel,True,c39f7f80-d42f-3669-9653-230f8e922083,49,39,ok
+173,1993,Nirvana,In Utero,In Utero,Nirvana,True,2a0981fb-9593-3019-864b-ce934d97a16e,65,58,ok
+175,2017,Kendrick Lamar,DAMN.,DAMN.,Kendrick Lamar,True,b88655ba-7469-48b8-a296-b9011ab73ef3,54,51,ok
+176,1990,Public Enemy,Fear of a Black Planet,Fear of a Black Planet,Public Enemy,True,13cf2244-c850-304d-bc46-b30e3f10e0cc,17,14,ok
+177,1971,Rod Stewart,Every Picture Tells a Story,Every Picture Tells a Story,Rod Stewart,True,d4e7be0c-6db3-372e-aee6-e048dbb9ac51,23,18,ok
+178,1965,Otis Redding,Otis Blue/Otis Redding Sings Soul,,,,,,,no match
+179,1997,The Notorious B.I.G.,Life After Death,Life After Death,The Notorious B.I.G.,True,132d78be-baa5-3301-aba5-933409e3f848,15,9,ok
+180,1967,Love,Forever Changes,Forever Changes,Love,True,c7035bc6-6101-326f-992c-401d451c1716,24,15,ok
+181,1965,Bob Dylan,Bringing It All Back Home,Bringing It All Back Home,Bob Dylan,True,6cadda7c-fbd0-3b19-9546-56915e3305d8,46,29,ok
+182,1970,James Taylor,Sweet Baby James,Sweet Baby James,James Taylor,True,a3a2756d-93b4-37c6-8b82-513070ef58d6,16,14,ok
+183,1995,D'Angelo,Brown Sugar,Brown Sugar,D’Angelo,True,a4591f67-48d9-36ae-bc68-2deb954d0a15,11,8,ok
+184,1983,Cyndi Lauper,She's So Unusual,She’s So Unusual,Cyndi Lauper,True,46d415e9-39b7-3978-9e3d-d9d8a32c6751,30,22,ok
+185,1968,The Rolling Stones,Beggars Banquet,Beggars Banquet,The Rolling Stones,True,6e672bbd-7c7f-32f8-8335-c603be99d13b,36,29,ok
+186,1991,Red Hot Chili Peppers,Blood Sugar Sex Magik,Blood Sugar Sex Magik,Red Hot Chili Peppers,True,68bee70d-b425-3813-aca7-dd7b912c3d11,27,24,ok
+187,1990,Ice Cube,AmeriKKKa's Most Wanted,AmeriKKKa’s Most Wanted,Ice Cube,True,f7e8792d-4aaf-389c-b0e5-a4bbae2bacdf,16,11,ok
+188,1971,T. Rex,Electric Warrior,Electric Warrior,T. Rex,True,e53310bf-8ccc-3d7f-a0b7-5ca4dbababcb,38,35,ok
+189,1997,Sleater-Kinney,Dig Me Out,Dig Me Out,Sleater‐Kinney,True,209b45b7-8b2f-3e07-b194-efff9cde80dd,6,4,ok
+190,1969,The Who,Tommy,Tommy,The Who,True,0e587339-406a-3d21-8678-73e46e250379,54,52,ok
+191,1960,Etta James,At Last!,At Last!,Etta James,True,56933d06-34a0-3a49-8e42-7c39f8c356dd,19,11,ok
+192,1986,Beastie Boys,Licensed to Ill,Licensed to Ill,Beastie Boys,True,57f5e7c8-2a6e-34a0-b4cd-0e77695bc36f,27,20,ok
+193,1969,Creedence Clearwater Revival,Willy and the Poor Boys,Willy and the Poor Boys,Creedence Clearwater Revival,True,5fdea541-32fc-3b17-b7c4-50b40f65203d,36,29,ok
+194,1987,Michael Jackson,Bad,Bad,Michael Jackson,True,a5711a77-42d1-3f4c-830c-e27a96f0800f,47,40,ok
+195,1967,Leonard Cohen,Songs of Leonard Cohen,Songs of Leonard Cohen,Leonard Cohen,True,34291a49-8df9-304e-bd39-16b11d829d5f,20,16,ok
+196,2010,Robyn,Body Talk,Body Talk,Robyn,True,1e151a63-e906-4903-b108-b3ecf21218b4,14,13,ok
+197,1964,The Beatles,Meet the Beatles!,Meet The Beatles!,The Beatles,True,c2c696fc-6beb-3dfb-bb15-7bb021ebeb5d,35,34,ok
+198,1979,The B-52's,The B-52's,,,,,,,no match
+199,1992,Pavement,Slanted and Enchanted,Slanted and Enchanted,Pavement,True,869f9eac-2a40-3a41-80a3-6bf2297a7cbc,18,9,ok
+200,1984,Sade,Diamond Life,Diamond Life,Sade,True,af2a0c41-e612-3232-949d-bdca340c407c,29,23,ok
+201,1993,A Tribe Called Quest,Midnight Marauders,Midnight Marauders,A Tribe Called Quest,True,c2afedfb-034a-3683-ad47-e4404cd7c485,17,12,ok
+202,1997,Björk,Homogenic,Homogenic,Björk,True,810272e0-aef1-3d85-b2d3-e512e87fc38c,29,24,ok
+203,1972,Nick Drake,Pink Moon,Pink Moon,Nick Drake,True,740ec10a-e887-38a6-a04d-fe2069c9e2a7,16,16,ok
+204,2007,Kanye West,Graduation,Graduation,Kanye West,True,d44c50ad-61fd-3fce-95fc-27024d7f1d30,25,21,ok
+205,1970,Cat Stevens,Tea for the Tillerman,Tea for the Tillerman,Cat Stevens,True,418678e7-2807-3bed-a305-11b4181e533e,38,31,ok
+206,1977,David Bowie,Low,Low,David Bowie,True,f6a51281-56c4-3538-b915-65a9d4eb29b5,26,19,ok
+207,1972,Eagles,Eagles,Eagles,Eagles,True,23eafc30-3978-37fb-bfa0-8058aa1eb81a,18,12,ok
+208,2008,Lil Wayne,Tha Carter III,Tha Carter III,Lil Wayne,True,cb688885-74b2-4e9b-a18c-6102866151f2,18,14,ok
+209,1986,Run-DMC,Raising Hell,,,,,,,no match
+211,1979,Joy Division,Unknown Pleasures,Unknown Pleasures,Joy Division,True,42352def-1aab-3000-b548-895ebd869cb6,55,51,ok
+212,1966,Nina Simone,Wild Is the Wind,Wild Is the Wind,Nina Simone,True,b4433a3e-d5ad-3d99-965c-96bfb6a0f071,8,8,ok
+213,2012,Fiona Apple,The Idler Wheel...,The Idler Wheel Is Wiser Than the Driver of the Screw and Whipping Cords Will Serve You More Than Ropes Will Ever Do,Fiona Apple,False,6086062c-f943-4b85-b1cb-43558425ec1c,11,8,ok
+214,1994,Tom Petty,Wildflowers,Wildflowers,Tom Petty,True,80a0451a-d135-3517-96e4-3629dc4f66b9,21,17,ok
+215,1970,Grateful Dead,American Beauty,American Beauty,Grateful Dead,True,994c2c59-d32f-304e-8f53-bda17a254f52,42,35,ok
+216,1997,Elliott Smith,Either/Or,Either/Or,Elliott Smith,True,dfb85157-313b-3f5f-8739-a5162bcb6345,14,11,ok
+217,1994,Oasis,Definitely Maybe,Definitely Maybe,Oasis,True,451dca98-c118-32e1-9244-c47ca9c3c0f9,40,32,ok
+218,1994,TLC,CrazySexyCool,CrazySexyCool,TLC,True,3d886c06-a4c7-3431-be87-2b2940f07acd,12,10,ok
+219,1995,Raekwon,Only Built 4 Cuban Linx...,Only Built 4 Cuban Linx…,Raekwon,True,ab981b48-9a7b-34c4-b46a-f6266317ce7c,8,6,ok
+220,1970,"Crosby, Stills, Nash & Young",Déjà Vu,Déjà vu,"Crosby, Stills, Nash & Young",True,3412fd44-c6e6-3a3b-b91a-964a055192ec,29,22,ok
+221,1992,Rage Against the Machine,Rage Against the Machine,Rage Against the Machine,Rage Against the Machine,True,1305859b-8937-397f-9c33-39f62eb672fb,40,31,ok
+222,1998,Madonna,Ray of Light,Ray of Light,Madonna,True,cb93e87f-5d21-3447-a6e8-22d44f9b0d7a,23,19,ok
+223,1971,John Lennon,Imagine,Imagine,John Lennon,True,f242f304-0f1f-33a5-81a2-7a965b30e3b5,53,35,ok
+224,1999,Dixie Chicks,Fly,Fly,Dixie Chicks,True,e1fbdc3d-2aa4-345d-ae0e-40bfb1552431,8,5,ok
+225,2001,Wilco,Yankee Hotel Foxtrot,Yankee Hotel Foxtrot,Wilco,True,95f2ba4b-2dd9-38d1-8158-a416a391489c,14,11,ok
+226,1970,Derek and the Dominos,Layla and Other Assorted Love Songs,Layla and Other Assorted Love Songs,Derek and the Dominos,True,ba53dcbd-9328-3cf7-bc72-179b4512867e,45,43,ok
+227,1957,Little Richard,Here's Little Richard,Here’s Little Richard,Little Richard,True,a987042b-4fe0-35bb-9cca-7ff44b1ff5b4,12,10,ok
+228,1991,De La Soul,De La Soul Is Dead,De La Soul Is Dead,De La Soul,True,0be4cdd5-ed37-3842-82ba-7f9983a34473,16,10,ok
+230,2016,Rihanna,Anti,ANTI,Rihanna,True,0c482acd-35a2-466b-b833-ef5f2f1297d4,22,17,ok
+231,1979,Tom Petty,Damn the Torpedoes,Damn the Torpedoes,Tom Petty and the Heartbreakers,True,871631b9-651c-3c2e-88ae-3a2491d9eb6b,28,15,ok
+232,1960,John Coltrane,Giant Steps,Giant Steps,John Coltrane,True,2cdca11d-3e45-3152-93e5-4d2a4ddb1bc6,41,40,ok
+233,1992,Tori Amos,Little Earthquakes,Little Earthquakes,Tori Amos,True,cb10018e-e795-3b62-b9d6-f143d188e496,19,13,ok
+234,1971,Black Sabbath,Master of Reality,Master of Reality,Black Sabbath,True,e51e9779-2edc-3b39-959c-299fdb5ed940,46,36,ok
+235,1991,Metallica,Metallica,Metallica,Metallica,True,e8f70201-8899-3f0c-9e07-5d6495bc8046,59,52,ok
+236,2001,Daft Punk,Discovery,Discovery,Daft Punk,True,48117b90-a16e-34ca-a514-19c702df1158,24,21,ok
+237,1975,Willie Nelson,Red Headed Stranger,Red Headed Stranger,Willie Nelson,True,b51ba291-2490-3132-a85d-2094de795b63,11,8,ok
+238,1977,Kraftwerk,Trans-Europe Express,,,,,,,no match
+239,1987,Boogie Down Productions,Criminal Minded,Criminal Minded,Boogie Down Productions,True,420e3df4-6322-3399-8144-29ef7eb62e42,10,7,ok
+241,1991,Massive Attack,Blue Lines,Blue Lines,Massive Attack,True,8b6f133a-2fdf-3cc2-b84d-1c889adc0939,23,22,ok
+242,1970,The Velvet Underground,Loaded,Loaded,The Velvet Underground,True,4be9d91f-6ed7-34b8-aa5e-45be79819273,23,18,ok
+243,1968,The Zombies,Odessey and Oracle,Odessey and Oracle,The Zombies,True,9a4a9ebf-f4f7-3dba-9b80-0b274cbc80f9,30,23,ok
+244,2008,Kanye West,808s & Heartbreak,808s & Heartbreak,Kanye West,True,1c1b50ec-828b-3d7c-9b1b-54cb1fe97d55,13,11,ok
+245,1990,Cocteau Twins,Heaven or Las Vegas,Heaven or Las Vegas,Cocteau Twins,True,12fab6b9-4eaf-33b0-963e-cae03ac332fe,14,11,ok
+246,1990,LL Cool J,Mama Said Knock You Out,Mama Said Knock You Out,L.L. Cool J,True,a1440823-4a3f-38c3-8649-a346a86fe1ec,13,8,ok
+247,1992,Sade,Love Deluxe,Love Deluxe,Sade,True,e4a67add-6aab-390c-bb82-53939fb9cd0a,14,11,ok
+248,2004,Green Day,American Idiot,American Idiot,Green Day,True,de9bf827-a9b0-348b-a7c9-556c03c3fb07,32,23,ok
+249,1985,Whitney Houston,Whitney Houston,Whitney Houston,Whitney Houston,True,131d12c0-e720-31df-a2f9-d9abd868ceaf,24,20,ok
+250,1979,Buzzcocks,Singles Going Steady,,,,,,,no match
+251,1972,Elton John,Honky Château,Honky Château,Elton John,True,e17f2d6e-7849-37f9-a6d8-cda4d59cea28,23,22,ok
+252,1978,Devo,Q: Are We Not Men? A: We Are Devo!,Q: Are We Not Men? A: We Are Devo!,DEVO,True,60a754f9-50e1-346a-97db-925a1e2ad7e0,12,7,ok
+253,1967,Pink Floyd,The Piper at the Gates of Dawn,The Piper at the Gates of Dawn,Pink Floyd,True,6792b6d1-4e65-3c3c-9d20-d08aa1dcfc60,82,74,ok
+254,1973,Herbie Hancock,Head Hunters,Head Hunters,Herbie Hancock,True,322f18bb-5491-38e9-9044-c0a468651eec,34,24,ok
+255,1963,Bob Dylan,The Freewheelin' Bob Dylan,The Freewheelin’ Bob Dylan,Bob Dylan,True,169b62aa-c3a5-3ed9-bed1-cc47c4bc51ad,34,31,ok
+256,1988,Tracy Chapman,Tracy Chapman,Tracy Chapman,Tracy Chapman,True,a738bdf1-f610-30aa-9ae7-9a4f90d6f2d7,23,20,ok
+257,1971,Dolly Parton,Coat of Many Colors,Coat of Many Colors,Dolly Parton,True,2c98f21a-e2af-3412-a253-de9a1e06d7f7,8,6,ok
+258,1975,Joni Mitchell,The Hissing of Summer Lawns,The Hissing of Summer Lawns,Joni Mitchell,True,169a1a7e-f91e-3b10-a136-d94eba6eee2e,16,13,ok
+259,1971,Janis Joplin,Pearl,Pearl,Janis Joplin,True,99878359-e736-3cdc-a225-548ad17d1c76,36,27,ok
+260,1979,The Slits,Cut,Cut,The Slits,True,116b94a2-4361-3ec2-af92-270d97dc10f9,12,7,ok
+261,1992,Beastie Boys,Check Your Head,Check Your Head,Beastie Boys,True,b0935b00-1380-3777-b79d-bd49ef5fb9c0,22,12,ok
+262,1983,New Order,"Power, Corruption & Lies","Power, Corruption & Lies",New Order,True,16cc9dfc-594d-3fb9-b789-3e1bfcb6f9f8,26,20,ok
+263,1964,The Beatles,A Hard Day's Night,The Alternate A Hard Day's Night,The Beatles,False,13fdfb22-4986-427f-b6c2-f3036e0fd580,1,0,ok
+264,1975,Pink Floyd,Wish You Were Here,Wish You Were Here,Pink Floyd,True,1a272023-10d3-38ee-bab3-317b55fcc21d,128,82,ok
+265,1995,Pavement,Wowee Zowee,Wowee Zowee,Pavement,True,fa79988d-62b5-3039-9169-ed0d17d53296,16,6,ok
+266,1965,The Beatles,Help!,Help! Back To Basics,The Beatles,False,954a00ea-a7c8-4c4d-ad92-e34be40c03d3,1,0,ok
+267,1984,Minutemen,Double Nickels on the Dime,Double Nickels on the Dime,Minutemen,True,0bcb9f3e-e341-3ed5-ac5b-8ed5e17f9a7e,5,5,ok
+268,1972,Randy Newman,Sail Away,Sail Away,Randy Newman,True,d1c0b3db-6b93-3b9d-9479-0d60486120cb,10,6,ok
+269,2013,Kanye West,Yeezus,Yeezus,Kanye West,True,5d4d0f2d-9be7-4922-bc9a-cbd2880b12c2,9,8,ok
+270,2018,Kacey Musgraves,Golden Hour,Golden Hour,Kacey Musgraves,True,56713bde-f9de-4097-bbe3-41d9d7af32c4,16,13,ok
+271,1992,Mary J. Blige,What's the 411?,What’s the 411?,Mary J. Blige,True,8debe6e5-7fd1-35ee-9d3f-96523536b9f8,7,4,ok
+272,1968,The Velvet Underground,White Light/White Heat,White Light/White Heat,The Velvet Underground,True,fc0885e0-0284-3f9d-81ee-17c5e7196346,20,19,ok
+273,1979,Gang of Four,Entertainment!,Entertainment!,Gang of Four,True,d0493944-992b-3534-9174-8320c1879837,17,17,ok
+274,1968,The Byrds,Sweetheart of the Rodeo,Sweetheart of the Rodeo,The Byrds,True,2a02ea31-7a7f-3a46-8a46-aebfac434a81,18,9,ok
+275,1970,Curtis Mayfield,Curtis,Curtis,Curtis Mayfield,True,0c24e81f-b710-3e24-a4fa-12950e153585,12,12,ok
+276,1995,Radiohead,The Bends,The Bends,Radiohead,True,b8048f24-c026-3398-b23a-b5e50716cbc7,35,26,ok
+277,2003,Alicia Keys,The Diary of Alicia Keys,The Diary of Alicia Keys,Alicia Keys,True,e53e291f-9a9c-38a0-96e0-86a9b63b776d,18,17,ok
+278,1973,Led Zeppelin,Houses of the Holy,Houses of the Holy,Led Zeppelin,True,9b5006e5-b276-3a05-bcdd-8d986842320b,53,41,ok
+280,2003,50 Cent,Get Rich or Die Tryin',Get Rich or Die Tryin’,50 Cent,True,f624ead2-e4ba-4e52-bea5-4362b1c67b14,17,15,ok
+281,1971,Harry Nilsson,Nilsson Schmilsson,,,,,,,no match
+282,1955,Frank Sinatra,In the Wee Small Hours,In the Wee Small Hours,Frank Sinatra,True,5a5d9938-38a9-3f32-b03b-8f14f62b880a,23,19,ok
+283,1979,Donna Summer,Bad Girls,Bad Girls,Donna Summer,True,f7568cc7-4c09-3a47-abbc-593e7aaac7d6,18,17,ok
+285,1978,Big Star,Third/Sister Lovers,,,,,,,no match
+286,1999,Red Hot Chili Peppers,Californication,Californication,Red Hot Chili Peppers,True,ca5dfcc3-83fb-3eee-9061-c27296b77b2c,38,30,ok
+287,1965,The Byrds,Mr. Tambourine Man,Mr. Tambourine Man,The Byrds,True,2b83d3e4-d461-31d6-9e2a-c99b69421e28,17,12,ok
+288,1976,The Modern Lovers,The Modern Lovers,The Modern Lovers,The Modern Lovers,True,91e1f88a-f081-3639-9972-0d46b3d3b616,17,12,ok
+289,1995,Björk,Post,Post,Björk,True,b2a6e057-087d-3ae5-a6e5-7f5fa39808ff,31,26,ok
+290,2003,Outkast,Speakerboxxx/The Love Below,,,,,,,no match
+291,1999,Destiny's Child,The Writing's on the Wall,The Writing’s on the Wall,Destiny’s Child,True,7bfda0d3-5747-3f7c-a60f-065b6ea29db1,16,13,ok
+292,1978,Van Halen,Van Halen,Van Halen,Van Halen,True,43a0e8b5-6059-397f-81e6-b8df5a648496,39,30,ok
+293,1993,The Breeders,Last Splash,Last Splash,The Breeders,True,7aaf0618-292c-3474-bfbc-d831baf710cf,16,16,ok
+294,1994,Weezer,Weezer,Weezer,Weezer,True,c7b245c9-8099-32ea-af95-893acedde2cf,38,23,ok
+295,2013,Daft Punk,Random Access Memories,Random Access Memories,Daft Punk,True,aa997ea0-2936-40bd-884d-3af8a0e064dc,23,21,ok
+296,1979,Neil Young,Rust Never Sleeps,Rust Never Sleeps,Neil Young,True,a710c7c7-46e6-36ca-9c3c-87c8e79f8daf,13,11,ok
+297,1986,Peter Gabriel,So,So,Peter Gabriel,True,be3cc3e7-bdb0-3c13-a60b-a985b30eb603,51,45,ok
+298,1989,Tom Petty,Full Moon Fever,Full Moon Fever,Tom Petty,True,ffbef03e-3651-39db-8a2f-e140dc5aa219,25,20,ok
+300,1997,Shania Twain,Come On Over,Come On Over,Shania Twain,True,45bcf3e0-a274-3bdd-9130-299a5ef780ea,41,34,ok
+301,1973,New York Dolls,New York Dolls,New York Dolls,New York Dolls,True,4cdd4c59-e38f-382b-b01c-e69829faa69c,12,7,ok
+302,1975,Neil Young,Tonight's the Night,Tonight’s the Night,Neil Young,True,e0207e33-af06-3862-baba-f42ca722de0d,11,9,ok
+304,1971,Bill Withers,Just as I Am,Just As I Am,Bill Withers,True,a72ee504-15b5-343c-bfd7-e71f9272e0e5,9,5,ok
+306,1972,Al Green,I'm Still in Love with You,I’m Still in Love With You,Al Green,True,4a40960b-44b3-313c-8540-cde054d41bd9,9,7,ok
+308,1974,Brian Eno,Here Come the Warm Jets,Here Come the Warm Jets,Brian Eno,True,90d9be4c-30be-3e28-949a-66ee22c3a63a,21,19,ok
+309,1980,Joy Division,Closer,Closer,Joy Division,True,852f9715-24b3-37d5-b8a5-456f5e19b41e,27,23,ok
+310,1977,Wire,Pink Flag,Pink Flag,Wire,True,9facb8b5-4b02-3f28-9f4a-61cb9b8fd7aa,13,10,ok
+311,1974,Neil Young,On the Beach,On the Beach,Neil Young,True,f4174531-b783-3786-b75f-4fe61a8f6333,16,12,ok
+312,2016,Solange,A Seat at the Table,A Seat at the Table,Solange,True,331a7ba1-fae2-4881-b434-554f46c13746,5,3,ok
+313,2000,PJ Harvey,"Stories from the City, Stories from the Sea","Stories From the City, Stories From the Sea",PJ Harvey,True,71641af7-d122-326a-b0bb-f76a8d09810c,13,10,ok
+314,1996,Aaliyah,One in a Million,One in a Million,Aaliyah,True,776a71f8-2071-3743-aab4-83436df1b366,14,11,ok
+315,2018,Rosalía,El Mal Querer,EL MAL QUERER,ROSALÍA,True,bb525db3-81e4-4c05-b529-23fa05f35c12,3,3,ok
+316,1967,The Who,The Who Sell Out,The Who Sell Out,The Who,True,aa02a102-f7b5-3584-8d21-bd9c560effb6,33,24,ok
+317,1958,Billie Holiday,Lady in Satin,Lady in Satin,Billie Holiday,True,cf7bc239-a3ba-3d87-80e5-261f750cb560,35,22,ok
+318,1997,Janet Jackson,The Velvet Rope,The Velvet Rope,Janet Jackson,True,5bb501c6-2e78-393d-bcac-27d7d1b44a27,18,16,ok
+319,1989,The Stone Roses,The Stone Roses,The Stone Roses,The Stone Roses,True,88b86fe0-26f5-3949-817a-8082145e704d,38,22,ok
+320,1980,X,Los Angeles,Los Angeles,X,True,700da083-bd95-3301-91f1-af571a001414,7,5,ok
+321,2019,Lana Del Rey,Norman Fucking Rockwell!,Norman Fucking Rockwell!,Lana Del Rey,True,24fd0887-9e83-42e3-b27e-e7f89ead4c03,39,33,ok
+322,1969,Elvis Presley,From Elvis in Memphis,From Elvis in Memphis,Elvis Presley,True,2a753764-89d5-3b72-8dff-8c599f1ea925,20,16,ok
+323,1980,The Clash,Sandinista!,Sandinista!,The Clash,True,ff729e76-b7c5-3877-bf7d-bbad4fde43cb,16,11,ok
+324,2002,Coldplay,A Rush of Blood to the Head,A Rush of Blood to the Head,Coldplay,True,120c786d-a3b2-3c19-b4ff-2b7b3b4435bf,29,26,ok
+326,1980,Prince,Dirty Mind,Dirty Mind,Prince,True,4f19b946-6ecb-3801-9248-cc44e9e9a284,30,30,ok
+328,2013,Vampire Weekend,Modern Vampires of the City,Modern Vampires of the City,Vampire Weekend,True,eb143c5a-9a85-4bce-a78c-f7faf72c0169,10,8,ok
+329,1996,DJ Shadow,Endtroducing.....,Endtroducing.....,DJ Shadow,True,4b2186f5-ff00-3227-ae11-783ba93e1089,22,17,ok
+330,1966,The Rolling Stones,Aftermath,Aftermath,The Rolling Stones,True,26987c39-5914-483b-a897-d43ce6aad9b1,50,43,ok
+331,1989,Madonna,Like a Prayer,Like a Prayer,Madonna,True,1f75a8df-176c-3d23-8f1f-b0c8935682ec,26,18,ok
+332,1956,Elvis Presley,Elvis Presley,,,,,,,no match
+333,1972,Bill Withers,Still Bill,Still Bill,Bill Withers,True,63544e97-de86-3096-8702-250590ae5f90,10,6,ok
+334,1970,Santana,Abraxas,Abraxas,Santana,True,43424c73-fc58-36b0-b9cf-f8b057ac0603,38,33,ok
+335,1975,Bob Dylan,The Basement Tapes,The Basement Tapes,Bob Dylan,True,47873729-6db0-3431-99e7-0292e939dadf,13,13,ok
+336,1982,Roxy Music,Avalon,Avalon,Roxy Music,True,4b51d75c-ca0e-3ea7-9950-639eda1f7d1a,37,31,ok
+337,1967,Bob Dylan,John Wesley Harding,John Wesley Harding,Bob Dylan,True,32981714-597a-32dd-9f29-b2f7566fed89,25,21,ok
+338,1975,Brian Eno,Another Green World,,,,,,,no match
+339,1989,Janet Jackson,Janet Jackson's Rhythm Nation 1814,,,,,,,no match
+340,1993,Snoop Doggy Dogg,Doggystyle,Doggystyle,Snoop Doggy Dogg,True,649762c9-8785-3d9c-803d-2f0496f168e5,28,20,ok
+341,1993,The Smashing Pumpkins,Siamese Dream,,,,,,,no match
+342,1970,The Beatles,Let It Be,Let It Be,The Beatles,True,bff544a7-56e0-3ed6-9e0f-3b676cca9111,56,39,ok
+344,1973,Toots and the Maytals,Funky Kingston,Funky Kingston,Toots & The Maytals,True,dc7f2fc9-19ff-33e9-aa0d-3c81f91ca633,9,7,ok
+345,1973,Bruce Springsteen,"The Wild, the Innocent & the E Street Shuffle","The Wild, the Innocent & The E Street Shuffle",Bruce Springsteen,True,4b443e66-52a7-3cc9-a522-0dc64a6a51dc,87,85,ok
+346,2013,Arctic Monkeys,AM,AM,Arctic Monkeys,True,a348ba2f-f8b3-4686-b928-e63d8d94d543,21,15,ok
+347,1995,GZA,Liquid Swords,Liquid Swords,Genius/GZA,True,6075a004-e983-3a00-8a13-50af32f0e200,10,6,ok
+348,2001,Gillian Welch,Time (The Revelator),Time (The Revelator),Gillian Welch,True,4f9a9d35-b16d-3b7b-80d0-32b29683633f,6,5,ok
+349,1969,MC5,Kick Out the Jams,,,,,,,no match
+350,1972,Stevie Wonder,Music of My Mind,Music of My Mind,Stevie Wonder,True,5a253b10-e9f8-334c-b343-7f14e92402c2,15,10,ok
+351,2022,SZA,SOS,SOS,SZA,True,1646286a-d0ad-4288-bfab-34b0fb7b22c1,21,16,ok
+352,1999,Eminem,The Slim Shady LP,The Slim Shady LP,Eminem,True,be725de4-4633-3c8a-9a03-f2c4392b6e0d,17,14,ok
+353,1978,The Cars,The Cars,The Cars,The Cars,True,36172f3d-9b55-37f1-9fd4-0cbd2f3af0ce,29,22,ok
+354,1978,X-Ray Spex,Germfree Adolescents,Germfree Adolescents,X‐Ray Spex,True,02c1c972-b5a1-3b8f-be3f-83dfb9373def,13,7,ok
+355,1970,Black Sabbath,Black Sabbath,Black Sabbath,Black Sabbath,True,826c9743-a3f0-3479-bf06-8df2e140ef1d,51,39,ok
+356,1968,Dr. John,Gris-Gris,Gris-Gris,"Dr. John, the Night Tripper",True,8ceb6d06-3a60-37eb-81de-9cc8fe538e16,13,11,ok
+357,1985,Tom Waits,Rain Dogs,Rain Dogs,Tom Waits,True,fb25a883-2270-3ec4-8c62-85c7ed857e6f,21,21,ok
+358,2021,Olivia Rodrigo,Sour,SOUR,Olivia Rodrigo,True,2ae2e504-7116-4b4f-b632-9748bb18ccd2,53,44,ok
+359,1974,Big Star,Radio City,Radio City,Big Star,True,dea0867d-45d1-3366-8147-1b78f924a137,11,7,ok
+360,1978,Funkadelic,One Nation Under a Groove,One Nation Under a Groove,Funkadelic,True,9d084107-b712-3599-ab62-ac76fe3756b5,14,8,ok
+361,2006,My Chemical Romance,The Black Parade,The Black Parade,My Chemical Romance,True,bcba43e7-2f72-3b60-b234-577e77fd2d9e,29,24,ok
+362,1981,Luther Vandross,Never Too Much,Never Too Much,Luther Vandross,True,6e49186d-ce5c-3686-86cd-021f0ce1eda3,10,2,ok
+363,1975,Parliament,Mothership Connection,Mothership Connection,Parliament,True,cb69bfc6-a15c-34cd-b1af-76b6481bf09a,6,3,ok
+364,1978,Talking Heads,More Songs About Buildings and Food,More Songs About Buildings and Food,Talking Heads,True,2cecb2c0-cac3-3c55-8083-577308746230,69,66,ok
+365,2004,Madvillain,Madvillainy,Madvillainy,Madvillain,True,ab570ccb-b06b-3746-8147-4903163ba895,17,11,ok
+366,1976,Aerosmith,Rocks,Rocks,Aerosmith,True,775d9a2d-effc-35c8-b80a-f9a4e4206d27,28,23,ok
+367,2015,Drake,If You're Reading This It's Too Late,,,,,,,no match
+368,1970,George Harrison,All Things Must Pass,All Things Must Pass,George Harrison,True,d4b0f3e2-e3eb-3531-b305-ed8105cb5be4,28,22,ok
+369,1995,Mobb Deep,The Infamous,The Infamous…,Mobb Deep,True,03f3c216-bd40-322b-ac8a-254816ff5573,9,9,ok
+370,2005,Lil Wayne,Tha Carter II,Tha Carter II,Lil Wayne,True,d97d9f3b-3dc1-3330-a240-b84b74e62044,7,4,ok
+372,1968,Big Brother and the Holding Company,Cheap Thrills,Cheap Thrills,Big Brother & the Holding Company,True,02de8887-e93b-3ea6-8b6d-de072a159bba,22,14,ok
+373,1969,Isaac Hayes,Hot Buttered Soul,Hot Buttered Soul,Isaac Hayes,True,e76d4f75-f09b-3f5b-aca9-44ac4489e58d,15,11,ok
+374,1961,Robert Johnson,King of the Delta Blues Singers,,,,,,,no match
+375,1994,Green Day,Dookie,Dookie,Green Day,True,314cffd4-daa5-3337-85e5-e54165a96113,35,28,ok
+376,1998,Neutral Milk Hotel,In the Aeroplane Over the Sea,In the Aeroplane Over the Sea,Neutral Milk Hotel,True,8f310800-045b-3e12-8268-50b3d33a2267,15,9,ok
+377,2003,Yeah Yeah Yeahs,Fever to Tell,Fever to Tell,Yeah Yeah Yeahs,True,e8e2d824-dd32-3b24-9c7c-24619fbe86a9,14,9,ok
+378,1984,Run-DMC,Run-D.M.C.,,,,,,,no match
+379,1981,Rush,Moving Pictures,Moving Pictures,Rush,True,40e30dc1-55ac-33e1-85d3-1f1508140bfc,47,42,ok
+380,1959,Charles Mingus,Mingus Ah Um,Mingus Ah Um,Charles Mingus,True,48ec720b-2fc2-35dd-8130-5b186c4abcbc,28,22,ok
+381,1973,Lynyrd Skynyrd,(Pronounced 'Lĕh-'nérd 'Skin-'nérd),(pronounced ’lĕh-’nérd ’skin-’nérd),Lynyrd Skynyrd,True,33446893-8c9f-30b6-aa73-d719df371430,21,17,ok
+382,2015,Tame Impala,Currents,Currents,Tame Impala,True,08aa7a6c-3e43-4459-87b2-e47faf3a088a,16,12,ok
+383,1998,Massive Attack,Mezzanine,Mezzanine,Massive Attack,True,6f9f6899-c0d3-311d-ae87-a10ae6bc53a9,23,22,ok
+384,1968,The Kinks,The Kinks Are the Village Green Preservation Society,The Kinks Are the Village Green Preservation Society,The Kinks,True,4516a30e-939c-3b2b-a8ea-f94ae418d3a6,28,17,ok
+385,1977,Ramones,Rocket to Russia,Rocket to Russia,Ramones,True,dd959091-dba1-32b8-8159-0090959ce75b,16,9,ok
+386,2006,J Dilla,Donuts,Donuts,J Dilla,True,6b78c33a-64c4-3472-99e9-be45a392acb4,11,9,ok
+387,2007,Radiohead,In Rainbows,In Rainbows,Radiohead,True,6e335887-60ba-38f0-95af-fae7774336bf,20,18,ok
+388,1972,Aretha Franklin,"Young, Gifted and Black","Young, Gifted and Black",Aretha Franklin,True,f62ec525-7158-37c1-8535-6eaac62435b3,7,7,ok
+389,2005,Mariah Carey,The Emancipation of Mimi,The Emancipation of Mimi,Mariah Carey,True,2391debf-38aa-3a90-888e-51f857131e98,23,18,ok
+390,1988,Pixies,Surfer Rosa,Surfer Rosa,Pixies,True,74e36cbc-a747-3ebf-a60e-51e656c87741,14,9,ok
+391,1999,Kelis,Kaleidoscope,Kaleidoscope,Kelis,True,4ea68d9e-7e06-30ea-8b29-3d8195b302c7,7,5,ok
+393,2014,Taylor Swift,1989,1989,Taylor Swift,True,4d9ec1c2-58ec-48a4-aa0a-916718adead0,97,79,ok
+394,1980,Diana Ross,Diana,Diana,Diana Ross,True,fd07981b-fe56-3218-8df6-bcbe6992c96e,16,13,ok
+395,2014,D'Angelo,Black Messiah,Black Messiah,D’Angelo,True,b3d96626-4d46-4012-b6cb-e8d8b192a4f1,6,4,ok
+396,1972,Todd Rundgren,Something/Anything?,Something/Anything?,Todd Rundgren,True,edbaf38a-ba3c-3d21-981c-879fe4ac6c76,16,9,ok
+397,2019,Billie Eilish,"When We All Fall Asleep, Where Do We Go?","WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",Billie Eilish,True,72375978-a9a1-4254-b957-85565c716b7e,59,32,ok
+398,1979,The Raincoats,The Raincoats,The Raincoats,The Raincoats,True,044a7a01-ab8f-4781-a4de-183718abb936,10,5,ok
+399,2004,Brian Wilson,Brian Wilson Presents Smile,,,,,,,no match
+400,1981,The Go-Go's,Beauty and the Beat,Beauty And The Beat (30th Anniversary Deluxe Edition),The Go-Go’s,False,5230e044-dc45-49d7-9fae-973b7e706a9f,1,1,ok
+401,1976,Blondie,Blondie,Blondie,Blondie,True,e0400e1e-2dd9-3bed-9538-614998b3702c,13,9,ok
+402,1975,Fela Kuti,Expensive Shit,,,,,,,no match
+403,2000,Ghostface Killah,Supreme Clientele,Supreme Clientele,Ghostface Killah,True,e54744e2-7646-304d-abb8-2952671da3bb,8,2,ok
+404,1986,Anita Baker,Rapture,Rapture,Anita Baker,True,b544c1b2-9190-34ac-8d03-348c86a77cb2,11,8,ok
+406,1999,The Magnetic Fields,69 Love Songs,69 Love Songs,The Magnetic Fields,True,5dfac852-1aed-35b2-93b6-e8f9c93fe521,10,8,ok
+407,1969,Neil Young,Everybody Knows This Is Nowhere,Everybody Knows This Is Nowhere,Neil Young,True,f61603ab-ef6b-386b-a5e0-aaefc00543f1,23,16,ok
+408,1980,Motörhead,Ace of Spades,Ace of Spades,Motörhead,True,51d51de2-0312-4798-8529-bed2ae2581c6,31,25,ok
+409,1970,Grateful Dead,Workingman's Dead,Workingman’s Dead,Grateful Dead,True,6fdb82d8-9aee-35ed-8092-8434866bab7f,76,71,ok
+410,1967,The Beach Boys,Wild Honey,Wild Honey,The Beach Boys,True,25db75ad-e1e3-3941-85bd-291009a5f00d,16,5,ok
+411,2001,Bob Dylan,Love and Theft,“Love and Theft”,Bob Dylan,True,9980ffe5-c5b5-3a83-8c1e-1ec6618f97ca,20,13,ok
+412,1965,Smokey Robinson,Going to a Go-Go,Going to a Go‐Go,Smokey Robinson and The Miracles,True,88762473-682d-3544-a9e7-1bb3c5dddaf1,8,6,ok
+413,1970,Creedence Clearwater Revival,Cosmo's Factory,Cosmo’s Factory,Creedence Clearwater Revival,True,3a31800f-1916-3f4c-a7ae-26b783d00670,38,31,ok
+414,1979,Chic,Risqué,Risqué,Chic,True,baa74317-3f23-3f0b-a996-c68f52c61f13,9,8,ok
+415,1969,The Meters,Look-Ka Py Py,Look‐Ka Py Py,The Meters,True,fb2a15ff-c773-3297-9d15-2dd4eee92e4c,5,5,ok
+416,1999,The Roots,Things Fall Apart,Things Fall Apart,The Roots,True,8f341430-85b9-3a66-875f-ed1202868393,11,7,ok
+417,1959,Ornette Coleman,The Shape of Jazz to Come,The Shape of Jazz to Come,Ornette Coleman,True,5879cfca-e1d0-3ef4-8014-3b284832ed18,23,19,ok
+418,1985,Dire Straits,Brothers in Arms,Brothers in Arms,Dire Straits,True,b02f651e-32a1-30ae-bc23-070b59170278,78,62,ok
+419,2011,Eric Church,Chief,Chief,Eric Church,True,979e5e4d-0c1d-46c0-9fda-fa9b6fce89a6,9,9,ok
+420,1975,"Earth, Wind & Fire",That's the Way of the World,,,,,,,no match
+421,2005,M.I.A.,Arular,Arular,M.I.A.,True,32d38e25-27e8-45bc-b79b-931f5a609546,10,6,ok
+422,1973,Marvin Gaye,Let's Get It On,Let’s Get It On,Marvin Gaye,True,120c822e-3cd2-3652-975c-d687256a7931,23,17,ok
+423,1997,Yo La Tengo,I Can Hear the Heart Beating as One,I Can Hear the Heart Beating as One,Yo La Tengo,True,901ddfef-b428-3022-a7b9-429f56513831,9,6,ok
+424,1996,Beck,Odelay,Odelay,Beck,True,df0bfd42-78a9-40c3-a45f-a12e10d446f8,32,24,ok
+425,1972,Paul Simon,Paul Simon,Paul Simon,Paul Simon,True,602d0c54-2901-3469-a683-a5a50f3e5260,15,11,ok
+426,1988,Lucinda Williams,Lucinda Williams,Lucinda Williams,Lucinda Williams,True,9868b6bf-6bf5-3d62-bdb9-a312694c34f1,13,12,ok
+427,1973,Al Green,Call Me,Call Me,Al Green,True,edafb37c-f392-3765-9dbd-80616dcb2ad7,11,6,ok
+428,1985,Hüsker Dü,New Day Rising,New Day Rising,Hüsker Dü,True,5ae570d2-65c1-3da5-9a1b-dbb98ca7c3d2,7,5,ok
+429,1967,Four Tops,Reach Out,Reach Out,Four Tops,True,f56179b0-5abe-43fb-8f64-3e45648186da,1,1,ok
+430,2022,Bad Bunny,Un Verano Sin Ti,Un verano sin ti,Bad Bunny,True,e992b449-141b-4aea-b07b-9b2a478a8570,2,2,ok
+431,1984,Los Lobos,How Will the Wolf Survive?,How Will the Wolf Survive?,Los Lobos,True,2478de4b-9470-311b-be17-68fb79388e89,6,6,ok
+432,2004,Usher,Confessions,Confessions,Usher,True,0ee013ee-5f59-35d5-b6b8-26a0cb3e4372,13,9,ok
+433,2007,LCD Soundsystem,Sound of Silver,Sound of Silver,LCD Soundsystem,True,5cbcdd9f-4b7d-3b3c-b9f2-6b0e75971157,9,5,ok
+434,1994,Pavement,"Crooked Rain, Crooked Rain","Crooked Rain, Crooked Rain",Pavement,True,4f348977-6f44-39f9-b243-071927ecc6a4,19,10,ok
+435,1987,Pet Shop Boys,Actually,Actually,Pet Shop Boys,True,6de9a233-13dd-30b5-ad30-61c5814774c5,25,18,ok
+436,1996,2Pac,All Eyez on Me,All Eyez on Me,2Pac,True,e2621417-9236-36b4-9f9e-376c416dc4b0,22,19,ok
+437,2005,Gorillaz,Demon Days,Demon Days,Gorillaz,True,f959a46a-a136-3134-9412-6572b23fad95,32,29,ok
+438,1994,Blur,Parklife,Parklife,Blur,True,67461c8e-d864-3910-9bf4-39e44357aac9,22,19,ok
+439,1970,James Brown,Sex Machine,Sex Machine Today,James Brown,False,32185d3f-7daa-4d58-905a-37a842968e1f,1,1,ok
+440,1971,Loretta Lynn,Coal Miner's Daughter,Coal Miner’s Daughter,Loretta Lynn,True,edca17e1-d696-3fc8-a22a-06d232f1f48f,9,9,ok
+441,2007,Britney Spears,Blackout,Blackout,Britney Spears,True,0b8e14e1-d44d-3770-8617-5c6137a444a8,47,42,ok
+442,2015,The Weeknd,Beauty Behind the Madness,Beauty Behind the Madness,The Weeknd,True,a85b8aff-fcbc-4431-95ba-d8c20bbfb77e,23,19,ok
+443,1980,David Bowie,Scary Monsters (and Super Creeps),Scary Monsters… and Super Creeps,David Bowie,True,bb13cb45-254c-3a61-89a5-15d22a97e6d6,25,17,ok
+444,2005,Fiona Apple,Extraordinary Machine,Extraordinary Machine,Fiona Apple,True,81c98a74-56ba-355e-8d63-83e12a63dace,16,11,ok
+445,1972,Yes,Close to the Edge,Close to the Edge,Yes,True,5a59b948-1961-32ff-80d9-e970c7d4ebe9,48,36,ok
+446,1971,Alice Coltrane,Journey in Satchidananda,Journey in Satchidananda,Alice Coltrane,True,cf154081-2678-3778-95cf-cd31c4ea5dfe,9,8,ok
+447,2018,Bad Bunny,X 100pre,X 100PRE,Bad Bunny,True,68f8c63d-3e54-4f26-8ce3-41a7bc1ca7fd,2,2,ok
+448,1966,Otis Redding,Complete & Unbelievable: The Otis Redding Dictionary of Soul,Complete & Unbelievable: The Otis Redding Dictionary of Soul,Otis Redding,True,aeea2d91-3d98-389e-92fc-ff0db34762be,11,10,ok
+449,2003,The White Stripes,Elephant,Elephant,The White Stripes,True,d85b9684-4277-3565-b89b-115c8b4b7fd3,29,23,ok
+450,1971,Paul McCartney,Ram,,,,,,,no match
+451,1969,Roberta Flack,First Take,First Take,Roberta Flack,True,4455c04d-9368-4dc5-b35d-6ff8c407921f,10,7,ok
+453,1989,Nine Inch Nails,Pretty Hate Machine,Pretty Hate Machine,Nine Inch Nails,True,fcb872a2-7ef9-3ed0-bd4a-7c55c78179b6,32,16,ok
+454,1972,Can,Ege Bamyası,Ege Bamyası,Can,True,a4b405a6-0577-3b77-b46d-06af1b98fbd2,20,8,ok
+457,1990,Sinéad O'Connor,I Do Not Want What I Haven't Got,I Do Not Want What I Haven’t Got,Sinéad O’Connor,True,9747bcfe-7c42-35ac-8c3e-7ecac9f1227b,18,16,ok
+458,2013,Jason Isbell,Southeastern,Southeastern,Jason Isbell,True,47e4fe0d-8be7-4bdc-b5e7-5b0409ed6afc,6,4,ok
+459,2009,Kid Cudi,Man on the Moon: The End of Day,Man on the Moon: The End of Day,Kid Cudi,True,1b4bb003-db4c-4858-84ec-817aaca09501,17,13,ok
+460,2017,Lorde,Melodrama,Melodrama,Lorde,True,668e80e0-b35e-4471-9788-0a3d797fe42c,33,29,ok
+461,2007,Bon Iver,"For Emma, Forever Ago","For Emma, Forever Ago",Bon Iver,True,187935b5-a0a4-3e6f-9684-48b67a5190a1,15,11,ok
+462,1969,The Flying Burrito Brothers,The Gilded Palace of Sin,,,,,,,no match
+463,1968,Laura Nyro,Eli and the Thirteenth Confession,Eli and the Thirteenth Confession,Laura Nyro,True,c5410670-fce4-3139-9fab-6806d79171c5,11,7,ok
+464,1973,The Isley Brothers,3 + 3,,,,,,,no match
+466,1981,Black Uhuru,Red,Red,Black Uhuru,True,8b23e15c-c1bf-38c6-94d8-0208da2a6519,6,2,ok
+467,2009,Maxwell,BLACKsummers'night,BLACKsummers’night,Maxwell,True,65579f48-3ba4-489a-9b1a-6108925055c9,1,1,ok
+468,1978,The Rolling Stones,Some Girls,Some Girls,The Rolling Stones,True,b44bc358-a28f-3a1f-b07e-604910f12d37,42,31,ok
+469,1998,Manu Chao,Clandestino,Clandestino,Manu Chao,True,24a451c9-a8f3-33f9-a4fc-5e2d00cb7816,17,10,ok
+470,1998,Juvenile,400 Degreez,400 Degreez,Juvenile,True,08399f8b-c114-3080-b548-7599af1ebc5c,4,4,ok
+471,1967,Jefferson Airplane,Surrealistic Pillow,Surrealistic Pillow,Jefferson Airplane,True,e6440cd2-5e8e-367d-bc49-cc042b5ef524,31,25,ok
+472,2017,SZA,Ctrl,Ctrl,SZA,True,8f892c1b-0709-4cf4-9711-493892a9eb9b,9,8,ok
+473,2004,Daddy Yankee,Barrio Fino,Barrio fino,Daddy Yankee,True,5fa20be8-ea07-31bd-a915-f12a3ab8495e,6,5,ok
+474,1972,Big Star,#1 Record,#1 Record,Big Star,True,18ec10a7-864f-3f1b-8d68-5cb622165b20,12,10,ok
+475,1996,Sheryl Crow,Sheryl Crow,Sheryl Crow,Sheryl Crow,True,9d95366b-4d7b-360a-a847-19286e55f98d,21,18,ok
+476,1974,Sparks,Kimono My House,Kimono My House,Sparks,True,0539b843-2228-36f5-965d-f370d05f66c3,10,8,ok
+477,1959,Howlin' Wolf,Moanin' in the Moonlight,Moanin’ in the Moonlight,Howlin’ Wolf,True,75d0f3a2-5938-3f4d-b845-174b81eace3b,14,8,ok
+478,1967,The Kinks,Something Else by the Kinks,Something Else by The Kinks,The Kinks,True,ab0ea2d3-a273-3d7f-855b-f9930a1395cf,21,19,ok
+479,1994,Selena,Amor Prohibido,Amor Prohibido,Selena,True,bc5e0495-4db9-3dae-9883-104d5df6b2cc,8,5,ok
+480,2016,Miranda Lambert,The Weight of These Wings,The Weight of These Wings,Miranda Lambert,True,6a9f6cf0-2316-46a7-b8e2-71d356ac737d,7,7,ok
+481,1996,Belle and Sebastian,If You're Feeling Sinister,If You’re Feeling Sinister,Belle and Sebastian,True,66be5deb-75d5-3737-9037-1c745891d3ec,10,9,ok
+482,1992,The Pharcyde,Bizarre Ride II the Pharcyde,Bizarre Ride II the Pharcyde,The Pharcyde,True,c799ef0c-f038-364b-972b-51f52d794781,11,6,ok
+484,2011,Lady Gaga,Born This Way,Born This Way,Lady Gaga,True,2e3b231b-ab9f-4d85-950a-48708a1cc2fb,36,31,ok
+485,1974,Richard Thompson,I Want to See the Bright Lights Tonight,,,,,,,no match
+486,2006,John Mayer,Continuum,Continuum,John Mayer,True,21e886f7-db66-3103-beb4-da9323adddc7,23,18,ok
+487,1981,Black Flag,Damaged,Damaged,Black Flag,True,2cf40300-0f67-3136-9b84-57104f1f7a50,8,6,ok
+488,1969,The Stooges,The Stooges,The Stooges,The Stooges,True,18037a41-2695-3a8f-a732-f6653a7f125b,27,17,ok
+490,1974,Linda Ronstadt,Heart Like a Wheel,Heart Like a Wheel,Linda Ronstadt,True,3a026caf-ae4f-3b51-9d70-bb85ba6e1e7d,14,9,ok
+491,2022,Harry Styles,Harry's House,Harry’s House,Harry Styles,True,d712ba0e-25fa-4c03-aecd-ec0c100deba5,9,6,ok
+492,1989,Bonnie Raitt,Nick of Time,Nick of Time,Bonnie Raitt,True,182a8072-0513-3aa2-b812-9f7a9692731a,13,8,ok
+493,1978,Marvin Gaye,"Here, My Dear","Here, My Dear",Marvin Gaye,True,225a6648-d4d2-3b89-986b-6e515e7a94f0,9,5,ok
+494,1964,The Ronettes,Presenting the Fabulous Ronettes,Presenting the Fabulous Ronettes Featuring Veronica,The Ronettes,False,b24ffd1d-1cbc-32bd-bf45-b76b30792b8d,11,7,ok
+495,1994,Boyz II Men,II,II,Boyz II Men,True,6eaebb45-8911-3d0b-8ef3-914726356144,14,13,ok
+496,1998,Shakira,¿Dónde Están los Ladrones?,Dónde están los ladrones?,Shakira,True,3197ee5d-696e-374f-8df3-042f1c0fd3a5,10,9,ok
+498,1977,Suicide,Suicide,Suicide,Suicide,True,702d4a53-9f00-3f57-a723-e5e267518454,13,8,ok
+499,1977,Rufus,Ask Rufus,Ask Rufus,Rufus,True,cb6327b8-4ef5-3ca2-bbe2-260473c457cd,5,3,ok
+500,2004,Arcade Fire,Funeral,Funeral,Arcade Fire,True,05affa96-5959-32da-8d75-1c9eb985ca59,15,12,ok

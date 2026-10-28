@@ -1,0 +1,468 @@
+artist,album,year,rank
+Marvin Gaye,What's Going On,1971,1
+The Beach Boys,Pet Sounds,1966,2
+Joni Mitchell,Blue,1971,3
+Stevie Wonder,Songs in the Key of Life,1976,4
+The Beatles,Abbey Road,1969,5
+Nirvana,Nevermind,1991,6
+Fleetwood Mac,Rumours,1977,7
+Prince,Purple Rain,1984,8
+Bob Dylan,Blood on the Tracks,1975,9
+Lauryn Hill,The Miseducation of Lauryn Hill,1998,10
+The Beatles,Revolver,1966,11
+Michael Jackson,Thriller,1982,12
+Aretha Franklin,I Never Loved a Man the Way I Love You,1967,13
+The Rolling Stones,Exile on Main St.,1972,14
+Public Enemy,It Takes a Nation of Millions to Hold Us Back,1988,15
+The Clash,London Calling,1979,16
+Kanye West,My Beautiful Dark Twisted Fantasy,2010,17
+Bob Dylan,Highway 61 Revisited,1965,18
+Kendrick Lamar,To Pimp a Butterfly,2015,19
+Radiohead,Kid A,2000,20
+Bruce Springsteen,Born to Run,1975,21
+The Notorious B.I.G.,Ready to Die,1994,22
+The Velvet Underground,The Velvet Underground & Nico,1967,23
+The Beatles,Sgt. Pepper's Lonely Hearts Club Band,1967,24
+Carole King,Tapestry,1971,25
+Patti Smith,Horses,1975,26
+Wu-Tang Clan,Enter the Wu-Tang (36 Chambers),1993,27
+D'Angelo,Voodoo,2000,28
+The Beatles,The Beatles,1968,29
+The Jimi Hendrix Experience,Are You Experienced,1967,30
+Miles Davis,Kind of Blue,1959,31
+Beyoncé,Lemonade,2016,32
+Amy Winehouse,Back to Black,2006,33
+Stevie Wonder,Innervisions,1973,34
+The Beatles,Rubber Soul,1965,35
+Michael Jackson,Off the Wall,1979,36
+Dr. Dre,The Chronic,1992,37
+Bob Dylan,Blonde on Blonde,1966,38
+Talking Heads,Remain in Light,1980,39
+David Bowie,The Rise and Fall of Ziggy Stardust and the Spiders from Mars,1972,40
+The Rolling Stones,Let It Bleed,1969,41
+Radiohead,OK Computer,1997,42
+A Tribe Called Quest,The Low End Theory,1991,43
+Nas,Illmatic,1994,44
+Prince,Sign o' the Times,1987,45
+Paul Simon,Graceland,1986,46
+Ramones,Ramones,1976,47
+Bob Marley and the Wailers,Exodus,1977,48
+Outkast,Aquemini,1998,49
+Jay-Z,The Blueprint,2001,50
+David Bowie,Station to Station,1976,52
+The Jimi Hendrix Experience,Electric Ladyland,1968,53
+Pink Floyd,The Dark Side of the Moon,1973,55
+Liz Phair,Exile in Guyville,1993,56
+The Band,The Band,1969,57
+Led Zeppelin,Led Zeppelin IV,1971,58
+Stevie Wonder,Talking Book,1972,59
+Van Morrison,Astral Weeks,1968,60
+Eric B. & Rakim,Paid in Full,1987,61
+Guns N' Roses,Appetite for Destruction,1987,62
+Steely Dan,Aja,1977,63
+Outkast,Stankonia,2000,64
+John Coltrane,A Love Supreme,1965,66
+Jay-Z,Reasonable Doubt,1996,67
+Kate Bush,Hounds of Love,1985,68
+Alanis Morissette,Jagged Little Pill,1995,69
+N.W.A,Straight Outta Compton,1988,70
+Beyoncé,Renaissance,2022,71
+Neil Young,Harvest,1972,72
+My Bloody Valentine,Loveless,1991,73
+Kanye West,The College Dropout,2004,74
+Aretha Franklin,Lady Soul,1968,75
+Curtis Mayfield,Super Fly,1972,76
+The Who,Who's Next,1971,77
+Frank Ocean,Blonde,2016,79
+Sex Pistols,"Never Mind the Bollocks, Here's the Sex Pistols",1977,80
+Beyoncé,Beyoncé,2013,81
+Sly and the Family Stone,There's a Riot Goin' On,1971,82
+Dusty Springfield,Dusty in Memphis,1969,83
+AC/DC,Back in Black,1980,84
+John Lennon,John Lennon/Plastic Ono Band,1970,85
+The Doors,The Doors,1967,86
+Miles Davis,Bitches Brew,1970,87
+David Bowie,Hunky Dory,1971,88
+Erykah Badu,Baduizm,1997,89
+Neil Young,After the Gold Rush,1970,90
+Bruce Springsteen,Darkness on the Edge of Town,1978,91
+The Jimi Hendrix Experience,Axis: Bold as Love,1967,92
+Missy Elliott,Supa Dupa Fly,1997,93
+The Stooges,Fun House,1970,94
+Drake,Take Care,2011,95
+R.E.M.,Automatic for the People,1992,96
+Metallica,Master of Puppets,1986,97
+Lucinda Williams,Car Wheels on a Gravel Road,1998,98
+Taylor Swift,Red,2012,99
+The Band,Music from Big Pink,1968,100
+Led Zeppelin,Led Zeppelin,1969,101
+The Clash,The Clash,1977,102
+De La Soul,3 Feet High and Rising,1989,103
+The Rolling Stones,Sticky Fingers,1971,104
+Hole,Live Through This,1994,106
+Television,Marquee Moon,1977,107
+Fiona Apple,When the Pawn...,1999,108
+Lou Reed,Transformer,1972,109
+Joni Mitchell,Court and Spark,1974,110
+Janet Jackson,Control,1986,111
+Elton John,Goodbye Yellow Brick Road,1973,112
+The Smiths,The Queen Is Dead,1986,113
+The Strokes,Is This It,2001,114
+Kendrick Lamar,"Good Kid, M.A.A.D City",2012,115
+The Cure,Disintegration,1989,116
+Kanye West,Late Registration,2005,117
+Eagles,Hotel California,1976,118
+Sly and the Family Stone,Stand!,1969,119
+Van Morrison,Moondance,1970,120
+Elvis Costello,This Year's Model,1978,121
+Nine Inch Nails,The Downward Spiral,1994,122
+Led Zeppelin,Led Zeppelin II,1969,123
+U2,Achtung Baby,1991,124
+Beastie Boys,Paul's Boutique,1989,125
+Mary J. Blige,My Life,1994,126
+Ray Charles,Modern Sounds in Country and Western Music,1962,127
+Queen,A Night at the Opera,1975,128
+Pink Floyd,The Wall,1979,129
+Prince,1999,1982,130
+Portishead,Dummy,1994,131
+Joni Mitchell,Hejira,1976,133
+Fugees,The Score,1996,134
+U2,The Joshua Tree,1987,135
+Funkadelic,Maggot Brain,1971,136
+Adele,21,2011,137
+Black Sabbath,Paranoid,1970,139
+Bob Marley and the Wailers,Catch a Fire,1973,140
+Pixies,Doolittle,1989,141
+Bruce Springsteen,Born in the U.S.A.,1984,142
+The Velvet Underground,The Velvet Underground,1969,143
+Led Zeppelin,Physical Graffiti,1975,144
+Eminem,The Marshall Mathers LP,2000,145
+Blondie,Parallel Lines,1978,146
+Jeff Buckley,Grace,1994,147
+Frank Ocean,Channel Orange,2012,148
+John Prine,John Prine,1971,149
+Bruce Springsteen,Nebraska,1982,150
+George Michael,Faith,1987,151
+The Pretenders,Pretenders,1980,152
+PJ Harvey,Rid of Me,1993,153
+Aretha Franklin,Amazing Grace,1972,154
+Jay-Z,The Black Album,2003,155
+The Replacements,Let It Be,1984,156
+Oasis,(What's the Story) Morning Glory?,1995,157
+Erykah Badu,Mama's Gun,2000,158
+The Police,Synchronicity,1983,159
+Pearl Jam,Ten,1991,160
+"Crosby, Stills & Nash","Crosby, Stills & Nash",1969,161
+Pulp,Different Class,1995,162
+R.E.M.,Murmur,1983,165
+Depeche Mode,Violator,1990,167
+Steely Dan,Can't Buy a Thrill,1972,168
+Billy Joel,The Stranger,1977,169
+Taylor Swift,Folklore,2020,170
+Sonic Youth,Daydream Nation,1988,171
+Simon & Garfunkel,Bridge over Troubled Water,1970,172
+Nirvana,In Utero,1993,173
+Kendrick Lamar,DAMN.,2017,175
+Public Enemy,Fear of a Black Planet,1990,176
+Rod Stewart,Every Picture Tells a Story,1971,177
+Otis Redding,Otis Blue/Otis Redding Sings Soul,1965,178
+The Notorious B.I.G.,Life After Death,1997,179
+Love,Forever Changes,1967,180
+Bob Dylan,Bringing It All Back Home,1965,181
+James Taylor,Sweet Baby James,1970,182
+D'Angelo,Brown Sugar,1995,183
+Cyndi Lauper,She's So Unusual,1983,184
+The Rolling Stones,Beggars Banquet,1968,185
+Red Hot Chili Peppers,Blood Sugar Sex Magik,1991,186
+Ice Cube,AmeriKKKa's Most Wanted,1990,187
+T. Rex,Electric Warrior,1971,188
+Sleater-Kinney,Dig Me Out,1997,189
+The Who,Tommy,1969,190
+Etta James,At Last!,1960,191
+Beastie Boys,Licensed to Ill,1986,192
+Creedence Clearwater Revival,Willy and the Poor Boys,1969,193
+Michael Jackson,Bad,1987,194
+Leonard Cohen,Songs of Leonard Cohen,1967,195
+Robyn,Body Talk,2010,196
+The Beatles,Meet the Beatles!,1964,197
+The B-52's,The B-52's,1979,198
+Pavement,Slanted and Enchanted,1992,199
+Sade,Diamond Life,1984,200
+A Tribe Called Quest,Midnight Marauders,1993,201
+Björk,Homogenic,1997,202
+Nick Drake,Pink Moon,1972,203
+Kanye West,Graduation,2007,204
+Cat Stevens,Tea for the Tillerman,1970,205
+David Bowie,Low,1977,206
+Eagles,Eagles,1972,207
+Lil Wayne,Tha Carter III,2008,208
+Run-DMC,Raising Hell,1986,209
+Joy Division,Unknown Pleasures,1979,211
+Nina Simone,Wild Is the Wind,1966,212
+Fiona Apple,The Idler Wheel...,2012,213
+Tom Petty,Wildflowers,1994,214
+Grateful Dead,American Beauty,1970,215
+Elliott Smith,Either/Or,1997,216
+Oasis,Definitely Maybe,1994,217
+TLC,CrazySexyCool,1994,218
+Raekwon,Only Built 4 Cuban Linx...,1995,219
+"Crosby, Stills, Nash & Young",Déjà Vu,1970,220
+Rage Against the Machine,Rage Against the Machine,1992,221
+Madonna,Ray of Light,1998,222
+John Lennon,Imagine,1971,223
+Dixie Chicks,Fly,1999,224
+Wilco,Yankee Hotel Foxtrot,2001,225
+Derek and the Dominos,Layla and Other Assorted Love Songs,1970,226
+Little Richard,Here's Little Richard,1957,227
+De La Soul,De La Soul Is Dead,1991,228
+Rihanna,Anti,2016,230
+Tom Petty,Damn the Torpedoes,1979,231
+John Coltrane,Giant Steps,1960,232
+Tori Amos,Little Earthquakes,1992,233
+Black Sabbath,Master of Reality,1971,234
+Metallica,Metallica,1991,235
+Daft Punk,Discovery,2001,236
+Willie Nelson,Red Headed Stranger,1975,237
+Kraftwerk,Trans-Europe Express,1977,238
+Boogie Down Productions,Criminal Minded,1987,239
+Massive Attack,Blue Lines,1991,241
+The Velvet Underground,Loaded,1970,242
+The Zombies,Odessey and Oracle,1968,243
+Kanye West,808s & Heartbreak,2008,244
+Cocteau Twins,Heaven or Las Vegas,1990,245
+LL Cool J,Mama Said Knock You Out,1990,246
+Sade,Love Deluxe,1992,247
+Green Day,American Idiot,2004,248
+Whitney Houston,Whitney Houston,1985,249
+Buzzcocks,Singles Going Steady,1979,250
+Elton John,Honky Château,1972,251
+Devo,Q: Are We Not Men? A: We Are Devo!,1978,252
+Pink Floyd,The Piper at the Gates of Dawn,1967,253
+Herbie Hancock,Head Hunters,1973,254
+Bob Dylan,The Freewheelin' Bob Dylan,1963,255
+Tracy Chapman,Tracy Chapman,1988,256
+Dolly Parton,Coat of Many Colors,1971,257
+Joni Mitchell,The Hissing of Summer Lawns,1975,258
+Janis Joplin,Pearl,1971,259
+The Slits,Cut,1979,260
+Beastie Boys,Check Your Head,1992,261
+New Order,"Power, Corruption & Lies",1983,262
+The Beatles,A Hard Day's Night,1964,263
+Pink Floyd,Wish You Were Here,1975,264
+Pavement,Wowee Zowee,1995,265
+The Beatles,Help!,1965,266
+Minutemen,Double Nickels on the Dime,1984,267
+Randy Newman,Sail Away,1972,268
+Kanye West,Yeezus,2013,269
+Kacey Musgraves,Golden Hour,2018,270
+Mary J. Blige,What's the 411?,1992,271
+The Velvet Underground,White Light/White Heat,1968,272
+Gang of Four,Entertainment!,1979,273
+The Byrds,Sweetheart of the Rodeo,1968,274
+Curtis Mayfield,Curtis,1970,275
+Radiohead,The Bends,1995,276
+Alicia Keys,The Diary of Alicia Keys,2003,277
+Led Zeppelin,Houses of the Holy,1973,278
+50 Cent,Get Rich or Die Tryin',2003,280
+Harry Nilsson,Nilsson Schmilsson,1971,281
+Frank Sinatra,In the Wee Small Hours,1955,282
+Donna Summer,Bad Girls,1979,283
+Big Star,Third/Sister Lovers,1978,285
+Red Hot Chili Peppers,Californication,1999,286
+The Byrds,Mr. Tambourine Man,1965,287
+The Modern Lovers,The Modern Lovers,1976,288
+Björk,Post,1995,289
+Outkast,Speakerboxxx/The Love Below,2003,290
+Destiny's Child,The Writing's on the Wall,1999,291
+Van Halen,Van Halen,1978,292
+The Breeders,Last Splash,1993,293
+Weezer,Weezer,1994,294
+Daft Punk,Random Access Memories,2013,295
+Neil Young,Rust Never Sleeps,1979,296
+Peter Gabriel,So,1986,297
+Tom Petty,Full Moon Fever,1989,298
+Shania Twain,Come On Over,1997,300
+New York Dolls,New York Dolls,1973,301
+Neil Young,Tonight's the Night,1975,302
+Bill Withers,Just as I Am,1971,304
+Al Green,I'm Still in Love with You,1972,306
+Brian Eno,Here Come the Warm Jets,1974,308
+Joy Division,Closer,1980,309
+Wire,Pink Flag,1977,310
+Neil Young,On the Beach,1974,311
+Solange,A Seat at the Table,2016,312
+PJ Harvey,"Stories from the City, Stories from the Sea",2000,313
+Aaliyah,One in a Million,1996,314
+Rosalía,El Mal Querer,2018,315
+The Who,The Who Sell Out,1967,316
+Billie Holiday,Lady in Satin,1958,317
+Janet Jackson,The Velvet Rope,1997,318
+The Stone Roses,The Stone Roses,1989,319
+X,Los Angeles,1980,320
+Lana Del Rey,Norman Fucking Rockwell!,2019,321
+Elvis Presley,From Elvis in Memphis,1969,322
+The Clash,Sandinista!,1980,323
+Coldplay,A Rush of Blood to the Head,2002,324
+Prince,Dirty Mind,1980,326
+Vampire Weekend,Modern Vampires of the City,2013,328
+DJ Shadow,Endtroducing.....,1996,329
+The Rolling Stones,Aftermath,1966,330
+Madonna,Like a Prayer,1989,331
+Elvis Presley,Elvis Presley,1956,332
+Bill Withers,Still Bill,1972,333
+Santana,Abraxas,1970,334
+Bob Dylan,The Basement Tapes,1975,335
+Roxy Music,Avalon,1982,336
+Bob Dylan,John Wesley Harding,1967,337
+Brian Eno,Another Green World,1975,338
+Janet Jackson,Janet Jackson's Rhythm Nation 1814,1989,339
+Snoop Doggy Dogg,Doggystyle,1993,340
+The Smashing Pumpkins,Siamese Dream,1993,341
+The Beatles,Let It Be,1970,342
+Toots and the Maytals,Funky Kingston,1973,344
+Bruce Springsteen,"The Wild, the Innocent & the E Street Shuffle",1973,345
+Arctic Monkeys,AM,2013,346
+GZA,Liquid Swords,1995,347
+Gillian Welch,Time (The Revelator),2001,348
+MC5,Kick Out the Jams,1969,349
+Stevie Wonder,Music of My Mind,1972,350
+SZA,SOS,2022,351
+Eminem,The Slim Shady LP,1999,352
+The Cars,The Cars,1978,353
+X-Ray Spex,Germfree Adolescents,1978,354
+Black Sabbath,Black Sabbath,1970,355
+Dr. John,Gris-Gris,1968,356
+Tom Waits,Rain Dogs,1985,357
+Olivia Rodrigo,Sour,2021,358
+Big Star,Radio City,1974,359
+Funkadelic,One Nation Under a Groove,1978,360
+My Chemical Romance,The Black Parade,2006,361
+Luther Vandross,Never Too Much,1981,362
+Parliament,Mothership Connection,1975,363
+Talking Heads,More Songs About Buildings and Food,1978,364
+Madvillain,Madvillainy,2004,365
+Aerosmith,Rocks,1976,366
+Drake,If You're Reading This It's Too Late,2015,367
+George Harrison,All Things Must Pass,1970,368
+Mobb Deep,The Infamous,1995,369
+Lil Wayne,Tha Carter II,2005,370
+Big Brother and the Holding Company,Cheap Thrills,1968,372
+Isaac Hayes,Hot Buttered Soul,1969,373
+Robert Johnson,King of the Delta Blues Singers,1961,374
+Green Day,Dookie,1994,375
+Neutral Milk Hotel,In the Aeroplane Over the Sea,1998,376
+Yeah Yeah Yeahs,Fever to Tell,2003,377
+Run-DMC,Run-D.M.C.,1984,378
+Rush,Moving Pictures,1981,379
+Charles Mingus,Mingus Ah Um,1959,380
+Lynyrd Skynyrd,(Pronounced 'Lĕh-'nérd 'Skin-'nérd),1973,381
+Tame Impala,Currents,2015,382
+Massive Attack,Mezzanine,1998,383
+The Kinks,The Kinks Are the Village Green Preservation Society,1968,384
+Ramones,Rocket to Russia,1977,385
+J Dilla,Donuts,2006,386
+Radiohead,In Rainbows,2007,387
+Aretha Franklin,"Young, Gifted and Black",1972,388
+Mariah Carey,The Emancipation of Mimi,2005,389
+Pixies,Surfer Rosa,1988,390
+Kelis,Kaleidoscope,1999,391
+Taylor Swift,1989,2014,393
+Diana Ross,Diana,1980,394
+D'Angelo,Black Messiah,2014,395
+Todd Rundgren,Something/Anything?,1972,396
+Billie Eilish,"When We All Fall Asleep, Where Do We Go?",2019,397
+The Raincoats,The Raincoats,1979,398
+Brian Wilson,Brian Wilson Presents Smile,2004,399
+The Go-Go's,Beauty and the Beat,1981,400
+Blondie,Blondie,1976,401
+Fela Kuti,Expensive Shit,1975,402
+Ghostface Killah,Supreme Clientele,2000,403
+Anita Baker,Rapture,1986,404
+The Magnetic Fields,69 Love Songs,1999,406
+Neil Young,Everybody Knows This Is Nowhere,1969,407
+Motörhead,Ace of Spades,1980,408
+Grateful Dead,Workingman's Dead,1970,409
+The Beach Boys,Wild Honey,1967,410
+Bob Dylan,Love and Theft,2001,411
+Smokey Robinson,Going to a Go-Go,1965,412
+Creedence Clearwater Revival,Cosmo's Factory,1970,413
+Chic,Risqué,1979,414
+The Meters,Look-Ka Py Py,1969,415
+The Roots,Things Fall Apart,1999,416
+Ornette Coleman,The Shape of Jazz to Come,1959,417
+Dire Straits,Brothers in Arms,1985,418
+Eric Church,Chief,2011,419
+"Earth, Wind & Fire",That's the Way of the World,1975,420
+M.I.A.,Arular,2005,421
+Marvin Gaye,Let's Get It On,1973,422
+Yo La Tengo,I Can Hear the Heart Beating as One,1997,423
+Beck,Odelay,1996,424
+Paul Simon,Paul Simon,1972,425
+Lucinda Williams,Lucinda Williams,1988,426
+Al Green,Call Me,1973,427
+Hüsker Dü,New Day Rising,1985,428
+Four Tops,Reach Out,1967,429
+Bad Bunny,Un Verano Sin Ti,2022,430
+Los Lobos,How Will the Wolf Survive?,1984,431
+Usher,Confessions,2004,432
+LCD Soundsystem,Sound of Silver,2007,433
+Pavement,"Crooked Rain, Crooked Rain",1994,434
+Pet Shop Boys,Actually,1987,435
+2Pac,All Eyez on Me,1996,436
+Gorillaz,Demon Days,2005,437
+Blur,Parklife,1994,438
+James Brown,Sex Machine,1970,439
+Loretta Lynn,Coal Miner's Daughter,1971,440
+Britney Spears,Blackout,2007,441
+The Weeknd,Beauty Behind the Madness,2015,442
+David Bowie,Scary Monsters (and Super Creeps),1980,443
+Fiona Apple,Extraordinary Machine,2005,444
+Yes,Close to the Edge,1972,445
+Alice Coltrane,Journey in Satchidananda,1971,446
+Bad Bunny,X 100pre,2018,447
+Otis Redding,Complete & Unbelievable: The Otis Redding Dictionary of Soul,1966,448
+The White Stripes,Elephant,2003,449
+Paul McCartney,Ram,1971,450
+Roberta Flack,First Take,1969,451
+Nine Inch Nails,Pretty Hate Machine,1989,453
+Can,Ege Bamyası,1972,454
+Sinéad O'Connor,I Do Not Want What I Haven't Got,1990,457
+Jason Isbell,Southeastern,2013,458
+Kid Cudi,Man on the Moon: The End of Day,2009,459
+Lorde,Melodrama,2017,460
+Bon Iver,"For Emma, Forever Ago",2007,461
+The Flying Burrito Brothers,The Gilded Palace of Sin,1969,462
+Laura Nyro,Eli and the Thirteenth Confession,1968,463
+The Isley Brothers,3 + 3,1973,464
+Black Uhuru,Red,1981,466
+Maxwell,BLACKsummers'night,2009,467
+The Rolling Stones,Some Girls,1978,468
+Manu Chao,Clandestino,1998,469
+Juvenile,400 Degreez,1998,470
+Jefferson Airplane,Surrealistic Pillow,1967,471
+SZA,Ctrl,2017,472
+Daddy Yankee,Barrio Fino,2004,473
+Big Star,#1 Record,1972,474
+Sheryl Crow,Sheryl Crow,1996,475
+Sparks,Kimono My House,1974,476
+Howlin' Wolf,Moanin' in the Moonlight,1959,477
+The Kinks,Something Else by the Kinks,1967,478
+Selena,Amor Prohibido,1994,479
+Miranda Lambert,The Weight of These Wings,2016,480
+Belle and Sebastian,If You're Feeling Sinister,1996,481
+The Pharcyde,Bizarre Ride II the Pharcyde,1992,482
+Lady Gaga,Born This Way,2011,484
+Richard Thompson,I Want to See the Bright Lights Tonight,1974,485
+John Mayer,Continuum,2006,486
+Black Flag,Damaged,1981,487
+The Stooges,The Stooges,1969,488
+Linda Ronstadt,Heart Like a Wheel,1974,490
+Harry Styles,Harry's House,2022,491
+Bonnie Raitt,Nick of Time,1989,492
+Marvin Gaye,"Here, My Dear",1978,493
+The Ronettes,Presenting the Fabulous Ronettes,1964,494
+Boyz II Men,II,1994,495
+Shakira,¿Dónde Están los Ladrones?,1998,496
+Suicide,Suicide,1977,498
+Rufus,Ask Rufus,1977,499
+Arcade Fire,Funeral,2004,500
