@@ -1,7 +1,7 @@
 """
 Step 2: download front covers for albums that passed the screen.
 Reads screen.csv (made by 01_screen_albums.py). Falls back to albums.csv lookup if screen.csv is missing.
-Output: data/raw/covers/<artist>__<album>/<release-id>.jpg, per-album manifest.csv, covers/summary.csv
+Output: data/raw/candidate_fronts/<artist>__<album>/<release-id>.jpg, per-album manifest.csv, summary.csv
 
 Needs tqdm for the progress bars:  pip install tqdm
 Run from anywhere:  python scripts/02_download_covers.py
@@ -17,7 +17,7 @@ SCREEN_PATH = ROOT / "data/metadata/screen.csv"   # output of 01_screen_albums.p
 MIN_FRONT = 50                     # keep albums with at least this many front-art releases
 TOP_N = 20                         # download at most this many albums (None = every album that passes)
 MAX_PER_ARTIST = 1                 # at most this many albums per artist (None = no limit)
-OUT_DIR = ROOT / "data/raw/covers"
+OUT_DIR = ROOT / "data/raw/candidate_fronts"
 SUMMARY_PATH = OUT_DIR / "summary.csv"
 MAX_IMAGES = 40                    # stop an album once it has this many saved images
 SEED = 42

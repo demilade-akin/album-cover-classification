@@ -24,7 +24,8 @@ data/
                  final_albums.csv  the 10 albums used (folder name, release-group ID)
                  image_types_raw.csv / image_types.csv  Cover Art Archive images and type tags (snapshot)
                  releases.csv      release metadata (snapshot)
-  raw/           covers/ (front covers of the top 20), covers_extra/ (top-up). Not in git.
+  raw/           candidate_fronts/ (40 front covers each for the top 20 candidates),
+                 remaining_fronts/ (old notebook top-up, replaced by data/project fronts). Not in git.
   assignment2/   dataset/ (cleaned front covers, Dataset A), split/ + split.csv, looks.csv (to add)
   project/       images/<album>/<type>/ (not in git), manifest.csv
 models/          saved models
@@ -35,7 +36,7 @@ sample.ipynb     Assignment 2 notebook (run from the project folder)
 ## Full pipeline
 
 1. `01_screen_albums.py`: albums.csv to screen.csv (front-art count per album)
-2. `02_download_covers.py`: front covers of the top 20 into data/raw/covers/
+2. `02_download_covers.py`: front covers of the top 20 into data/raw/candidate_fronts/
 3. Manual: pick the final 10, clean them into data/assignment2/dataset/, list them in final_albums.csv
 4. `03_split_assignment2.py`: grouped, stratified train/val/test split for Assignment 2
 5. `04_count_image_types.py`: snapshot every image and type tag for the final albums
