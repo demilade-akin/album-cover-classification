@@ -1,1 +1,9 @@
-/covers
+# Downloads and generated data (rebuild them with the scripts)
+/data/raw/
+/data/assignment2/split/
+
+# Python, Jupyter, editor and macOS clutter
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.idea/workspace.xml
