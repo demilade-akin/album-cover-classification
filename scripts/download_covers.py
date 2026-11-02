@@ -1,27 +1,28 @@
 """
 Step 2: download front covers for albums that passed the screen.
 Reads screen.csv (made by screen_albums.py). Falls back to albums.csv lookup if screen.csv is missing.
-Output: covers/<artist>__<album>/<release-id>.jpg, per-album manifest.csv, covers/summary.csv
+Output: data/raw/covers/<artist>__<album>/<release-id>.jpg, per-album manifest.csv, covers/summary.csv
 
 Needs tqdm for the progress bars:  pip install tqdm
-Run from the folder that contains screen.csv:  python download_covers.py
+Run from anywhere:  python scripts/download_covers.py
 """
 import requests, time, hashlib, csv, re, random
 from pathlib import Path
 from tqdm import tqdm
 
 HEADERS = {"User-Agent": "AlbumCoverProject/0.1 (akinbobola71@gmail.com)"}
-CSV_PATH = "../albums.csv"  # fallback: columns artist,album (with a header row)
-SCREEN_PATH = Path("../screen.csv")   # output of screen_albums.py
+ROOT = Path(__file__).resolve().parents[1] if "__file__" in globals() else Path.cwd()   # project folder
+CSV_PATH = ROOT / "data/metadata/albums.csv"  # fallback: columns artist,album (with a header row)
+SCREEN_PATH = ROOT / "data/metadata/screen.csv"   # output of screen_albums.py
 MIN_FRONT = 50                     # keep albums with at least this many front-art releases
 TOP_N = 20                         # download at most this many albums (None = every album that passes)
 MAX_PER_ARTIST = 1                 # at most this many albums per artist (None = no limit)
-OUT_DIR = Path("../covers")
+OUT_DIR = ROOT / "data/raw/covers"
 SUMMARY_PATH = OUT_DIR / "summary.csv"
 MAX_IMAGES = 40                    # stop an album once it has this many saved images
 SEED = 42
 
-OUT_DIR.mkdir(exist_ok=True)
+OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def slug(text):
