@@ -8,7 +8,7 @@ Split the cleaned album images into train / val / test for Keras.
   and saves data/assignment2/split.csv.
 
 Needs:  pip install imagehash pandas pillow
-Run from anywhere:  python scripts/split_dataset.py   (or paste into a notebook cell run from the project folder)
+Run from anywhere:  python scripts/03_split_assignment2.py   (or paste into a notebook cell run from the project folder)
 """
 import random, shutil
 from itertools import combinations

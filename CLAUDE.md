@@ -23,14 +23,17 @@ Problem statement; number of data points; how I know it is enough (3); how the d
 
 ## Layout
 ```
-data/metadata/      albums.csv, screen.csv, image_types.csv, image_types_raw.csv
+data/metadata/      albums.csv, screen.csv, final_albums.csv (the 10 albums), image_types_raw.csv +
+                    releases.csv (pinned snapshots the project download reads), image_types.csv
 data/raw/           covers/ (20 downloaded albums), covers_extra/ (top-up, unreviewed). Not in git.
 data/assignment2/   dataset/ (cleaned, Dataset A), split/ + split.csv, looks.csv (to add)
-data/project/       final project images (to build)
+data/project/       images/<album>/<type>/<release_id>.jpg (not in git), manifest.csv
 models/             saved models
-scripts/            run from anywhere: python scripts/<name>.py (paths resolve from the project root)
+scripts/            01_screen_albums, 02_download_covers, 03_split_assignment2, 04_count_image_types,
+                    05_download_project. Run from anywhere: python scripts/<name>.py
 sample.ipynb        Assignment 2 notebook, run from the project folder
 ```
+- Reproducibility: a fresh clone rebuilds the project dataset with `05_download_project.py` from the committed snapshots. Never refetch the snapshots silently: `04_count_image_types.py` skips the fetch unless run with `--resume` or the file is deleted.
 
 ## Environment
 - macOS on Apple Silicon, PyCharm, `uv`-managed `.venv` on Python 3.12.
@@ -47,7 +50,7 @@ sample.ipynb        Assignment 2 notebook, run from the project folder
 - **Dataset A (balanced):** `data/assignment2/dataset/`, 393 images, 38 to 40 per album, no class weights.
 - **Dataset B (uncapped):** A's training images plus reviewed extras from `covers_extra/`, trained with class weights. Extras go into training only. Val and test are identical to A's.
 - A vs B isolates one variable: training data volume. Four runs: from-scratch CNN and pre-trained model, each on A and B.
-- **Split:** about 70/15/15, stratified by album and look, near-duplicate groups kept together, seed 42. `split_dataset.py` must use `HASH_THRESHOLD = 2` (the current split at 4 is invalid and must be rerun).
+- **Split:** about 70/15/15, stratified by album and look, near-duplicate groups kept together, seed 42. `03_split_assignment2.py` must use `HASH_THRESHOLD = 2` (the current split at 4 is invalid and must be rerun).
 - **Looks:** `looks.csv` (`file,look`) tags GKMC minivan covers and Thriller alternates so each look reaches train and test.
 
 ## Final project plan

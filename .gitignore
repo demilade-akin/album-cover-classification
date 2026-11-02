@@ -1,6 +1,8 @@
 # Downloads and generated data (rebuild them with the scripts)
 /data/raw/
 /data/assignment2/split/
+/data/project/images/
+*.part
 
 # Python, Jupyter, editor and macOS clutter
 __pycache__/

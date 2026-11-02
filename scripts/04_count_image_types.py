@@ -1,5 +1,5 @@
 """
-Count the image types the Cover Art Archive holds for the 10 albums in data/assignment2/dataset/.
+Count the image types the Cover Art Archive holds for the albums in data/metadata/final_albums.csv.
 Downloads no images: it reads only each release's JSON index on the Cover Art Archive.
 
 Answers two questions:
@@ -10,10 +10,12 @@ Output (data/metadata/):
   image_types_raw.csv  one row per image: album, release_id, image_id, types, approved
   image_types.csv      per album and type: images tagged with that type / tagged with that type only
 
-Resumable: releases already in image_types_raw.csv are skipped on a rerun.
-Run from anywhere:  python scripts/count_image_types.py   (roughly 40 to 60 minutes for 10 albums)
+If the run stops partway, finish it with --resume: releases already in image_types_raw.csv are skipped.
+image_types_raw.csv is the pinned snapshot that 05_download_project.py downloads from. It is committed
+to git, so a fresh clone skips the fetch and reproduces the same dataset. Delete it to take a new snapshot.
+Run from anywhere:  python scripts/04_count_image_types.py   (roughly 40 to 60 minutes for 10 albums)
 """
-import csv, re, threading, time
+import csv, threading, time
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -23,8 +25,7 @@ from tqdm import tqdm
 
 ROOT = Path(__file__).resolve().parents[1] if "__file__" in globals() else Path.cwd()   # project folder
 HEADERS = {"User-Agent": "AlbumCoverProject/0.1 (akinbobola71@gmail.com)"}
-SUMMARY_PATH = ROOT / "data/raw/covers/summary.csv"   # has the release-group ID (rg_id) of each downloaded album
-DATASET_DIR = ROOT / "data/assignment2/dataset"               # only albums with a folder here are counted
+ALBUMS_PATH = ROOT / "data/metadata/final_albums.csv"   # artist, album, folder, rg_id of the 10 final albums
 RAW_PATH = ROOT / "data/metadata/image_types_raw.csv"
 OUT_PATH = ROOT / "data/metadata/image_types.csv"
 CORE_TYPES = ["Front", "Back", "Medium", "Booklet", "Tray"]   # printed first in the table
@@ -39,11 +40,6 @@ def session():
         _local.s = requests.Session()
         _local.s.headers.update(HEADERS)
     return _local.s
-
-
-def slug(text):
-    # Same rule as download_covers.py, so folder names match
-    return re.sub(r"[^a-z0-9]+", "_", text.lower()).strip("_")
 
 
 def get_json(url, params=None, pause=1.1, retries=4):
@@ -63,15 +59,9 @@ def get_json(url, params=None, pause=1.1, retries=4):
 
 
 def album_list():
-    """(folder, rg_id) for every album in summary.csv that is also in dataset/."""
-    keep = {p.name for p in DATASET_DIR.iterdir() if p.is_dir()}
-    with open(SUMMARY_PATH, newline="", encoding="utf-8") as f:
-        rows = [(f"{slug(r['artist'])}__{slug(r['album'])}", r["rg_id"]) for r in csv.DictReader(f)]
-    albums = [(folder, rg) for folder, rg in rows if folder in keep]
-    missing = keep - {folder for folder, _ in albums}
-    if missing:
-        print("Warning: no rg_id found for", sorted(missing))
-    return albums
+    """(folder, rg_id) for every album in final_albums.csv."""
+    with open(ALBUMS_PATH, newline="", encoding="utf-8") as f:
+        return [(r["folder"], r["rg_id"]) for r in csv.DictReader(f)]
 
 
 def releases_with_art(rg_id):
@@ -177,5 +167,11 @@ def summarise():
 
 
 if __name__ == "__main__":
-    collect()
+    import sys
+    if RAW_PATH.exists() and "--resume" not in sys.argv:
+        # Keep the pinned snapshot: refetching would add releases uploaded since, and change the dataset
+        print(f"{RAW_PATH.name} exists (pinned snapshot), so nothing is fetched.\n"
+              "Use --resume to finish an interrupted run, or delete the file to take a new snapshot.")
+    else:
+        collect()
     summarise()

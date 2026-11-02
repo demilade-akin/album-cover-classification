@@ -3,7 +3,7 @@ Step 1: screen every album in albums.csv.
 Looks each album up on MusicBrainz and counts releases with front cover art.
 No images are downloaded. Results go to data/metadata/screen.csv (resumes if interrupted).
 
-Run from anywhere:  python scripts/screen_albums.py
+Run from anywhere:  python scripts/01_screen_albums.py
 """
 import requests, time, csv, re
 from pathlib import Path
