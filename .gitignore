@@ -9,3 +9,14 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 .idea/workspace.xml
+/data/project/features_resnet50.npz
+
+# LaTeX build files (keep the .tex, .bib and figures)
+/reports/*.aux
+/reports/*.bbl
+/reports/*.blg
+/reports/*.fdb_latexmk
+/reports/*.fls
+/reports/*.log
+/reports/*.out
+/reports/*.synctex.gz

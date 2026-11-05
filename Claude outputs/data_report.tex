@@ -1,0 +1,128 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[margin=1.7cm,columnsep=0.7cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype,graphicx,booktabs,tabularx,longtable,array,caption,hyperref,float,pdflscape,xcolor}
+\usepackage{enumitem}
+\usepackage{dblfloatfix}
+\graphicspath{{reports/figures/}{figures/}}
+\setlength{\emergencystretch}{3em}
+\sloppy
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlist{nosep,leftmargin=*}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue}
+\newcommand{\var}[1]{\texttt{\detokenize{#1}}}
+
+\title{\textbf{Dataset Report}\\Recognizing Albums from Any Packaging Image}
+\author{
+    TME 6015: AI/ML Workflow Design\\[6pt]
+    Akinbobola Akin (3784664)
+}
+\date{November 5, 2026}
+
+\begin{document}\maketitle\tableofcontents\clearpage
+
+% ---------------------------------------------------------------
+\section{Problem Statement}
+Streaming platforms like Spotify, Apple Music and Deezer have made music easy to access. Each album on these platforms has one digital version, chosen as the official version of that album. But in practice, most popular albums exist in many versions. Artists, studios and labels release the same album again and again across countries, formats and anniversaries, with small changes to each issue: a new sticker, a banner, a recoloured cover or even a completely different design. The ten albums in this project alone have 1,029 releases on MusicBrainz. For collectors, record shops and music archives, this turns cataloguing into a real problem. Every edition has to be identified and tagged by hand, often from a photo of just the disc or the back cover, and mistakes happen.
+
+This project treats the problem as image classification. Given a photo of any part of an album's packaging, the model predicts two things: which album it belongs to, out of ten, and which part of the packaging it shows: front, back, disc or booklet.
+
+% ---------------------------------------------------------------
+\section{Dataset Description}
+The dataset has 2,223 images from 10 albums. Each image has two labels: the album it belongs to and the part of the packaging it shows, which is the front, back, disc or booklet. The images come from 899 different releases of these albums, and each release adds at most one image of each part.
+
+\subsection{Data Collection}
+To test whether a model can recognize an album across its editions, I needed albums that have been released many times. Older albums that fans treat as classics tend to get the most reissues, so I started with the Rolling Stone 500 Greatest Albums list (2023 edition). I removed live albums, compilations and Various Artists releases because they are not single studio albums, which left 467 candidates.
+
+Next, I needed a way to tell which of these albums had the most editions. I looked up each one on MusicBrainz, an open music database, and counted how many of its releases had a front cover on the Cover Art Archive, the image library linked to it. This count told me both how many editions an album had and how many images I could actually get. Of the 430 albums that matched, most had very few: the median was 17 releases with a front cover, and only 40 albums had 50 or more.
+
+I downloaded front covers for the top 20 albums and kept only one album per artist, since two albums by the same artist could share a visual style and make the classes easier to confuse. From these 20, I chose the final 10 by looking through the covers myself. I wanted albums whose editions looked noticeably different from each other, and a mix of eras and genres. Because this step relied on my own judgement, I come back to it in the bias section.
+
+From the snapshot, I kept only the four parts of the packaging that appear across most releases: front, back, disc and booklet. Images tagged as both back and spine were counted as backs, since the spine is just the edge of the back cover. I dropped rarer tags such as tray or obi because they had too few images to learn from. Some releases also had many images of the same part, like a booklet with 20 pages, so I kept one image per part per release to stop a single release from dominating the data. This gave 2,231 images, and 2,223 of them downloaded. The other 8 came from 4 releases that the archive could not serve.
+
+\subsection{Number of Data Points}
+The final dataset has 2,223 images. Table~\ref{tab:counts} breaks this down by album and by part of the packaging.
+
+\begin{table*}[!t]\centering\small\caption{Images per album and packaging part}\label{tab:counts}
+\begin{tabularx}{\linewidth}{@{}Xrrrrrr@{}}\toprule
+Album & Releases & Front & Back & Disc & Booklet & Total\\\midrule
+Paranoid (Black Sabbath) & 73 & 46 & 23 & 26 & 18 & 113\\
+Darkness on the Edge of Town (Bruce Springsteen) & 167 & 145 & 128 & 140 & 29 & 442\\
+Tapestry (Carole King) & 183 & 134 & 141 & 149 & 40 & 464\\
+good kid, m.A.A.d city (Kendrick Lamar) & 73 & 57 & 33 & 30 & 14 & 134\\
+Thriller (Michael Jackson) & 85 & 58 & 34 & 27 & 19 & 138\\
+Kind of Blue (Miles Davis) & 137 & 104 & 85 & 82 & 31 & 302\\
+Remain in Light (Talking Heads) & 94 & 69 & 56 & 68 & 22 & 215\\
+Red (Taylor Swift) & 97 & 71 & 51 & 22 & 14 & 158\\
+Tommy (The Who) & 54 & 43 & 27 & 26 & 18 & 114\\
+The Joshua Tree (U2) & 66 & 48 & 35 & 36 & 24 & 143\\\midrule
+Total & \textbf{1,029} & \textbf{775} & \textbf{613} & \textbf{606} & \textbf{229} & \textbf{2,223}\\
+\bottomrule\end{tabularx}\end{table*}
+
+The counts are uneven, and this reflects how often each album has been reissued. Tapestry and Darkness on the Edge of Town each have over 440 images, while Paranoid and Tommy have about 110, so the largest album has roughly four times as many images as the smallest. The parts of the packaging are uneven too. Fronts are the most common because nearly every release has one, while booklets are the rarest, with only 229 images in total and as few as 14 for some albums. This happens because booklets mostly come with CDs, and vinyl and digital releases usually have none.
+
+\subsection{Is the Data Enough}
+% TODO: section not written yet
+
+\subsection{Representativeness}
+The model is meant to recognize real album packaging, the kind a collector, record shop or archive volunteer would photograph or scan. For the dataset to represent that problem, it needs to cover the many forms an album takes across its editions, not just its best-known cover.
+
+I did not hand-pick editions within an album. Every release on the archive had the same chance of being included, so the dataset follows the real spread of editions instead of my own idea of what an album should look like. The 899 releases in the dataset come from 56 countries. The largest groups are the United States (192), Europe-wide releases (138), Japan (79), Canada (76) and the United Kingdom (67). This matters because regional editions often change the packaging. Japanese releases, for example, add an obi strip down the side of the cover.
+
+The dataset also covers the main physical formats: 385 CD releases, 328 vinyl, 68 cassette and a few rarer ones such as 8-track and reel-to-reel. Each format packages an album differently, with different sizes, materials and layouts, so the model sees the same album in many physical forms. The releases span every decade from the 1950s to the 2020s, which captures how reissues change over time, from original pressings to anniversary and deluxe editions.
+
+The albums themselves cover a range of eras and genres. They go from Kind of Blue (1959) to Red and good kid, m.A.A.d city (2012), and include jazz, rock, heavy metal, singer-songwriter, new wave, pop and hip hop. Each album also has a different kind of variation. Some editions only add a sticker or banner, while others, like Thriller's anniversary editions and the two covers of good kid, m.A.A.d city, change the design completely.
+
+Finally, the images come from many different uploaders. Some are clean scans and others are photos of worn copies with glare, stickers or price tags. This variety is close to what the model would face in real use.
+
+The dataset does have limits. All 10 albums are well known, Western and mostly from before 1990, and scans outnumber phone photos. Booklets come mostly from CDs, with 181 of the 229 booklet images taken from CD releases. I discuss these gaps in the bias section.
+
+\subsection{Steps to Ensure Enough Data}
+I made several choices to get as many usable images as possible. The first came at the start, when I ranked albums by how many releases they had and kept only the top ones. Most albums on the list had fewer than 20 releases with a front cover, which would never be enough, so ranking by edition count meant I only worked with albums that had plenty of material.
+
+When choosing tags, I looked for images I could keep without hurting the labels. Many back covers were tagged as both back and spine because the scan included the spine edge. These are still back covers, so I counted them as backs, which added 157 images to the back class.
+
+During training, I will use data augmentation to give the model more variety from the images I have. Each time the model sees a training image, it gets a slightly changed copy: a random crop, a small rotation, or a change in brightness and contrast. These changes copy what happens in real photos, where a cover may be off-centre, tilted or badly lit. I will not flip images, because covers contain text and a mirrored cover never appears in real life.
+
+I will also use a model pre-trained on ImageNet instead of only training from scratch. This model has already learned general features like edges, shapes and text from over a million images, so it needs far fewer examples to learn my task.
+
+% ---------------------------------------------------------------
+\section{Bias Analysis}
+
+\subsection{Identified Biases}
+\textbf{Coverage bias.} My candidate albums came from the Rolling Stone 500, a list chosen by critics and focused on Western music, especially rock. All 10 final albums are by artists from the United States, United Kingdom or Ireland, all are in English, and 8 of the 10 came out before 1990. I also ranked albums by how many editions they had, which favours older and more popular records. The dataset leaves out whole groups of albums, such as non-Western music, newer releases and albums with only a few editions. A model trained on it may not work as well on those.
+
+\textbf{Sampling bias.} I did not pick the final 10 albums at random. I chose them from the top 20 by looking through the covers myself, favouring albums with clear variety between editions. The screening step also only counted the first 100 releases of each album, which undercounts albums with the most reissues.
+
+\textbf{Reporting bias.} The images come from volunteers who choose what to upload. People are more likely to upload unusual or collectible editions, like Japanese pressings or deluxe box sets, than ordinary ones. The mix of editions in the dataset may not match how often each edition exists in the real world. Formats are skewed as well: 181 of the 229 booklet images come from CDs, so the model sees few vinyl or cassette booklets.
+
+\textbf{Non-response bias.} Not every release has images. Of the 1,029 releases of my 10 albums, 89 have no artwork at all, and many others have only a front cover. Only 145 releases have all four parts. These gaps are not random, since popular and well-documented editions are more likely to be photographed in full. This makes the back, disc and booklet classes smaller than the front class and less representative.
+
+\textbf{Implicit and confirmation bias.} Some steps relied on my own judgement, such as choosing the final albums and deciding which images to keep during cleaning. I may have unconsciously kept images that matched my idea of what an album ``should'' look like.
+
+\subsection{Mitigation}
+Some of these biases cannot be fully removed with the data available, so I combine fixes with honest limits on what the results can claim.
+
+To reduce the effect of coverage bias, I will state clearly that the album label only applies to well-known, heavily reissued albums. To test whether the packaging label generalizes, I will build a separate test set from 5 albums the model never sees in training, chosen from different genres and eras. If the model still recognizes fronts, backs, discs and booklets on those albums, the packaging label is not tied to my 10 albums.
+
+For sampling bias, I wrote down the selection rules and kept them fixed: one album per artist, a mix of eras and genres, and editions chosen at random with a fixed seed. Anyone can check or repeat these choices using the scripts and snapshot in the repository.
+
+For reporting and non-response bias, I will not treat the dataset as a mirror of the real world. I will report results separately for each part of the packaging and for each format, so weak spots like vinyl booklets are visible instead of hidden in one overall accuracy number. The uneven class sizes will be handled with class weights during training, and I will report macro F1, which gives each class equal weight.
+
+For labelling errors from volunteers, I will hand-check a random sample of about 30 images per part, report the error rate, and record any removals in a file so the cleaned dataset can be rebuilt.
+
+For implicit and confirmation bias, I set the cleaning rules before reviewing images and applied them the same way to every album. I will also split the data by release before training and only use the test set once at the end. This guards against experimenter's bias, where a model keeps getting retrained until it gives the expected result.
+
+% ---------------------------------------------------------------
+\section{Conclusion}
+I built a dataset of 2,223 images from 899 releases of 10 well-known albums, with each image labelled by album and by part of the packaging. I chose albums with many editions so a model has to recognize an album across its reissues, and I kept every release instead of a fixed sample to get as much data as possible. The dataset covers 56 countries, the main physical formats and every decade from the 1950s to the 2020s, and a saved snapshot means anyone can rebuild it exactly.
+
+The dataset has clear limits. The classes are uneven, booklets are scarce, and the albums lean towards older Western music. I will handle these with class weights, results reported per class and per part, and a separate test on albums the model has never seen. A learning curve on the training data will show whether the dataset is large enough, or whether more albums need to be added.
+
+% ---------------------------------------------------------------
+\section*{References}
+\addcontentsline{toc}{section}{References}
+% TODO: add references
+
+\end{document}
