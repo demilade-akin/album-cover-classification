@@ -5,8 +5,6 @@ top-level folder, and nothing in one folder reads or writes the other.
 
 - **`assignment2/`**: Assignment 2, a 6-class food image classifier built from recipe blog photos.
 - **`project/`**: final project, classify any album packaging image (front, back, disc, booklet) into 10 albums.
-- **`archive/assignment2_albums/`**: the earlier album-cover version of Assignment 2. Replaced, reference only, do not
-  update or run it.
 
 ## Shared
 
@@ -84,7 +82,7 @@ data/metadata/   albums.csv, screen.csv, final_albums.csv (the 10 albums), image
 data/raw/        candidate_fronts/ (40 fronts each for the top 20 candidates). Not in git.
 data/images/     <album>/<type>/<release_id>.jpg. Not in git.
 data/            manifest.csv, split.csv, pilot_results.csv, features_resnet50.npz
-reports/         data_report.tex, references.bib, figures/, claude_outputs/ (earlier drafts)
+reports/         data_report.tex, references.bib, figures/, submitted PDF
 scripts/         01_screen_albums, 02_download_covers, 03_count_image_types, 04_download_project,
                  05_pilot_learning_curve
 ```
@@ -107,7 +105,7 @@ scripts/         01_screen_albums, 02_download_covers, 03_count_image_types, 04_
 - Thin backs for Paranoid, Tommy and Joshua Tree. Report it.
 - Hand-check about 30 images per type and report the mislabel rate.
 - Record country, year and format per release to show representativeness.
-- Pending: instructor approval to reuse the albums from the archived Assignment 2.
+- Pending: instructor approval to reuse the albums from the earlier Assignment 2 version.
 
 ### Rules that must hold
 - **Split by edition (release), never by image.** The same image (same scan resized or recompressed) on both sides is

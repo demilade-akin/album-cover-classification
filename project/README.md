@@ -29,7 +29,6 @@ data/
   manifest.csv   one row per selected image
   split.csv, pilot_results.csv     outputs of the pilot learning curve
 reports/         data report (LaTeX source, bibliography, figures, submitted PDF)
-  claude_outputs/  earlier generated drafts of the report
 scripts/         run from anywhere: python project/scripts/<name>.py
 ```
 

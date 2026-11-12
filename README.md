@@ -7,7 +7,6 @@ its scripts only read and write inside that folder.
 | --- | --- |
 | [`assignment2/`](assignment2/README.md) | Assignment 2: 6-class food image classifier (pasta, soup, salad, cake, cookies, stir fry) built from recipe blog photos |
 | [`project/`](project/README.md) | Final project: classify any album packaging image (front, back, disc, booklet) into 10 albums. Includes the data report |
-| [`archive/assignment2_albums/`](archive/assignment2_albums/README.md) | The earlier album-cover version of Assignment 2, replaced by the recipe classifier. Kept for reference only |
 
 ## Setup
 
