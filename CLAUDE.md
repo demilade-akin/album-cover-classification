@@ -60,11 +60,21 @@ plots and written interpretation.
   JSON-LD fallback only fetches slugs that name a class unless `--jsonld-all`. WordPress "large" image size (about
   1024 px). Repeated image URLs are skipped.
 - Resumable through `processed.csv`. Delete it, or use a fresh `--out`, after changing keyword lists or switching modes.
+- `scripts/02_clean.py`: drops title-rule matches (`EXCLUDE_RULES`: roundup posts, spaghetti squash, ice cream as
+  cookies, pineapple cake), files in optional `data/exclude.csv`, and near-duplicates (pHash <= 4, keep first, drop all
+  on a class conflict). Converts to RGB JPEG q95, shorter side <= 512. Writes `data/clean/`, `clean.csv`, `removed.csv`.
+  No manual review pass (my choice), so the mislabel rate isn't measured.
+- `scripts/03_split.py`: 70/15/15, seed 42, stratified by class and source site (class-site groups under 10 merge into
+  "other"). Writes `data/split/{train,val,test}/<class>/` and `split.csv`. Both 02 and 03 rebuild their folders and are
+  deterministic.
+- Current dataset: 1,694 downloaded, 1,679 kept (pasta 291, soup 300, salad 300, cake 299, cookies 288, stir_fry 201).
+  Split 1,175 / 252 / 252.
+- Imbalance: keep everything, use class weights computed from the train folder, report macro F1. No undersampling.
 
-### Open issues
-- WebP files can't be read by `image_dataset_from_directory`. Convert them when cleaning.
-- The same photo can appear on more than one site. Dedup before splitting so copies don't land in both train and test.
-- stir_fry is thin. Check class balance after the full run.
+### Things to report
+- Site and class are tangled (sugarspunrun: half of cake and cookies, omnivorescookbook: most of stir_fry). Shortcut
+  risk. Report accuracy per site from `split.csv`.
+- Most photos are portrait (aspect about 0.7). Squashing to 224x224 distorts them, `crop_to_aspect_ratio=True` crops.
 - Horizontal flips are fine for food photos (unlike album covers).
 
 ## Final project: album packaging classifier (`project/`)
