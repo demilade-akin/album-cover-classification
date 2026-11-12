@@ -15,6 +15,10 @@ sallysbakingaddiction.com. The script uses the WP Recipe Maker REST API where it
 schema.org Recipe data on each page. It waits 1 to 2 s between requests and follows robots.txt. It is
 resumable: rerun the same command to continue. See the docstring at the top of the script for the full rules.
 
+Caps: `--max-per-class` (default 150 per class per site) and `--max-total-per-class` (default 300 per class
+across all sites) keep the classes balanced. In the JSON-LD fallback only sitemap URLs whose slug names a class
+are fetched. `--jsonld-all` fetches every URL, at about 10x the requests.
+
 This step only downloads and labels. Cleaning, deduplication and splitting come later.
 
 ## Layout

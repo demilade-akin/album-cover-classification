@@ -7,20 +7,31 @@ Collection, per site
   1. WP Recipe Maker REST API (/wp-json/wp/v2/wprm_recipe), 100 recipes per page. The parent posts of each
      page are fetched in one batched request (posts?include=...), and their featured images in one more
      (media?include=...). That is 3 requests per 100 recipes instead of 1 + 100.
+     If the parent post request fails, the page is left for the next run rather than dropped.
   2. If the WPRM API is unavailable on a site, the script reads recipe URLs from the site's sitemaps and
-     parses the schema.org Recipe JSON-LD on each page (1 request per recipe).
+     parses the schema.org Recipe JSON-LD on each page (1 request per recipe). Only URLs whose slug names a
+     class are fetched, unless --jsonld-all is given.
   3. If a single WPRM recipe has no usable image, the script reads the JSON-LD on its parent page.
 
 Hero image
-  WPRM: the parent post's featured image, else the recipe card image (resize query removed).
+  WPRM: the parent post's featured image at WordPress's "large" size (about 1024 px), else the original,
+  else the recipe card image (resize query removed).
   JSON-LD: Recipe.image, the original upload rather than a crop. Step-by-step photos are never fetched.
+  An image URL already saved is not downloaded again (two recipe cards in one post share one photo).
+
+Caps
+  --max-per-class caps each class per site (default 150), so no single site dominates a class.
+  --max-total-per-class caps each class across all sites (default 300), so the classes stay balanced.
 
 Labelling (keyword lists in CLASS_PATTERNS below)
   1. Match the recipe's categories (WP post categories + WPRM course tags, or JSON-LD recipeCategory).
   2. If no category matches, match the title.
   3. Exactly one class matched: keep it. Zero, or more than one: skip it and log the reason.
-  4. Title veto: if the title names something that is not the class (banana bread filed under "Cakes"),
-     skip it. Sites file loosely, so a category match alone is not trusted for these cases.
+  4. Title veto, two kinds per class:
+     - veto: applies only when the title does not name the class. "Banana Bread" filed under Cakes is
+       dropped, "Chocolate Cake with Fudge Frosting" is kept.
+     - hard_veto: always applies, for titles that name the class but aren't it ("Crumb Cake Donuts",
+       "Chocolate Chip Cookie Bars").
   5. Strict mode (--strict): a category label is kept only if the title also names that class. Budget
      Bytes files Chicken Stroganoff and a turkey skillet under "Pasta", for example. Strict mode trades
      volume for cleaner labels. Title-only labels are unaffected, since the title already confirms them.
@@ -38,17 +49,20 @@ Output (under assignment2/data/)
   processed.csv                          every recipe looked at, with status (downloaded / skip reason)
 
 Resumable: recipes listed in processed.csv are skipped on the next run, so a rerun only does new work.
-Failed downloads are not logged as processed, so they are retried. Delete processed.csv to re-evaluate
+Network failures are not logged as processed, so they are retried. An unusable image type (AVIF, HTML) is
+logged as skip_bad_format and not retried. Delete processed.csv to re-evaluate
 skipped recipes (after editing the keyword lists, for example).
 
 Usage (from anywhere):
-  python assignment2/scripts/01_download_recipes.py              all sites, up to 150 images per class per site
+  python assignment2/scripts/01_download_recipes.py              all sites, 150 per class per site, 300 per class total
   python assignment2/scripts/01_download_recipes.py --strict     cleaner labels, fewer images
   python assignment2/scripts/01_download_recipes.py --sites cafedelites.com --max-per-class 20
   python assignment2/scripts/01_download_recipes.py --force-jsonld --sites loveandlemons.com   (test the fallback)
 """
 import argparse, csv, html, json, os, random, re, time
 from collections import Counter, defaultdict
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from urllib.parse import urlparse, urlunparse
 from urllib.robotparser import RobotFileParser
@@ -75,9 +89,10 @@ TIMEOUT = 30
 MAX_RETRIES = 3
 
 # ---------------------------------------------------------------------------------------------------------
-# Class keywords. Each class has patterns that count as a match and patterns that cancel a match
-# (a crab cake is not a cake). Matching is case-insensitive on whole words. Edit these to change the labels,
-# and report the final lists in the write-up, because they define what each class means.
+# Class keywords. include: patterns that count as a match. exclude: phrases removed before matching (a crab
+# cake is not a cake). veto: title words that drop the label when the title doesn't name the class.
+# hard_veto: title words that always drop it. Matching is case-insensitive on whole words. Edit these to
+# change the labels, and report the final lists in the write-up, because they define what each class means.
 # ---------------------------------------------------------------------------------------------------------
 CLASS_PATTERNS = {
     "pasta": {
@@ -86,42 +101,53 @@ CLASS_PATTERNS = {
                     r"tortellini", r"tagliatelle", r"pappardelle", r"bucatini", r"carbonara", r"bolognese"],
         "exclude": [r"pasta sauce", r"pasta dough"],
         "veto": [r"sauce", r"dough"],
+        "hard_veto": [],
     },
     "soup": {
         "include": [r"soups?", r"chowders?", r"bisque", r"minestrone", r"gazpacho"],
         "exclude": [r"soup dumplings?"],
         "veto": [r"dumplings?"],
+        "hard_veto": [],
     },
     "salad": {
         "include": [r"salads?", r"slaw", r"coleslaw"],
         "exclude": [r"salad dressings?", r"dressings?", r"vinaigrettes?"],
         "veto": [r"dressings?", r"vinaigrettes?"],
+        "hard_veto": [],
     },
     "cake": {
         "include": [r"cakes?", r"cheesecakes?", r"cupcakes?", r"bundt"],
         "exclude": [r"(crab|fish|rice|potato|salmon|corn|tuna|zucchini|veggie|vegetable) cakes?",
                     r"pancakes?", r"cake pops?", r"cake mix cookies", r"cake (batter|flour|mix)",
                     r"funnel cakes?"],
-        "veto": [r"breads?", r"muffins?", r"brownies?", r"bars?", r"scones?", r"pancakes?", r"frosting",
-                 r"icing", r"glaze", r"donuts?", r"doughnuts?", r"cinnamon rolls?", r"treats",
-                 r"substitute", r"bouquet"],
+        "veto": [r"breads?", r"brownies?", r"bars?", r"scones?", r"frosting", r"icing", r"glaze",
+                 r"treats", r"substitute", r"bouquet"],
+        "hard_veto": [r"donuts?", r"doughnuts?", r"cinnamon rolls?", r"muffins?"],
     },
     "cookies": {
         "include": [r"cookies?", r"biscotti", r"snickerdoodles?", r"shortbread", r"macarons?"],
         "exclude": [r"cookie dough dip", r"edible cookie dough", r"cookie butter", r"cookie bars?"],
-        "veto": [r"bars?", r"dough", r"dip"],
+        "veto": [r"dough", r"dip"],
+        "hard_veto": [r"bars?"],
     },
     "stir_fry": {
         "include": [r"stir[- ]?fr(y|ies|ied)", r"lo mein", r"chow mein", r"fried rice", r"pad thai"],
-        "exclude": [],
+        "exclude": [r"stir[- ]?fry (sauce|marinade)s?"],
         "veto": [r"sauce", r"marinade"],
+        "hard_veto": [],
     },
 }
 CLASSES = list(CLASS_PATTERNS)
 _COMPILED = {c: ([re.compile(rf"\b{p}\b", re.I) for p in v["include"]],
                  [re.compile(rf"\b{p}\b", re.I) for p in v["exclude"]])
              for c, v in CLASS_PATTERNS.items()}
-_VETO = {c: [re.compile(rf"\b{p}\b", re.I) for p in v.get("veto", [])] for c, v in CLASS_PATTERNS.items()}
+
+
+def _compile(key):
+    return {c: [re.compile(rf"\b{p}\b", re.I) for p in v.get(key, [])] for c, v in CLASS_PATTERNS.items()}
+
+
+_VETO, _HARD_VETO = _compile("veto"), _compile("hard_veto")
 
 META_FIELDS = ["filename", "class", "source_site", "recipe_title", "recipe_url", "image_url"]
 LOG_FIELDS = ["source_site", "recipe_key", "recipe_url", "status", "detail"]
@@ -152,7 +178,13 @@ def assign_label(categories, title):
     if cls and STRICT and detail == "category" and cls not in classes_in(title):
         return None, "skip_unconfirmed", f"{cls} from category, title does not name it"
     if cls:
-        hit = next((p.pattern for p in _VETO[cls] if p.search(html.unescape(title or ""))), None)
+        plain = html.unescape(title or "")
+        # Hard veto: always applies ("Crumb Cake Donuts" names cake but is a donut).
+        hit = next((p.pattern for p in _HARD_VETO[cls] if p.search(plain)), None)
+        # Soft veto: only when the title does not name the class itself. "Banana Bread" in Cakes is dropped,
+        # "Chocolate Cake with Fudge Frosting" is kept.
+        if not hit and cls not in classes_in(plain):
+            hit = next((p.pattern for p in _VETO[cls] if p.search(plain)), None)
         if hit:
             return None, "skip_veto", f"{cls} vetoed by title ({hit})"
     return cls, status, detail
@@ -175,6 +207,21 @@ def _match(categories, title):
 
 
 # ======================================================================== polite HTTP
+
+def retry_after_seconds(value):
+    """Retry-After is either a number of seconds or an HTTP date. Returns whole seconds, or 0 if unreadable."""
+    if not value:
+        return 0
+    try:
+        return max(0, int(value))
+    except ValueError:
+        pass
+    try:
+        when = parsedate_to_datetime(value)
+        return max(0, int((when - datetime.now(timezone.utc)).total_seconds()))
+    except (TypeError, ValueError):
+        return 0
+
 
 class PoliteSession:
     """One requests session with a global 1-2 s gap between calls and a robots.txt check per host."""
@@ -230,7 +277,7 @@ class PoliteSession:
                 time.sleep(2 ** attempt)
                 continue
             if r.status_code == 429 or r.status_code >= 500:
-                wait = int(r.headers.get("Retry-After", 0) or 0) or 2 ** (attempt + 1)
+                wait = retry_after_seconds(r.headers.get("Retry-After")) or 2 ** (attempt + 1)
                 print(f"    HTTP {r.status_code}, waiting {wait}s")
                 time.sleep(min(wait, 60))
                 continue
@@ -247,12 +294,14 @@ def load_state():
         with open(LOG_PATH, newline="", encoding="utf-8") as f:
             done = {(row["source_site"], row["recipe_key"]) for row in csv.DictReader(f)}
     counts = Counter()                       # (site, class) -> images already downloaded
+    image_urls = set()                       # every image URL already saved, to skip repeats
     if META_PATH.exists():
         with open(META_PATH, newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 if (RAW_DIR / row["class"] / row["filename"]).exists():
                     counts[(row["source_site"], row["class"])] += 1
-    return done, counts
+                    image_urls.add(row.get("image_url", ""))
+    return done, counts, image_urls
 
 
 def append_row(path, fields, row):
@@ -268,6 +317,10 @@ def append_row(path, fields, row):
 # ======================================================================== image download
 
 EXT = {"image/jpeg": ".jpg", "image/jpg": ".jpg", "image/png": ".png", "image/webp": ".webp"}
+
+
+class BadFormat(IOError):
+    """The server sent a type we can't use (AVIF, HTML, ...). Logged once, not retried."""
 
 
 def full_size(url):
@@ -286,7 +339,7 @@ def download_image(sess, url, cls, stem):
         raise IOError(f"HTTP {r.status_code}")
     ctype = r.headers.get("Content-Type", "").split(";")[0].strip().lower()
     if ctype not in EXT:
-        raise IOError(f"unsupported content type {ctype or 'none'}")
+        raise BadFormat(f"unsupported content type {ctype or 'none'}")
     name = stem + EXT[ctype]
     dest = RAW_DIR / cls / name
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -379,17 +432,23 @@ def parse_recipe_page(sess, url):
 # ======================================================================== per-recipe processing
 
 class Run:
-    def __init__(self, sess, max_per_class):
+    def __init__(self, sess, max_per_class, max_total_per_class):
         self.sess = sess
-        self.max_per_class = max_per_class
-        self.done, self.counts = load_state()
+        self.max_per_class = max_per_class               # per class per site
+        self.max_total = max_total_per_class             # per class across all sites
+        self.done, self.counts, self.image_urls = load_state()
         self.stats = Counter()               # (site, status) -> recipes
 
+    def total(self, cls):
+        return sum(n for (_, c), n in self.counts.items() if c == cls)
+
     def full(self, site, cls):
-        return self.max_per_class and self.counts[(site, cls)] >= self.max_per_class
+        """A class is full for a site when it hits the per-site cap or the total cap (0 means no cap)."""
+        return bool((self.max_per_class and self.counts[(site, cls)] >= self.max_per_class)
+                    or (self.max_total and self.total(cls) >= self.max_total))
 
     def site_full(self, site):
-        return self.max_per_class and all(self.full(site, c) for c in CLASSES)
+        return all(self.full(site, c) for c in CLASSES)
 
     def log(self, site, key, url, status, detail=""):
         self.stats[(site, status)] += 1
@@ -417,15 +476,23 @@ class Run:
         if not image_url:
             self.log(site, key, url, "skip_no_image")
             return
+        if image_url in self.image_urls:     # e.g. two recipe cards in one post share the featured image
+            self.log(site, key, url, "skip_duplicate_image", image_url)
+            return
         stem = f"{site.split('.')[0]}_{key}"
         try:
             name = download_image(self.sess, image_url, cls, stem)
+        except BadFormat as e:               # permanent: retrying would fail the same way
+            print(f"    image skipped for {url}: {e}")
+            self.log(site, key, url, "skip_bad_format", str(e))
+            return
         except (IOError, PermissionError) as e:
             print(f"    image failed for {url}: {e}")
             self.log(site, key, url, "fail_download", str(e))
             return
         append_row(META_PATH, META_FIELDS, {"filename": name, "class": cls, "source_site": site,
                                             "recipe_title": title, "recipe_url": url, "image_url": image_url})
+        self.image_urls.add(image_url)
         self.counts[(site, cls)] += 1
         self.log(site, key, url, "downloaded", f"{cls} ({detail})")
 
@@ -443,6 +510,17 @@ def wp_get_json(sess, url):
         return r.json(), r
     except ValueError:
         return None, r
+
+
+def pick_size(m):
+    """Prefer WordPress's "large" rendition (about 1024 px) over the original upload, which can be 4000 px and
+    several MB. Training uses 224 px, so the original adds download time and disk space for nothing."""
+    sizes = (m.get("media_details") or {}).get("sizes") or {}
+    for name in ("large", "medium_large", "full"):
+        url = (sizes.get(name) or {}).get("source_url")
+        if url:
+            return url
+    return m.get("source_url")
 
 
 def wp_categories(sess, base):
@@ -485,6 +563,11 @@ def collect_wprm(run, site, base, max_pages):
         if parent_ids:
             pdata, _ = wp_get_json(sess, f"{base}/wp-json/wp/v2/posts?include={','.join(parent_ids)}"
                                          f"&per_page=100&_fields=id,link,title,categories,featured_media")
+            if pdata is None:
+                # The batch request failed. Logging these recipes as skip_no_parent would drop them for good,
+                # so leave them unlogged and let the next run retry the page.
+                print(f"  page {page}: parent post request failed, skipping the page (rerun to retry)")
+                recipes = []
             posts = {str(p["id"]): p for p in (pdata or [])}
 
         # Batch 2: featured images of those posts (the hero image)
@@ -492,8 +575,9 @@ def collect_wprm(run, site, base, max_pages):
         media = {}
         if media_ids:
             mdata, _ = wp_get_json(sess, f"{base}/wp-json/wp/v2/media?include={','.join(media_ids)}"
-                                         f"&per_page=100&_fields=id,source_url")
-            media = {str(m["id"]): m.get("source_url") for m in (mdata or [])}
+                                         f"&per_page=100&_fields=id,source_url,media_details")
+            # (Nested _fields=media_details.sizes comes back empty on some sites, so ask for the whole object.)
+            media = {str(m["id"]): pick_size(m) for m in (mdata or [])}
 
         for d in recipes:
             rec = d["recipe"]
@@ -556,15 +640,24 @@ def sitemap_urls(sess, base, limit_sitemaps=60):
     return list(dict.fromkeys(pages))
 
 
-def collect_jsonld(run, site, base, max_pages):
-    """Fallback: sitemap URLs, then Recipe JSON-LD on each page. One request per recipe."""
+def collect_jsonld(run, site, base, max_pages, all_urls=False):
+    """Fallback: sitemap URLs, then Recipe JSON-LD on each page. One request per recipe.
+
+    By default only URLs whose slug names a class are fetched (/chicken-noodle-soup/). The label still comes
+    from the page's categories and title, the slug only decides which pages are worth a request. Walking
+    every URL (all_urls) costs about 10x the requests for few extra images, and a site that never fills all
+    six classes would otherwise be crawled end to end."""
     urls = sitemap_urls(run.sess, base)
-    print(f"  sitemaps: {len(urls)} page URLs")
+    slug_hits = [u for u in urls if classes_in(urlparse(u).path.replace("-", " "))]
+    print(f"  sitemaps: {len(urls)} page URLs, {len(slug_hits)} with a class word in the slug")
+    if all_urls:
+        # Slug matches first, the rest after, so the caps fill with fewer wasted fetches.
+        hit_set = set(slug_hits)
+        urls = slug_hits + [u for u in urls if u not in hit_set]
+    else:
+        urls = slug_hits
     if not urls:
         return
-    # Fetch URLs whose slug already names a class first. This changes only the order, not the labels,
-    # so the per-class cap fills with fewer wasted page fetches.
-    urls.sort(key=lambda u: 0 if classes_in(urlparse(u).path.replace("-", " ")) else 1)
     fetched, blocked_in_a_row = 0, 0
     for url in urls:
         key = urlparse(url).path.strip("/").replace("/", "_")[:120] or "home"
@@ -576,6 +669,11 @@ def collect_jsonld(run, site, base, max_pages):
         if run.site_full(site):
             print("  every class reached the cap for this site")
             break
+        # If every class the slug names is already full, the page can only end as skip_class_full, which is not
+        # logged. Skipping it here saves a request now and on every rerun.
+        slug_classes = classes_in(urlparse(url).path.replace("-", " "))
+        if slug_classes and all(run.full(site, c) for c in slug_classes):
+            continue
         fetched += 1
         try:
             parsed = parse_recipe_page(run.sess, url)
@@ -646,10 +744,14 @@ def main():
     ap.add_argument("--sites", nargs="+", default=SITES, help="domains to collect from")
     ap.add_argument("--max-per-class", type=int, default=150,
                     help="cap per class per site, 0 for no cap (default 150)")
+    ap.add_argument("--max-total-per-class", type=int, default=300,
+                    help="cap per class across all sites, 0 for no cap (default 300)")
     ap.add_argument("--max-pages", type=int, default=0,
                     help="WPRM pages of 100 recipes per site, 0 for all (JSON-LD: 100 page fetches per unit)")
     ap.add_argument("--out", type=Path, default=OUT_DIR, help="output folder (default assignment2/data)")
     ap.add_argument("--force-jsonld", action="store_true", help="skip the WPRM API (to test the fallback)")
+    ap.add_argument("--jsonld-all", action="store_true",
+                    help="JSON-LD fallback: fetch every sitemap URL, not only slugs that name a class")
     ap.add_argument("--strict", action="store_true",
                     help="keep a category label only if the title also names the class")
     args = ap.parse_args()
@@ -659,7 +761,7 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     sess = PoliteSession()
     STRICT = args.strict
-    run = Run(sess, args.max_per_class)
+    run = Run(sess, args.max_per_class, args.max_total_per_class)
     print(f"User-Agent: {USER_AGENT}")
     print(f"Labelling: {'strict (category must be confirmed by title)' if STRICT else 'category first, title fallback'}")
     print(f"Resuming with {len(run.done)} recipes already processed\n")
@@ -677,7 +779,7 @@ def main():
                 continue
             if args.force_jsonld or not collect_wprm(run, site, base, args.max_pages):
                 print("  falling back to sitemap + JSON-LD")
-                collect_jsonld(run, site, base, args.max_pages)
+                collect_jsonld(run, site, base, args.max_pages, args.jsonld_all)
     except KeyboardInterrupt:
         print("\nInterrupted. Rerun the same command to continue where it stopped.")
     print_summary(run)

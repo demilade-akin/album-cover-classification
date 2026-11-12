@@ -51,8 +51,12 @@ plots and written interpretation.
   JSON-LD from sitemaps. 1 to 2 s between requests, descriptive user agent, robots.txt per host (RFC 9309). Never
   bypass bot protection.
 - Labelling: categories first, title as fallback, exactly one class or skip. Keyword, exclude and veto lists live in
-  `CLASS_PATTERNS` at the top of the script and define the classes, so report them. `--strict` keeps a category label
-  only when the title also names the class.
+  `CLASS_PATTERNS` at the top of the script and define the classes, so report them. `veto` drops a label only when the
+  title doesn't name the class. `hard_veto` always drops it. `--strict` keeps a category label only when the title
+  also names the class.
+- Caps: `--max-per-class` (150 per site) and `--max-total-per-class` (300 across sites) keep classes balanced. The
+  JSON-LD fallback only fetches slugs that name a class unless `--jsonld-all`. WordPress "large" image size (about
+  1024 px). Repeated image URLs are skipped.
 - Resumable through `processed.csv`. Delete it, or use a fresh `--out`, after changing keyword lists or switching modes.
 
 ### Open issues
