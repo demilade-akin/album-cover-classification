@@ -44,7 +44,9 @@ plots and written interpretation.
 
 ### Dataset
 - Classes: pasta, soup, salad, cake, cookies, stir_fry.
-- Sources: recipetineats.com, budgetbytes.com, seriouseats.com, cafedelites.com, loveandlemons.com, sallysbakingaddiction.com.
+- Sources: recipetineats.com, budgetbytes.com, cafedelites.com, loveandlemons.com, omnivorescookbook.com,
+  sugarspunrun.com, natashaskitchen.com. All have an open WPRM API. Serious Eats and Sally's were dropped (API blocked
+  or missing).
 - `scripts/01_download_recipes.py` downloads the main photo of each recipe into `data/raw/<class>/` and writes
   `data/metadata.csv` and `data/processed.csv`. Download and label only. Cleaning, dedup and splitting are later steps.
 - Collection: WP Recipe Maker REST API with batched parent post and media requests, falling back to schema.org Recipe
@@ -60,7 +62,6 @@ plots and written interpretation.
 - Resumable through `processed.csv`. Delete it, or use a fresh `--out`, after changing keyword lists or switching modes.
 
 ### Open issues
-- Serious Eats' robots.txt blocks AI and ML crawlers by name. Decide whether to keep it.
 - WebP files can't be read by `image_dataset_from_directory`. Convert them when cleaning.
 - The same photo can appear on more than one site. Dedup before splitting so copies don't land in both train and test.
 - stir_fry is thin. Check class balance after the full run.

@@ -81,8 +81,11 @@ CONTACT = os.environ.get("RECIPE_CONTACT", "no contact given")
 USER_AGENT = f"TME6015-RecipeDataset/0.1 (university coursework image classifier; {CONTACT})"
 ROBOTS_AGENT = "TME6015-RecipeDataset"   # the token matched against User-agent lines in robots.txt
 
-SITES = ["recipetineats.com", "budgetbytes.com", "seriouseats.com",
-         "cafedelites.com", "loveandlemons.com", "sallysbakingaddiction.com"]
+# All seven have an open WP Recipe Maker API. omnivorescookbook covers stir fry, sugarspunrun baking,
+# natashaskitchen general cooking. Serious Eats (API blocked, robots.txt names AI crawlers) and Sally's Baking
+# Addiction (no API, slow page-by-page fallback) were dropped.
+SITES = ["recipetineats.com", "budgetbytes.com", "cafedelites.com", "loveandlemons.com",
+         "omnivorescookbook.com", "sugarspunrun.com", "natashaskitchen.com"]
 
 MIN_GAP, MAX_GAP = 1.0, 2.0   # seconds between requests
 TIMEOUT = 30
@@ -120,9 +123,9 @@ CLASS_PATTERNS = {
         "exclude": [r"(crab|fish|rice|potato|salmon|corn|tuna|zucchini|veggie|vegetable) cakes?",
                     r"pancakes?", r"cake pops?", r"cake mix cookies", r"cake (batter|flour|mix)",
                     r"funnel cakes?"],
-        "veto": [r"breads?", r"brownies?", r"bars?", r"scones?", r"frosting", r"icing", r"glaze",
+        "veto": [r"breads?", r"brownies?", r"scones?", r"frosting", r"icing", r"glaze",
                  r"treats", r"substitute", r"bouquet"],
-        "hard_veto": [r"donuts?", r"doughnuts?", r"cinnamon rolls?", r"muffins?"],
+        "hard_veto": [r"donuts?", r"doughnuts?", r"cinnamon rolls?", r"muffins?", r"bars?"],
     },
     "cookies": {
         "include": [r"cookies?", r"biscotti", r"snickerdoodles?", r"shortbread", r"macarons?"],
