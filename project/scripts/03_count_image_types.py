@@ -11,9 +11,9 @@ Output (data/metadata/):
   image_types.csv      per album and type: images tagged with that type / tagged with that type only
 
 If the run stops partway, finish it with --resume: releases already in image_types_raw.csv are skipped.
-image_types_raw.csv is the pinned snapshot that 05_download_project.py downloads from. It is committed
+image_types_raw.csv is the pinned snapshot that 04_download_project.py downloads from. It is committed
 to git, so a fresh clone skips the fetch and reproduces the same dataset. Delete it to take a new snapshot.
-Run from anywhere:  python scripts/04_count_image_types.py   (roughly 40 to 60 minutes for 10 albums)
+Run from anywhere:  python project/scripts/03_count_image_types.py   (roughly 40 to 60 minutes for 10 albums)
 """
 import csv, threading, time
 from collections import Counter, defaultdict

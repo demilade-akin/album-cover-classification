@@ -1,7 +1,7 @@
 """
 Build the final project dataset: one image per type per release for the albums in final_albums.csv.
 
-Reads the pinned snapshot data/metadata/image_types_raw.csv (made by 04_count_image_types.py), so every
+Reads the pinned snapshot data/metadata/image_types_raw.csv (made by 03_count_image_types.py), so every
 machine picks the same images. Release metadata (date, country, format) comes from MusicBrainz once and is
 pinned in data/metadata/releases.csv. Both files are committed, so a fresh clone rebuilds the same dataset
 as long as the Cover Art Archive still serves the images.
@@ -14,12 +14,12 @@ Selection rules
     several candidates (booklet pages, multiple discs), the pick is seeded, so it is the same on every run.
 
 Output
-  data/project/images/<album>/<type>/<release_id>.jpg   500px thumbnails (250px fallback), saved as RGB JPEG
-  data/project/manifest.csv                            one row per selected image, with release metadata and SHA-256
+  data/images/<album>/<type>/<release_id>.jpg   500px thumbnails (250px fallback), saved as RGB JPEG
+  data/manifest.csv                            one row per selected image, with release metadata and SHA-256
   data/metadata/releases.csv                           pinned release metadata for every release of each album
 
 Resumable: images already on disk are kept. Failed downloads are listed at the end: rerun to retry them.
-Run from anywhere:  python scripts/05_download_project.py   (about 2,100 images, roughly 20 to 40 minutes)
+Run from anywhere:  python project/scripts/04_download_project.py   (about 2,100 images, roughly 20 to 40 minutes)
 """
 import csv, hashlib, io, random, threading, time
 from collections import Counter, defaultdict
@@ -35,8 +35,8 @@ HEADERS = {"User-Agent": "AlbumCoverProject/0.1 (akinbobola71@gmail.com)"}
 ALBUMS_PATH = ROOT / "data/metadata/final_albums.csv"
 RAW_PATH = ROOT / "data/metadata/image_types_raw.csv"
 RELEASES_PATH = ROOT / "data/metadata/releases.csv"
-IMG_DIR = ROOT / "data/project/images"
-MANIFEST_PATH = ROOT / "data/project/manifest.csv"
+IMG_DIR = ROOT / "data/images"
+MANIFEST_PATH = ROOT / "data/manifest.csv"
 SEED = 42
 WORKERS = 4                  # parallel image downloads (MusicBrainz calls stay sequential at 1 per second)
 SIZES = ["500", "250"]       # thumbnail sizes to try, in order
@@ -197,7 +197,7 @@ def main():
                 continue
             counts[p["album"]][p["type"]] += 1
             meta = releases.get(p["release_id"], {})
-            w.writerow({**p, "file": dest.relative_to(ROOT / "data/project").as_posix(), "sha256": sha256(dest),
+            w.writerow({**p, "file": dest.relative_to(ROOT / "data").as_posix(), "sha256": sha256(dest),
                         **{c: meta.get(c, "") for c in RELEASE_COLS}})
 
     print(f"\n{'album':<34}" + "".join(f"{t:>9}" for t in TYPES) + f"{'total':>9}")

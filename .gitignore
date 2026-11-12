@@ -1,7 +1,10 @@
 # Downloads and generated data (rebuild them with the scripts)
-/data/raw/
-/data/assignment2/split/
-/data/project/images/
+/project/data/raw/
+/project/data/images/
+/project/data/features_resnet50.npz
+/project/data/album_packaging_dataset.zip
+/assignment2/data/raw/
+/archive/assignment2_albums/data/split/
 *.part
 
 # Python, Jupyter, editor and macOS clutter
@@ -9,14 +12,13 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 .idea/workspace.xml
-/data/project/features_resnet50.npz
 
 # LaTeX build files (keep the .tex, .bib and figures)
-/reports/*.aux
-/reports/*.bbl
-/reports/*.blg
-/reports/*.fdb_latexmk
-/reports/*.fls
-/reports/*.log
-/reports/*.out
-/reports/*.synctex.gz
+/project/reports/*.aux
+/project/reports/*.bbl
+/project/reports/*.blg
+/project/reports/*.fdb_latexmk
+/project/reports/*.fls
+/project/reports/*.log
+/project/reports/*.out
+/project/reports/*.synctex.gz

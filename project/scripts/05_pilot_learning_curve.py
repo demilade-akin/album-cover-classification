@@ -2,21 +2,21 @@
 Pilot learning curve for the data report: is the dataset large enough for transfer learning?
 
 What it does
-  1. Splits data/project/manifest.csv by release (70/15/15, seed 42, stratified by album), so every image
-     of a release lands in the same split. Saves the split to data/project/split.csv for later reuse.
+  1. Splits data/manifest.csv by release (70/15/15, seed 42, stratified by album), so every image
+     of a release lands in the same split. Saves the split to data/split.csv for later reuse.
   2. Extracts features once with a frozen Keras ResNet-50 pre-trained on ImageNet (images squashed to
-     224x224, Keras ResNet-50 preprocessing). Cached in data/project/features_resnet50.npz, so reruns skip this step.
+     224x224, Keras ResNet-50 preprocessing). Cached in data/features_resnet50.npz, so reruns skip this step.
   3. Trains a logistic regression on those features with 25/50/75/100% of the training releases
      (3 repeats per size, class weights balanced), for both labels: album (10 classes) and part (4 classes).
   4. Reports VALIDATION macro F1 and accuracy only. The test split is never touched here.
 
 Output
-  data/project/pilot_results.csv            one row per label, fraction and repeat
+  data/pilot_results.csv            one row per label, fraction and repeat
   reports/figures/pilot_learning_curve.png  macro F1 vs training size, both labels
   console: mean results, plus album accuracy per packaging part at 100%
 
 Needs:  uv add tensorflow scikit-learn
-Run from anywhere:  python scripts/06_pilot_learning_curve.py   (a few minutes on Apple Silicon)
+Run from anywhere:  python project/scripts/05_pilot_learning_curve.py   (a few minutes on Apple Silicon)
 """
 import csv, random
 from collections import defaultdict
@@ -29,7 +29,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1] if "__file__" in globals() else Path.cwd()   # project folder
-DATA = ROOT / "data/project"
+DATA = ROOT / "data"
 MANIFEST = DATA / "manifest.csv"
 SPLIT_PATH = DATA / "split.csv"
 FEATURES = DATA / "features_resnet50.npz"
