@@ -3,9 +3,6 @@
 /project/data/images/
 /project/data/features_resnet50.npz
 /project/data/album_packaging_dataset.zip
-/assignment2/data/raw/
-/assignment2/data/clean/
-/assignment2/data/split/
 *.part
 
 # Python, Jupyter, editor and macOS clutter
