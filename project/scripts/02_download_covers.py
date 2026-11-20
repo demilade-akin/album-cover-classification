@@ -10,7 +10,8 @@ import requests, time, hashlib, csv, re, random
 from pathlib import Path
 from tqdm import tqdm
 
-HEADERS = {"User-Agent": "AlbumCoverProject/0.1 (akinbobola71@gmail.com)"}
+from http_client import user_agent   # contact comes from ALBUM_PROJECT_CONTACT
+HEADERS = {"User-Agent": user_agent()}
 ROOT = Path(__file__).resolve().parents[1] if "__file__" in globals() else Path.cwd()   # project folder
 CSV_PATH = ROOT / "data/metadata/albums.csv"  # fallback: columns artist,album (with a header row)
 SCREEN_PATH = ROOT / "data/metadata/screen.csv"   # output of 01_screen_albums.py

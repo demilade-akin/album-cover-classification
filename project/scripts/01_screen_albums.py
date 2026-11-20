@@ -8,7 +8,8 @@ Run from anywhere:  python project/scripts/01_screen_albums.py
 import requests, time, csv, re
 from pathlib import Path
 
-HEADERS = {"User-Agent": "AlbumCoverProject/0.1 (akinbobola71@gmail.com)"}
+from http_client import user_agent   # contact comes from ALBUM_PROJECT_CONTACT
+HEADERS = {"User-Agent": user_agent()}
 ROOT = Path(__file__).resolve().parents[1] if "__file__" in globals() else Path.cwd()   # project folder
 CSV_PATH = ROOT / "data/metadata/albums.csv"
 OUT_PATH = ROOT / "data/metadata/screen.csv"

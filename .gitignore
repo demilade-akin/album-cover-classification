@@ -20,3 +20,6 @@ __pycache__/
 /project/reports/*.log
 /project/reports/*.out
 /project/reports/*.synctex.gz
+
+# Failure lists from download runs
+/project/data/logs/

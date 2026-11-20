@@ -24,8 +24,20 @@ All work lives in `project/`. Assignment 2 (food image classifier) moved to its 
 
 ## Project
 
-Classify any packaging image (front, back, disc, booklet) into 10 albums. Question: does a model recognise an album
+Classify any packaging image (front, back, disc, booklet) into albums. Question: does a model recognise an album
 from parts of the package that look nothing like the front? The main result is accuracy per image type.
+
+### Two datasets
+- `10`: the 10 albums in `albums_10.csv`, as in the submitted data report (2,223 images, 899 releases). Must stay
+  reproducible: `manifest_10.csv`, `split_10.csv`, `pilot_results_10.csv` must not change.
+- `all`: the 430 albums in `albums_all.csv` (screen.csv with status ok and title_ok True, no size filter). Built by
+  `02b_make_album_list.py`. Any size cutoff happens at training time, not download time.
+- `all` contains `10` unchanged: one shared snapshot, image folder, releases.csv and feature cache. Image picks are
+  seeded per release and type, splits per album, so the 10 albums match in both.
+- Snapshot dates: the original 10 albums on November 2, 2026. The other 420 later, dated per album in
+  `snapshot_albums.csv`. Mention the gap when comparing the datasets.
+- `excluded_images.csv` keeps out 8 picks that failed to download in the original build, so `10` matches the report.
+- Network scripts read the User-Agent contact from `ALBUM_PROJECT_CONTACT`. Never hardcode it.
 
 ### Deadlines
 - Data report: Thursday, November 5, 2026.
@@ -37,21 +49,25 @@ preliminary training results and related literature.
 
 ### Layout (relative to `project/`)
 ```
-data/metadata/   albums.csv, screen.csv, final_albums.csv (the 10 albums), image_types_raw.csv +
-                 releases.csv (pinned snapshots the download reads), image_types.csv
+data/metadata/   albums.csv, screen.csv, albums_10.csv, albums_all.csv, image_types_raw.csv + releases.csv (pinned
+                 snapshots the download reads), snapshot_albums.csv, excluded_images.csv, image_types*.csv
 data/raw/        candidate_fronts/ (40 fronts each for the top 20 candidates). Not in git.
-data/images/     <album>/<type>/<release_id>.jpg. Not in git.
-data/            manifest.csv, split.csv, pilot_results.csv, features_resnet50.npz
+data/images/     <album>/<type>/<release_id>.jpg, shared by both datasets. Not in git.
+data/logs/       failure lists from download runs. Not in git.
+data/            manifest_<name>.csv, split_<name>.csv, pilot_results_<name>.csv, features_resnet50.npz (not in git)
 reports/         data_report.tex, references.bib, figures/, submitted PDF
-scripts/         01_screen_albums, 02_download_covers, 03_count_image_types, 04_download_project,
-                 05_pilot_learning_curve
+scripts/         01_screen_albums, 02_download_covers, 02b_make_album_list, 03_count_image_types,
+                 04_download_project {10,all}, 05_pilot_learning_curve {10,all}, http_client (shared)
 ```
-- Reproducibility: a fresh clone rebuilds the dataset with `04_download_project.py` from the committed snapshots. Never
-  refetch the snapshots silently: `03_count_image_types.py` skips the fetch unless run with `--resume` or the file is deleted.
+- Run order for `all`: `02b_make_album_list.py`, `03_count_image_types.py --resume`, `04_download_project.py all`,
+  `05_pilot_learning_curve.py all`. 03 and 04 are resumable: rerun the same command after a crash or failures.
+- Reproducibility: a fresh clone rebuilds either dataset with `04_download_project.py {10,all}` from the committed
+  snapshots. Never refetch the snapshots silently: `03_count_image_types.py` fetches nothing without `--resume`, and
+  with `--resume` skips albums already finished in `snapshot_albums.csv`.
 
 ### Data source
 - MusicBrainz (release group = album, release = edition) and the Cover Art Archive.
-- Requests need the identifying User-Agent header. MusicBrainz: about 1 request per second. Cover Art Archive
+- Requests need the identifying User-Agent header (contact from `ALBUM_PROJECT_CONTACT`). MusicBrainz: about 1 request per second. Cover Art Archive
   (archive.org) returns transient 500s: retry, skip, rerun.
 - The release ID in each filename is the edition identifier.
 - SHA-256 dedup only catches byte-identical files. Do not call images "distinct" beyond that.
