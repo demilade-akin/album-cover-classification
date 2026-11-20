@@ -1,8 +1,8 @@
 """
 Pilot learning curve for the data report: is the dataset large enough for transfer learning?
 
-  python project/scripts/05_pilot_learning_curve.py 10     reads data/manifest_10.csv
-  python project/scripts/05_pilot_learning_curve.py all    reads data/manifest_all.csv
+  python scripts/05_pilot_learning_curve.py 10     reads data/manifest_10.csv
+  python scripts/05_pilot_learning_curve.py all    reads data/manifest_all.csv
 
 What it does
   1. Splits the manifest by release (70/15/15, seed 42, stratified by album), so every image of a release
@@ -18,10 +18,10 @@ What it does
 
 Output
   data/split_<name>.csv                          release_id, album, split
-  data/pilot_results_<name>.csv                  one row per label, fraction and repeat
-  reports/figures/pilot_learning_curve_<name>.png  macro F1 vs training size, both labels
+  results/pilot_results_<name>.csv               one row per label, fraction and repeat
+  results/figures/pilot_learning_curve_<name>.png  macro F1 vs training size, both labels
   console: mean results, plus album accuracy per packaging part at 100%
-  (reports/figures/pilot_learning_curve.png is the figure in the submitted report. This script never writes it.)
+  (reports/data_report/ holds the submitted report and its figure. This script never writes there.)
 
 Needs:  uv add tensorflow scikit-learn
 Run time: a few minutes for "10". For "all", feature extraction takes roughly 10 to 20 minutes on Apple Silicon
@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from tqdm import tqdm
 
-ROOT = Path(__file__).resolve().parents[1]   # project folder
+ROOT = Path(__file__).resolve().parents[1]   # repo root
 DATA = ROOT / "data"
 FEATURES = DATA / "features_resnet50.npz"    # shared cache for every dataset, keyed per image file
 SEED = 42
@@ -163,8 +163,8 @@ def main():
     name = ap.parse_args().dataset
     manifest = DATA / f"manifest_{name}.csv"
     split_path = DATA / f"split_{name}.csv"
-    results_path = DATA / f"pilot_results_{name}.csv"
-    figure = ROOT / f"reports/figures/pilot_learning_curve_{name}.png"
+    results_path = ROOT / f"results/pilot_results_{name}.csv"
+    figure = ROOT / f"results/figures/pilot_learning_curve_{name}.png"
 
     rows = load_rows(manifest)
     assign = split_by_release(rows, split_path)
@@ -203,6 +203,7 @@ def main():
                     last_pred[name] = pred
             print(f"  {int(frac * 100)}% of training releases, repeat {rep + 1}: done")
 
+    results_path.parent.mkdir(parents=True, exist_ok=True)
     with open(results_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(out[0]), lineterminator="\n")
         w.writeheader()

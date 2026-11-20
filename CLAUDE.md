@@ -1,14 +1,14 @@
 # TME 6015 final project: album packaging classifier
 
-All work lives in `project/`. Assignment 2 (food image classifier) moved to its own repo,
+Assignment 2 (food image classifier) moved to its own repo,
 `~/Developer/tme6015-food-classifier`. Nothing here reads or writes that repo.
 
 ## Environment
 - macOS on Apple Silicon, PyCharm, `uv`-managed `.venv` on Python 3.12. `pyproject.toml` and `uv.lock` at the root.
 - **Keras / TensorFlow.** CPU is fine at this data size. `tensorflow-metal` optional. Colab is an option.
 - Load splits with `image_dataset_from_directory`, passing `class_names` explicitly so label indices match across splits.
-- Every script sets `ROOT = Path(__file__).resolve().parents[1]`, which is the `project/` folder. Data paths are
-  relative to it. Scripts run from anywhere: `python project/scripts/<name>.py`.
+- Every script sets `ROOT = Path(__file__).resolve().parents[1]`, which is the repo root. Data paths are
+  relative to it. Scripts run from anywhere: `python scripts/<name>.py`.
 
 ## Working style
 - Direct and concise. Push back when something has a problem.
@@ -29,7 +29,7 @@ from parts of the package that look nothing like the front? The main result is a
 
 ### Two datasets
 - `10`: the 10 albums in `albums_10.csv`, as in the submitted data report (2,223 images, 899 releases). Must stay
-  reproducible: `manifest_10.csv`, `split_10.csv`, `pilot_results_10.csv` must not change.
+  reproducible: `data/manifest_10.csv`, `data/split_10.csv`, `results/pilot_results_10.csv` must not change.
 - `all`: the 430 albums in `albums_all.csv` (screen.csv with status ok and title_ok True, no size filter). Built by
   `02b_make_album_list.py`. Any size cutoff happens at training time, not download time.
 - `all` contains `10` unchanged: one shared snapshot, image folder, releases.csv and feature cache. Image picks are
@@ -47,18 +47,18 @@ Problem statement, number of data points, how I know it is enough (3), how the d
 get enough data (3), at least 3 biases using lecture terms (3), how to remove them (3). Justify with explanations,
 preliminary training results and related literature.
 
-### Layout (relative to `project/`)
+### Layout
 ```
+scripts/         data pipeline: 01_screen_albums, 02_download_covers (record only), 02b_make_album_list,
+                 03_count_image_types, 04_download_project {10,all}, 05_pilot_learning_curve {10,all}, http_client
 data/metadata/   albums.csv, screen.csv, albums_10.csv, albums_all.csv, image_types_raw.csv + releases.csv (pinned
                  snapshots the download reads), snapshot_albums.csv, excluded_images.csv, image_types*.csv
-data/raw/        candidate_fronts/ (40 fronts each for the top 20 candidates). Not in git.
-data/images/     <album>/<type>/<release_id>.jpg, shared by both datasets. Not in git.
-data/logs/       failure lists from download runs. Not in git.
-data/            manifest_<name>.csv, split_<name>.csv, pilot_results_<name>.csv, features_resnet50.npz (not in git)
-reports/         data_report.tex, references.bib, figures/, submitted PDF
-scripts/         01_screen_albums, 02_download_covers, 02b_make_album_list, 03_count_image_types,
-                 04_download_project {10,all}, 05_pilot_learning_curve {10,all}, http_client (shared)
+data/            manifest_<name>.csv, split_<name>.csv (committed). images/, logs/, features_resnet50.npz (not in git)
+results/         generated outputs: pilot_results_<name>.csv, figures/, model metrics
+notebooks/       one notebook per model (create with the first model)
+reports/         data_report/ (submitted, frozen: never write into it), final_report/ (later)
 ```
+- Inputs go in `data/`, anything a script or notebook generates goes in `results/`, report sources in `reports/`.
 - Run order for `all`: `02b_make_album_list.py`, `03_count_image_types.py --resume`, `04_download_project.py all`,
   `05_pilot_learning_curve.py all`. 03 and 04 are resumable: rerun the same command after a crash or failures.
 - Reproducibility: a fresh clone rebuilds either dataset with `04_download_project.py {10,all}` from the committed
@@ -67,8 +67,8 @@ scripts/         01_screen_albums, 02_download_covers, 02b_make_album_list, 03_c
 
 ### Data source
 - MusicBrainz (release group = album, release = edition) and the Cover Art Archive.
-- Requests need the identifying User-Agent header (contact from `ALBUM_PROJECT_CONTACT`). MusicBrainz: about 1 request per second. Cover Art Archive
-  (archive.org) returns transient 500s: retry, skip, rerun.
+- Requests need the identifying User-Agent header (contact from `ALBUM_PROJECT_CONTACT`). MusicBrainz: about 1
+  request per second. Cover Art Archive (archive.org) returns transient 500s: retry, skip, rerun.
 - The release ID in each filename is the edition identifier.
 - SHA-256 dedup only catches byte-identical files. Do not call images "distinct" beyond that.
 

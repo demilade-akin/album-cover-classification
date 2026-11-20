@@ -10,13 +10,13 @@ Checks, and stops with an error if one fails:
   - every album in albums_10.csv appears in albums_all.csv with the same folder and rg_id
 
 Output: data/metadata/albums_all.csv (artist, album, folder, rg_id), in Rolling Stone rank order.
-Reads only local files.  Run from anywhere:  python project/scripts/02b_make_album_list.py
+Reads only local files.  Run from anywhere:  python scripts/02b_make_album_list.py
 """
 import csv, re
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]   # project folder
+ROOT = Path(__file__).resolve().parents[1]   # repo root
 SCREEN_PATH = ROOT / "data/metadata/screen.csv"
 TEN_PATH = ROOT / "data/metadata/albums_10.csv"
 OUT_PATH = ROOT / "data/metadata/albums_all.csv"
@@ -48,7 +48,7 @@ def main():
                 raise SystemExit(f"{t['folder']} from {TEN_PATH.name} has no identical entry in the new list")
 
     with open(OUT_PATH, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=["artist", "album", "folder", "rg_id"])
+        w = csv.DictWriter(f, fieldnames=["artist", "album", "folder", "rg_id"], lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
     print(f"Saved {OUT_PATH.relative_to(ROOT)}: {len(rows)} albums, "

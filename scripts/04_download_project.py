@@ -1,8 +1,8 @@
 """
 Build a project dataset: one image per type per release for the albums in one album list.
 
-  python project/scripts/04_download_project.py 10     albums_10.csv  -> data/manifest_10.csv
-  python project/scripts/04_download_project.py all    albums_all.csv -> data/manifest_all.csv
+  python scripts/04_download_project.py 10     albums_10.csv  -> data/manifest_10.csv
+  python scripts/04_download_project.py all    albums_all.csv -> data/manifest_all.csv
 
 Both datasets share one snapshot, one release-metadata file and one image folder. An image already on disk is
 reused, never downloaded again, so the 10 albums are the same files in both datasets.
@@ -42,7 +42,7 @@ from tqdm import tqdm
 
 from http_client import get, user_agent
 
-ROOT = Path(__file__).resolve().parents[1]   # project folder
+ROOT = Path(__file__).resolve().parents[1]   # repo root
 META = ROOT / "data/metadata"
 DATASETS = {"10": META / "albums_10.csv", "all": META / "albums_all.csv"}
 RAW_PATH = META / "image_types_raw.csv"

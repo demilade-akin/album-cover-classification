@@ -24,10 +24,10 @@ The full list goes to data/logs/03_failures.csv. Ctrl-C is safe: each release is
 
 Needs ALBUM_PROJECT_CONTACT set (see http_client.py) when anything is fetched.
 Run from anywhere:
-  python project/scripts/03_count_image_types.py                       summaries only
-  python project/scripts/03_count_image_types.py --resume              fetch unfinished albums of albums_all.csv
-  python project/scripts/03_count_image_types.py --resume --limit 3    only the first 3 unfinished albums
-  python project/scripts/03_count_image_types.py --albums albums_10.csv
+  python scripts/03_count_image_types.py                       summaries only
+  python scripts/03_count_image_types.py --resume              fetch unfinished albums of albums_all.csv
+  python scripts/03_count_image_types.py --resume --limit 3    only the first 3 unfinished albums
+  python scripts/03_count_image_types.py --albums albums_10.csv
 """
 import argparse, csv, io, statistics, sys
 from collections import Counter, defaultdict
@@ -40,7 +40,7 @@ from tqdm import tqdm
 
 from http_client import get, user_agent
 
-ROOT = Path(__file__).resolve().parents[1]   # project folder
+ROOT = Path(__file__).resolve().parents[1]   # repo root
 META = ROOT / "data/metadata"
 RAW_PATH = META / "image_types_raw.csv"
 PROGRESS_PATH = META / "snapshot_albums.csv"
