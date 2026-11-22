@@ -183,7 +183,9 @@ def save_tuning(log):
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
         for r in log:
-            w.writerow({k: (f"{r[k]:.4f}" if isinstance(r[k], float) and not np.isinf(r[k]) else r[k]) for k in cols})
+            # C is written with :g so 1e-06 survives (4 decimals would round it to 0.0000). Scores get 4 decimals.
+            w.writerow({k: (f"{r[k]:g}" if k == "C" else
+                            f"{r[k]:.4f}" if isinstance(r[k], float) else r[k]) for k in cols})
 
 
 # ---------------------------------------------------------------- test outputs
