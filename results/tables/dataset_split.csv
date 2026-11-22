@@ -1,0 +1,5 @@
+split,albums,releases,images,front,back,medium,booklet,albums_2plus_releases
+train,302,7211,16590,6571,4042,3853,2124,301
+val,64,1395,3211,1280,784,722,425,63
+test,64,1583,3629,1475,875,816,463,64
+total,430,10189,23430,9326,5701,5391,3012,428

@@ -1,0 +1,7 @@
+model,subset,scorer,threshold,auc,accuracy,genuine_accept_rate,impostor_reject_rate,n_checks
+baseline,random,top1,0.7866,0.9427,0.8634,0.7952,0.9316,7256
+baseline,hard,top1,0.7866,0.9059,0.8341,0.7952,0.8729,7256
+baseline,all,top1,0.7866,0.9243,0.8666,0.7952,0.9023,10884
+trained,random,top1,0.4312,0.9611,0.8976,0.8153,0.9799,7256
+trained,hard,top1,0.4312,0.9175,0.8775,0.8153,0.9396,7256
+trained,all,top1,0.4312,0.9393,0.9116,0.8153,0.9598,10884
