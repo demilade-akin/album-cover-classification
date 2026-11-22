@@ -3,6 +3,7 @@ name = "tme6015-album-project"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "imagehash>=4.3.2",
     "jupyter>=1.1.1",
     "jupyterlab>=4.5.11",
     "matplotlib>=3.9.4",

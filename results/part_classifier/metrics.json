@@ -8,6 +8,8 @@
   },
   "val_macro_f1": 0.8581766561097786,
   "C_grid": [
+    1e-06,
+    1e-05,
     0.0001,
     0.001,
     0.01,
@@ -15,7 +17,7 @@
     1,
     10
   ],
-  "test_evaluation_number": 2,
+  "test_evaluation_number": 3,
   "earlier_test_evaluations": [
     {
       "run": 1,
@@ -26,8 +28,24 @@
         10
       ],
       "chosen_C": 0.01,
+      "class_weight": "none",
       "test_accuracy": 0.833,
       "test_macro_f1": 0.813
+    },
+    {
+      "run": 2,
+      "C_grid": [
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1,
+        10
+      ],
+      "chosen_C": 0.0001,
+      "class_weight": "none",
+      "test_accuracy": 0.858,
+      "test_macro_f1": 0.833
     }
   ],
   "test_size": {

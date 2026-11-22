@@ -1,0 +1,147 @@
+{
+  "settings": {
+    "baseline": {
+      "features": "raw ResNet-50 (2048)",
+      "scorer": "top1",
+      "threshold": 0.7865637540817261,
+      "val_balanced_accuracy": 0.8580891521197007
+    },
+    "trained": {
+      "emb_size": 512,
+      "epochs": 15,
+      "scorer": "top1",
+      "lr": 0.001,
+      "batch": 256,
+      "class_weight": "balanced",
+      "patience": 5,
+      "threshold": 0.4311544895172119,
+      "val_balanced_accuracy": 0.8850529925187033
+    },
+    "near_duplicate_phash_distance": 2,
+    "seed": 42
+  },
+  "val_checks": {
+    "albums": 63,
+    "queries": 3208,
+    "checks": 9624,
+    "dropped_queries_empty_gallery": 2,
+    "hard_same_artist_albums": 2,
+    "hard_most_similar_albums": 61
+  },
+  "test_checks": {
+    "albums": 64,
+    "queries": 3628,
+    "checks": 10884,
+    "dropped_queries_empty_gallery": 1,
+    "hard_same_artist_albums": 6,
+    "hard_most_similar_albums": 58
+  },
+  "test": {
+    "baseline": {
+      "random": {
+        "auc": 0.9426907010158645,
+        "accuracy": 0.8634233737596472,
+        "n_checks": 7256,
+        "genuine_accept_rate": 0.7952039691289967,
+        "impostor_reject_rate": 0.9316427783902976
+      },
+      "hard": {
+        "auc": 0.9058877935790355,
+        "accuracy": 0.8340683572216097,
+        "n_checks": 7256,
+        "genuine_accept_rate": 0.7952039691289967,
+        "impostor_reject_rate": 0.8729327453142227
+      },
+      "all": {
+        "auc": 0.9242892472974501,
+        "accuracy": 0.8665931642778391,
+        "n_checks": 10884,
+        "genuine_accept_rate": 0.7952039691289967,
+        "impostor_reject_rate": 0.9022877618522602
+      },
+      "by_part": {
+        "front": {
+          "accuracy_all": 0.9699231117141565,
+          "n_queries": 1474,
+          "accuracy_genuine": 0.9165535956580733,
+          "accuracy_random": 1.0,
+          "accuracy_hard": 0.9932157394843962
+        },
+        "back": {
+          "accuracy_all": 0.9066666666666666,
+          "n_queries": 875,
+          "accuracy_genuine": 0.8262857142857143,
+          "accuracy_random": 0.9714285714285714,
+          "accuracy_hard": 0.9222857142857143
+        },
+        "medium": {
+          "accuracy_all": 0.7030228758169934,
+          "n_queries": 816,
+          "accuracy_genuine": 0.7512254901960784,
+          "accuracy_random": 0.758578431372549,
+          "accuracy_hard": 0.5992647058823529
+        },
+        "booklet": {
+          "accuracy_all": 0.750179985601152,
+          "n_queries": 463,
+          "accuracy_genuine": 0.42764578833693306,
+          "accuracy_random": 0.9438444924406048,
+          "accuracy_hard": 0.8790496760259179
+        }
+      }
+    },
+    "trained": {
+      "random": {
+        "auc": 0.9610935982417775,
+        "accuracy": 0.8976019845644984,
+        "n_checks": 7256,
+        "genuine_accept_rate": 0.8153252480705623,
+        "impostor_reject_rate": 0.9798787210584344
+      },
+      "hard": {
+        "auc": 0.9175057497182881,
+        "accuracy": 0.8774807056229328,
+        "n_checks": 7256,
+        "genuine_accept_rate": 0.8153252480705623,
+        "impostor_reject_rate": 0.9396361631753032
+      },
+      "all": {
+        "auc": 0.9392996739800328,
+        "accuracy": 0.9116133774347667,
+        "n_checks": 10884,
+        "genuine_accept_rate": 0.8153252480705623,
+        "impostor_reject_rate": 0.9597574421168688
+      },
+      "by_part": {
+        "front": {
+          "accuracy_all": 0.9807779285391226,
+          "n_queries": 1474,
+          "accuracy_genuine": 0.9633649932157394,
+          "accuracy_random": 0.9979647218453188,
+          "accuracy_hard": 0.9810040705563093
+        },
+        "back": {
+          "accuracy_all": 0.936,
+          "n_queries": 875,
+          "accuracy_genuine": 0.8617142857142858,
+          "accuracy_random": 0.9828571428571429,
+          "accuracy_hard": 0.9634285714285714
+        },
+        "medium": {
+          "accuracy_all": 0.829248366013072,
+          "n_queries": 816,
+          "accuracy_genuine": 0.6740196078431373,
+          "accuracy_random": 0.9595588235294118,
+          "accuracy_hard": 0.8541666666666666
+        },
+        "booklet": {
+          "accuracy_all": 0.7904967602591793,
+          "n_queries": 463,
+          "accuracy_genuine": 0.5053995680345572,
+          "accuracy_random": 0.9524838012958964,
+          "accuracy_hard": 0.9136069114470843
+        }
+      }
+    }
+  }
+}

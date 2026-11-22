@@ -1,0 +1,9 @@
+model,emb_size,epochs,scorer,val_auc_all,val_auc_random,val_auc_hard,chosen
+baseline,-,-,top1,0.9197,0.9401,0.8993,True
+baseline,-,-,top3,0.9082,0.9358,0.8806,False
+trained,128,4,top1,0.9282,0.9511,0.9052,False
+trained,128,4,top3,0.9220,0.9503,0.8937,False
+trained,256,5,top1,0.9311,0.9541,0.9082,False
+trained,256,5,top3,0.9244,0.9529,0.8959,False
+trained,512,15,top1,0.9343,0.9542,0.9143,True
+trained,512,15,top3,0.9282,0.9532,0.9033,False

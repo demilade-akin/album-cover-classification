@@ -10,7 +10,8 @@ What it does
      macro F1 goes up.
        Step 0  no regularization, no class weights
        Step 1  add class_weight="balanced"
-       Step 2  add L2 regularization, C in C_GRID (0.0001 to 10)
+       Step 2  add L2 regularization, C in C_GRID (0.000001 to 10)
+       Step 3  class_weight="balanced" with C in STEP3_C (0.0001, 0.001)
      Features are standardised with a scaler fitted on training albums only.
   3. Refits the chosen settings on training albums and evaluates ONCE on test albums.
 
@@ -54,9 +55,18 @@ MAX_ITER = 5000                                  # high enough that lbfgs should
 # The first run used [0.01, 0.1, 1, 10] and picked 0.01, the edge of the grid, with validation F1 still rising
 # as C fell. The grid was extended downwards on that validation evidence. The test set had already been scored
 # once with C=0.01, so this is the second test evaluation. metrics.json records both.
-C_GRID = [0.0001, 0.001, 0.01, 0.1, 1, 10]
-TEST_HISTORY = [{"run": 1, "C_grid": [0.01, 0.1, 1, 10], "chosen_C": 0.01, "test_accuracy": 0.833,
-                 "test_macro_f1": 0.813}]   # copied from the first run's metrics.json, kept for honest reporting
+# The second run picked 0.0001, again the edge, so the grid went down to 0.000001 for a third run.
+C_GRID = [0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10]
+# Step 3: balanced class weights retried with strong L2. Step 1 only tried them without regularization, and the
+# second run showed strong L2 pushing booklets towards front, which class weights might counter.
+STEP3_C = [0.0001, 0.001]
+# Earlier test evaluations, copied from each run's metrics.json, kept for honest reporting.
+TEST_HISTORY = [
+    {"run": 1, "C_grid": [0.01, 0.1, 1, 10], "chosen_C": 0.01, "class_weight": "none",
+     "test_accuracy": 0.833, "test_macro_f1": 0.813},
+    {"run": 2, "C_grid": [0.0001, 0.001, 0.01, 0.1, 1, 10], "chosen_C": 0.0001, "class_weight": "none",
+     "test_accuracy": 0.858, "test_macro_f1": 0.833},
+]
 
 
 # ---------------------------------------------------------------- data
@@ -144,6 +154,12 @@ def tune(X_tr, y_tr, X_va, y_va):
     f1, C = max(step2)
     if f1 > best:
         best, best_C = f1, C
+
+    # Step 3: balanced class weights with strong L2, kept only if it beats everything so far
+    step3 = [(trial(3, C, "balanced"), C) for C in STEP3_C]
+    f1, C = max(step3)
+    if f1 > best:
+        best, best_C, best_cw = f1, C, "balanced"
 
     for r in log:
         r["kept"] = (r["C"] == best_C or (np.isinf(r["C"]) and np.isinf(best_C))) and r["class_weight"] == (best_cw or "none")
