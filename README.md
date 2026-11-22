@@ -69,7 +69,7 @@ Run the steps in order. Step 07 needs the images. Steps 08 to 10 need the featur
 | 08 | `python scripts/08_part_classifier.py` | Experiment 1. Tunes logistic regression on validation, tests once. | `results/part_classifier/` | under a minute |
 | 09 | `python scripts/09_verifier.py` | Experiment 2. pHash near-duplicates, checks, baseline and trained projection, thresholds on validation, tests once. | `results/verifier/`, `data/phash.csv` | several minutes |
 | 10 | `python scripts/10_breadth_vs_depth.py` | Experiment 3. Training sets A, B (5 seeds) and C, each tuned on validation. | `results/breadth_depth/` | under a minute |
-| 11 | `python scripts/11_audit.py` | **TODO, not built yet.** Downstream audit: runs both models over the test albums and lists tag and album mismatches by confidence. | `results/audit/` | |
+| 11 | `python scripts/11_audit.py` | Downstream audit. Flags test images whose predicted part differs from the uploader tag, and images that fail the verifier against their own album, ranked by confidence. Writes a hand-check sheet of the top 50 part flags and top 20 album flags. | `results/audit/` | seconds |
 | 12 | `python scripts/12_make_figures.py` | Every report figure and table, from `results/` only. | `results/figures/`, `results/tables/` | seconds |
 
 Validation albums set every hyperparameter and threshold. Test albums are scored only at the end of each
@@ -78,10 +78,20 @@ during tuning.
 
 ## Inference
 
-**TODO:** `scripts/predict.py` is not built yet. It will take an image path and a claimed album and print the
-predicted part and the match decision.
+Check any image file, inside the dataset or not:
 
-Until then, the trained models load like this. Both take the 2,048 ResNet-50 features from step 07 as input.
+```bash
+python scripts/predict.py path/to/image.jpg                                    # predicted part, all 4 probabilities
+python scripts/predict.py path/to/image.jpg --album michael_jackson__thriller  # plus match / no match
+```
+
+`--album` takes a folder name from `data/metadata/albums_all.csv`. The verifier compares the image with that
+album's gallery using the same rules as experiment 2: if the image is in the dataset, its own release is left out,
+and near-duplicate scans (pHash distance 2 or less) are left out too. Gallery features come from
+`data/features_resnet50.npz`, or from the images in `data/images/` if the cache is missing. The script warns when
+the claimed album is a training album, because then the check is not on an unseen album.
+
+To use the models in your own code, load them like this. Both take the 2,048 ResNet-50 features as input.
 
 ```python
 import joblib, keras
@@ -101,6 +111,7 @@ results/
   part_classifier/  tuning.csv, metrics.json, predictions.csv, confusion_matrix.png, model.joblib
   verifier/         tuning.csv, tuning_epochs.csv, metrics.json, checks_test.csv, roc_curves.png, projection.keras
   breadth_depth/    results.csv, summary.csv, breadth_vs_depth.png
+  audit/            flags.csv, hand_check.csv (verdict column filled by hand), hand_check.html
   figures/          report figures (.pdf and .png), plus the data report pilot curve
   tables/           one CSV per report table
   pilot_results_10.csv   data report pilot (frozen)
