@@ -1,0 +1,4 @@
+set,runs,n_images,n_albums,chosen_C,test_accuracy,test_accuracy_sd,test_macro_f1,test_macro_f1_sd,test_f1_front,test_f1_front_sd,test_f1_back,test_f1_back_sd,test_f1_medium,test_f1_medium_sd,test_f1_booklet,test_f1_booklet_sd
+A,1,2223,10,0.001,0.7622,0.0000,0.7468,0.0000,0.7559,0.0000,0.6992,0.0000,0.9590,0.0000,0.5731,0.0000
+B,5,2223,302,0.001,0.8437,0.0076,0.8168,0.0074,0.8647,0.0087,0.7635,0.0159,0.9773,0.0034,0.6616,0.0112
+C,1,16590,302,0.0001,0.8581,0.0000,0.8327,0.0000,0.8768,0.0000,0.7816,0.0000,0.9853,0.0000,0.6873,0.0000
