@@ -1,0 +1,104 @@
+{
+  "settings": {
+    "C": 0.0001,
+    "class_weight": "none",
+    "max_iter": 5000,
+    "scaler": "StandardScaler fitted on training albums",
+    "converged": true
+  },
+  "val_macro_f1": 0.8581766561097786,
+  "C_grid": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1,
+    1,
+    10
+  ],
+  "test_evaluation_number": 2,
+  "earlier_test_evaluations": [
+    {
+      "run": 1,
+      "C_grid": [
+        0.01,
+        0.1,
+        1,
+        10
+      ],
+      "chosen_C": 0.01,
+      "test_accuracy": 0.833,
+      "test_macro_f1": 0.813
+    }
+  ],
+  "test_size": {
+    "images": 3629,
+    "albums": 64,
+    "releases": 1583
+  },
+  "train_size": {
+    "images": 16590,
+    "albums": 302
+  },
+  "accuracy": 0.8580876274455773,
+  "macro_f1": 0.8327140100710113,
+  "per_class": {
+    "front": {
+      "precision": 0.8324192565508836,
+      "recall": 0.9261016949152543,
+      "f1": 0.8767650834403081,
+      "support": 1475
+    },
+    "back": {
+      "precision": 0.7883720930232558,
+      "recall": 0.7748571428571429,
+      "f1": 0.7815561959654179,
+      "support": 875
+    },
+    "medium": {
+      "precision": 0.9864864864864865,
+      "recall": 0.9840686274509803,
+      "f1": 0.9852760736196319,
+      "support": 816
+    },
+    "booklet": {
+      "precision": 0.8503184713375797,
+      "recall": 0.5766738660907127,
+      "f1": 0.6872586872586872,
+      "support": 463
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "front",
+      "back",
+      "medium",
+      "booklet"
+    ],
+    "rows_true_cols_pred": [
+      [
+        1366,
+        94,
+        5,
+        10
+      ],
+      [
+        158,
+        678,
+        3,
+        36
+      ],
+      [
+        8,
+        4,
+        803,
+        1
+      ],
+      [
+        109,
+        84,
+        3,
+        267
+      ]
+    ]
+  }
+}
