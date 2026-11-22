@@ -16,10 +16,13 @@ Pinned snapshot rules
   - Without --resume nothing is fetched once image_types_raw.csv exists, so the dataset never changes silently.
   - With --resume, finished albums are skipped entirely (no new releases get added to them). Unfinished albums
     are listed on MusicBrainz and only releases missing from image_types_raw.csv are fetched.
+  - A finished album whose rg_id differs from the album list stops the run: its rows belong to another release
+    group. Fix it with --refetch, which removes the album's rows and fetches it again.
   - The original 10 albums predate snapshot_albums.csv. On first use they are recorded as finished with
     LEGACY_DATE, so they are never refetched.
 
 Failures: releases that keep failing (archive.org 500s) are not written, so the next --resume retries them.
+An album whose MusicBrainz release list keeps failing is skipped and stays unfinished, and the run carries on.
 The full list goes to data/logs/03_failures.csv. Ctrl-C is safe: each release is written in one go.
 
 Needs ALBUM_PROJECT_CONTACT set (see http_client.py) when anything is fetched.
@@ -28,6 +31,9 @@ Run from anywhere:
   python scripts/03_count_image_types.py --resume              fetch unfinished albums of albums_all.csv
   python scripts/03_count_image_types.py --resume --limit 3    only the first 3 unfinished albums
   python scripts/03_count_image_types.py --albums albums_10.csv
+  python scripts/03_count_image_types.py --resume --refetch FOLDER [FOLDER ...]
+                                         drop these albums from the snapshot and fetch them again (for an album
+                                         whose rg_id was corrected in rg_overrides.csv). Never the 10 report albums.
 """
 import argparse, csv, io, statistics, sys
 from collections import Counter, defaultdict
@@ -113,6 +119,28 @@ def repair_tail():
     print(f"Repaired a cut-off last line in {RAW_PATH.name}")
 
 
+def drop_albums(folders):
+    """Remove every snapshot row and the progress entry of these albums, so the next fetch starts clean."""
+    with open(META / "albums_10.csv", newline="", encoding="utf-8") as f:
+        protected = {r["folder"] for r in csv.DictReader(f)} & set(folders)
+    if protected:
+        raise SystemExit(f"Refusing to refetch albums of the 10-album dataset: {sorted(protected)}")
+    rows = read_csv(RAW_PATH)
+    kept = [r for r in rows if r["album"] not in folders]
+    write_csv_atomic(RAW_PATH, kept, RAW_COLS)
+    progress = {a: r for a, r in load_progress().items() if a not in folders}
+    write_csv_atomic(PROGRESS_PATH, progress.values(), PROGRESS_COLS)
+    print(f"Dropped {len(rows) - len(kept)} snapshot rows of {len(folders)} albums: {', '.join(folders)}")
+
+
+def check_rg_ids(albums, progress):
+    """Stop if a finished album was snapshotted under a different release group than the list now says."""
+    stale = [a for a, rg in albums if a in progress and progress[a]["rg_id"] and progress[a]["rg_id"] != rg]
+    if stale:
+        raise SystemExit("These finished albums have a different rg_id in the album list than in the snapshot:\n  "
+                         + "\n  ".join(stale) + "\nRerun with --resume --refetch " + " ".join(stale))
+
+
 # Fetching ----------------------------------------------------------------------------------------
 def releases_with_art(rg_id):
     """IDs of every release in the album that MusicBrainz says has any cover art (not just a front)."""
@@ -149,9 +177,15 @@ def release_lines(folder, rid, images):
     return buf.getvalue()
 
 
-def collect(albums, limit):
+def collect(albums, limit, refetch=()):
     repair_tail()
+    if refetch:
+        unknown = set(refetch) - {a for a, _ in albums}
+        if unknown:
+            raise SystemExit(f"--refetch names albums not in the list: {sorted(unknown)}")
+        drop_albums(list(refetch))
     progress = load_progress()
+    check_rg_ids(albums, progress)
     todo_albums = [(a, rg) for a, rg in albums if a not in progress]
     if limit:
         todo_albums = todo_albums[:limit]
@@ -175,8 +209,15 @@ def collect(albums, limit):
                 f.write(",".join(RAW_COLS) + "\n")
             for i, (folder, rg_id) in enumerate(todo_albums, 1):
                 overall.set_postfix_str(f"album {i}/{len(todo_albums)} {folder[:28]}, failed {len(failed)}")
-                listed = releases_with_art(rg_id)
                 est = screen_n.get(rg_id, 0)
+                try:
+                    listed = releases_with_art(rg_id)
+                except (requests.RequestException, ValueError, KeyError):
+                    # MusicBrainz kept failing for this album: leave it unfinished and carry on.
+                    # The next --resume lists it again.
+                    failed.append({"album": folder, "release_id": "(MusicBrainz release list)"})
+                    overall.update(est)
+                    continue
                 share = max(est, len(listed))
                 overall.total += share - est
                 todo = [rid for rid in listed if rid not in done]
@@ -215,7 +256,7 @@ def write_failures(failed):
     if not failed:
         return
     write_csv_atomic(FAIL_PATH, failed, ["album", "release_id"])
-    print(f"\n{len(failed)} releases failed after retries (archive.org errors). Their albums stay unfinished. "
+    print(f"\n{len(failed)} requests failed after retries (archive.org or MusicBrainz). Their albums stay unfinished. "
           f"Rerun with --resume to retry. Full list: {FAIL_PATH.relative_to(ROOT)}")
     for r in failed[:10]:
         print(f"  {r['album']}  {r['release_id']}")
@@ -256,7 +297,15 @@ def summarise(albums, list_path):
     # Console: totals for the chosen list only
     names = [a for a, _ in albums]
     present = [a for a in names if a in releases]
-    print(f"\nAlbum list {list_path.name}: {len(present)} of {len(names)} albums in the snapshot")
+    finished = {r["album"] for r in read_csv(PROGRESS_PATH)} if PROGRESS_PATH.exists() else set(releases)
+    no_art = [a for a in names if a in finished and a not in releases]
+    unfinished = [a for a in names if a not in finished]
+    print(f"\nAlbum list {list_path.name}: {len(names) - len(unfinished)} of {len(names)} albums finished, "
+          f"{len(present)} with images")
+    if no_art:
+        print(f"  Finished with no releases with artwork: {', '.join(no_art)}")
+    if unfinished:
+        print(f"  Not finished (rerun with --resume): {len(unfinished)}")
     if not present:
         return
     n_rel = [len(releases[a]) for a in present]
@@ -277,15 +326,19 @@ def main():
     ap.add_argument("--albums", default="albums_all.csv", help="album list in data/metadata/ (or a path)")
     ap.add_argument("--resume", action="store_true", help="fetch albums not yet finished in the snapshot")
     ap.add_argument("--limit", type=int, default=0, help="fetch at most this many unfinished albums")
+    ap.add_argument("--refetch", nargs="+", default=[], metavar="FOLDER",
+                    help="with --resume: drop these albums from the snapshot and fetch them again")
     args = ap.parse_args()
     albums, list_path = album_list(args.albums)
 
+    if args.refetch and not args.resume:
+        raise SystemExit("--refetch needs --resume")
     if RAW_PATH.exists() and not args.resume:
         # Keep the pinned snapshot: refetching would add releases uploaded since, and change the dataset
         print(f"{RAW_PATH.name} exists (pinned snapshot), so nothing is fetched. "
               "Use --resume to fetch albums that are not finished yet.")
     else:
-        collect(albums, args.limit)
+        collect(albums, args.limit, args.refetch)
     summarise(albums, list_path)
 
 

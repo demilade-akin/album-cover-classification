@@ -28,6 +28,7 @@ data/
                   image_types.csv, image_types_by_album.csv   summaries of the snapshot
                   releases.csv          release metadata (one shared snapshot)
                   excluded_images.csv   picks kept out of every dataset
+                  rg_overrides.csv      corrected release groups for albums the screen matched wrongly
   manifest_<name>.csv, split_<name>.csv   committed, one per dataset
   images/       <album>/<type>/<release_id>.jpg, shared by both datasets. Not in git.
   logs/         failure lists from download runs. Not in git.
@@ -55,6 +56,12 @@ split in both datasets.
 The new albums were snapshotted later than the original 10. The Cover Art Archive grows over time, so an album
 snapshotted later can hold uploads the original 10 never saw. `snapshot_albums.csv` records the date of each album.
 
+`rg_overrides.csv` corrects 3 albums where `01_screen_albums.py` matched a stray release group instead of the
+album: The Beatles (White Album), Who's Next and Reach Out. An audit of all 430 albums compared each release
+group's first release year with the Rolling Stone year. Only these 3 were wrong matches. Six more differ by one year
+because MusicBrainz records the earliest release anywhere (a Japanese edition, a promo). The audit cannot catch a
+wrong group from the same year.
+
 `excluded_images.csv` lists 8 images of the 10 albums that failed to download in the original build. They stay
 out of both datasets, so `10` matches the report exactly.
 
@@ -73,11 +80,13 @@ are the only source of difference.
 1. `01_screen_albums.py`: albums.csv to screen.csv (front-art count per album)
 2. `02_download_covers.py`: front covers of the top 20 candidates, used to choose the 10 albums (Assignment 2 era).
    Its output folder was deleted. The script stays as a record of how the 10 were chosen.
-3. `02b_make_album_list.py`: screen.csv to albums_all.csv. Checks folder and release-group collisions and that
-   albums_10.csv is an identical subset.
+3. `02b_make_album_list.py`: screen.csv plus rg_overrides.csv to albums_all.csv. Checks folder and release-group
+   collisions and that albums_10.csv is an identical subset.
 4. `03_count_image_types.py [--albums albums_all.csv] [--resume] [--limit N]`: snapshot every image and type tag.
    Without `--resume` it fetches nothing once the snapshot exists. With `--resume` it skips finished albums
-   entirely and fetches only missing releases of unfinished ones.
+   entirely and fetches only missing releases of unfinished ones. If an album's rg_id in the list no longer matches
+   the snapshot (after an override), it stops and names the album. `--refetch FOLDER ...` drops that album's rows
+   and fetches it again. It refuses the 10 report albums.
 5. `04_download_project.py {10,all}`: one image per type per release into data/images/, writes the manifest.
    Fetches release metadata only for albums missing from releases.csv. Reuses images on disk.
 6. `05_pilot_learning_curve.py {10,all}`: release-level split, pilot learning curve into results/.

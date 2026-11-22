@@ -20,12 +20,81 @@ Assignment 2 (food image classifier) moved to its own repo,
 ## Modelling rules
 - Augment only the training set, on the fly as Keras layers.
 - Tune on validation only. Touch the test set once per model at the end. Report test size honestly.
-- Metrics: accuracy plus macro F1, per-class precision and recall, confusion matrix.
+- Metrics: accuracy plus macro F1, per-class precision and recall, confusion matrix. Verification: ROC curve, AUC,
+  accuracy at a threshold chosen on validation.
 
-## Project
+## Project (final definition, set November 22, 2026)
 
-Classify any packaging image (front, back, disc, booklet) into albums. Question: does a model recognise an album
-from parts of the package that look nothing like the front? The main result is accuracy per image type.
+### Problem
+Music databases and marketplaces (MusicBrainz, the Cover Art Archive, Discogs) rely on uploaders to tag packaging
+images by hand. Tags are often wrong and images get attached to the wrong album. Nobody can check millions of uploads
+by hand.
+
+### Solution: an upload checker with two models
+1. **Part classifier:** image -> front, back, disc (medium) or booklet. 4 classes.
+2. **Album verifier:** image + claimed album -> match or no match. Score = mean of the top 3 similarities between the
+   image and that album's gallery images. Threshold chosen on validation albums.
+
+Both must work on **albums never seen in training**. That is the central claim.
+
+### Research question
+For generalising to unseen albums, do more albums beat more editions of a few albums? (Instructor feedback: more data
+over more variation of the same albums.)
+
+### Deadline and deliverables
+- Final project due **Thursday, November 26, 2026** (25 marks): report, presentation, public GitHub repo with dataset,
+  code and trained models.
+- Report: CVPR or IEEE two-column template, sections following the final project rubric (introduction and business
+  value, literature review, model selection, data preparation, training, downstream integration, results, discussion).
+- The report must explain the change from the data report: following instructor feedback, the dataset grew from 10
+  to 430 albums and the task changed so it works on unseen albums.
+- Images stay out of the public repo unless the instructor says otherwise. Commit manifests, splits, models and the
+  rebuild scripts.
+
+### Split (final experiments)
+- Dataset `all`, split **by album**: about 70/15/15 train/validation/test albums, fixed seed, saved to a committed
+  split file. Test albums are untouched until final evaluation.
+- The 10 albums of `albums_10.csv` are forced into the training pool, so breadth vs depth uses the same test albums.
+- The release-level split (`split_10.csv`, `05_pilot_learning_curve.py`) belongs to the data report pilot only.
+
+### Models
+- All models use frozen Keras ResNet-50 features (ImageNet weights, Keras `preprocess_input`), cached per image in
+  `data/features_resnet50.npz`.
+- Part classifier: logistic regression on the features, class weights (fronts are about 40% of images).
+- Verifier baseline: cosine similarity on the raw features.
+- Verifier trained: a small projection layer on the frozen features, trained on training albums so images of the same
+  album sit close together. Compare against the baseline.
+- Optional, only if everything else is done: one fine-tuning run on Colab.
+
+### Experiments (exactly three)
+1. **Part classifier on test albums:** accuracy, macro F1 (headline), per-class precision and recall, confusion matrix.
+2. **Verifier on test albums:** each test image gets one genuine check (own album), one random impostor check and one
+   hard impostor check (an album by the same artist, otherwise the most similar-looking album by features). Impostors
+   come only from other test albums. Report ROC, AUC and accuracy, split into random vs hard and by the query's part,
+   for both the baseline and the trained verifier.
+3. **Breadth vs depth:** part classifier trained on (A) the 10 albums (~2,200 images), (B) an equal number of images
+   sampled across all training albums, (C) all training albums. All tested on the same test albums. A vs B isolates
+   how the images are spread. C shows what extra data adds.
+
+### Verification rules
+- A query's gallery is its claimed album's images **minus the query's own release** and minus near-duplicates of the
+  query (imagehash), so a scan uploaded to several releases cannot match itself.
+- Only test albums with at least 2 releases take part in verification. The part classifier uses every image.
+- Pick the gallery score (top-1 vs mean of top 3) on validation, not test.
+- Albums with more than one cover design (good kid, m.A.A.d city, Thriller anniversary editions) are known hard
+  positives. Discuss them as a limitation with examples. Linking different designs needs text (OCR): future work.
+
+### Downstream integration
+- An audit script runs both models over the test albums' images and writes a report of tag mismatches (predicted part
+  differs from the uploader tag) and album mismatches, sorted by confidence. This is the presentation demo.
+- Hand-check the top 50 flagged images and report how many are real mislabels. This replaces the label check promised
+  in the data report.
+
+### Out of scope
+320-class album classification, retrieval or search, predicting format or decade, extra data collection, more than
+one fine-tuning run.
+
+## Data
 
 ### Two datasets
 - `10`: the 10 albums in `albums_10.csv`, as in the submitted data report (2,223 images, 899 releases). Must stay
@@ -36,23 +105,18 @@ from parts of the package that look nothing like the front? The main result is a
   seeded per release and type, splits per album, so the 10 albums match in both.
 - Snapshot dates: the original 10 albums on November 2, 2026. The other 420 later, dated per album in
   `snapshot_albums.csv`. Mention the gap when comparing the datasets.
+- `rg_overrides.csv` fixes 3 albums the screen matched to a stray release group (The Beatles, Who's Next, Reach
+  Out). 02b applies it. 03 stops when a finished album's rg_id changed. Use `--resume --refetch FOLDER`.
 - `excluded_images.csv` keeps out 8 picks that failed to download in the original build, so `10` matches the report.
 - Network scripts read the User-Agent contact from `ALBUM_PROJECT_CONTACT`. Never hardcode it.
-
-### Deadlines
-- Data report: Thursday, November 5, 2026.
-
-### Data report requirements (15 marks)
-Problem statement, number of data points, how I know it is enough (3), how the data is representative (3), steps to
-get enough data (3), at least 3 biases using lecture terms (3), how to remove them (3). Justify with explanations,
-preliminary training results and related literature.
 
 ### Layout
 ```
 scripts/         data pipeline: 01_screen_albums, 02_download_covers (record only), 02b_make_album_list,
                  03_count_image_types, 04_download_project {10,all}, 05_pilot_learning_curve {10,all}, http_client
 data/metadata/   albums.csv, screen.csv, albums_10.csv, albums_all.csv, image_types_raw.csv + releases.csv (pinned
-                 snapshots the download reads), snapshot_albums.csv, excluded_images.csv, image_types*.csv
+                 snapshots the download reads), snapshot_albums.csv, excluded_images.csv, rg_overrides.csv,
+                 image_types*.csv
 data/            manifest_<name>.csv, split_<name>.csv (committed). images/, logs/, features_resnet50.npz (not in git)
 results/         generated outputs: pilot_results_<name>.csv, figures/, model metrics
 notebooks/       one notebook per model (create with the first model)
@@ -72,24 +136,12 @@ reports/         data_report/ (submitted, frozen: never write into it), final_re
 - The release ID in each filename is the edition identifier.
 - SHA-256 dedup only catches byte-identical files. Do not call images "distinct" beyond that.
 
-### Plan
-- Image types: Front, Back, Medium, Booklet. Map "Back;Spine" to Back and "Medium;Matrix/Runout" to Medium. Drop Tray,
-  Other, Untyped and other multi-tag images.
-- One image per type per release (booklets have many pages per release).
-- Split by release: all images of a release in one split, stratified by album and type.
-- Album imbalance (Darkness and Tapestry far larger than Paranoid): class weights plus macro F1.
-- Thin backs for Paranoid, Tommy and Joshua Tree. Report it.
-- Hand-check about 30 images per type and report the mislabel rate.
-- Record country, year and format per release to show representativeness.
-- Pending: instructor approval to reuse the albums from the earlier Assignment 2 version.
-
 ### Rules that must hold
-- **Split by edition (release), never by image.** The same image (same scan resized or recompressed) on both sides is
-  leakage. A different scan of the same artwork in test is the task, not leakage.
-- **Augmentation:** random resized crop (scale about 0.7 to 1.0), small rotation (about ±10°), brightness and contrast
-  jitter, random erasing. **No flips** (covers contain text). Little or no blur.
-- **Preprocessing:** resize to 224×224 by squashing, ImageNet mean/std normalisation.
-- **Metrics:** the shared set plus per-type accuracy.
-- Cleaning rule for covers: keep the front of any packaged edition (stickers, banners, obi, box sets, photos of physical
-  copies). Delete bare discs, back covers, booklet pages, inner sleeves and spreads where the front is under about half
-  the image.
+- **No leakage across albums:** final experiments split by album. Nothing from validation or test albums is used for
+  training, impostor selection or thresholds (thresholds come from validation albums only).
+- Image types: Front, Back, Medium, Booklet. "Back;Spine" counts as Back, "Medium;Matrix/Runout" as Medium. Other tags
+  are dropped. One image per type per release.
+- Augmentation (only if fine-tuning): random resized crop (scale about 0.7 to 1.0), small rotation (about ±10°),
+  brightness and contrast jitter, random erasing. **No flips** (covers contain text). Little or no blur.
+- Preprocessing: resize to 224×224 by squashing, then the preprocessing that matches the pre-trained model.
+- Data report (`reports/data_report/`) is submitted and frozen. Never write into it.

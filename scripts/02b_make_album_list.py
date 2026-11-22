@@ -5,7 +5,13 @@ No size filter: albums with few releases stay in. Any cutoff happens later, at t
 Folder names follow the same rule as before, slug(artist) + "__" + slug(album), using the artist and album
 spelling from albums.csv (not the MusicBrainz match), so the 10 albums in albums_10.csv keep their folders.
 
+Corrections: data/metadata/rg_overrides.csv replaces release groups that 01_screen_albums.py matched wrongly.
+01 took the first search hit without secondary types, which sometimes is a small reissue or a stray duplicate
+(for example a 2023 "Who's Next" entry with 2 releases instead of the 1971 album with 73). Each row names the
+wrong rg_id from screen.csv, the correct one and how it was checked. screen.csv itself stays as screened.
+
 Checks, and stops with an error if one fails:
+  - every override matches an album in the list (catches typos and stale rows)
   - no two albums share a folder name or a release-group ID
   - every album in albums_10.csv appears in albums_all.csv with the same folder and rg_id
 
@@ -19,6 +25,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]   # repo root
 SCREEN_PATH = ROOT / "data/metadata/screen.csv"
 TEN_PATH = ROOT / "data/metadata/albums_10.csv"
+OVERRIDES_PATH = ROOT / "data/metadata/rg_overrides.csv"
 OUT_PATH = ROOT / "data/metadata/albums_all.csv"
 
 
@@ -32,6 +39,15 @@ def main():
     screen.sort(key=lambda r: int(r["rank"]))
     rows = [{"artist": r["artist"], "album": r["album"],
              "folder": f"{slug(r['artist'])}__{slug(r['album'])}", "rg_id": r["rg_id"]} for r in screen]
+
+    # Replace wrongly matched release groups. The folder name stays, only the rg_id changes.
+    with open(OVERRIDES_PATH, newline="", encoding="utf-8") as f:
+        overrides = {o["wrong_rg_id"]: o for o in csv.DictReader(f)}
+    for r in rows:
+        if r["rg_id"] in overrides:
+            r["rg_id"] = overrides.pop(r["rg_id"])["rg_id"]
+    if overrides:
+        raise SystemExit(f"Overrides that match no album in the list: {list(overrides)}")
 
     # Collisions would merge two albums into one class (folder) or duplicate one album as two classes (rg_id)
     for key in ("folder", "rg_id"):

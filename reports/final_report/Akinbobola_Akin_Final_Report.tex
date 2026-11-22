@@ -1,0 +1,291 @@
+% =================================================================
+% TME 6015 final project report: An Upload Checker for Album Packaging Images
+% Build: latexmk -pdf Akinbobola_Akin_Final_Report.tex
+%
+% Rules for this file
+%   - Every number and table comes from a file in results/. Never type numbers by hand.
+%     Figures go in figures/, generated tables in tables/, both written by scripts.
+%   - Prose: active voice, plain concrete words, no filler, no dashes or semicolons.
+%     First person is fine.
+%   - Cite each source once, at its first mention.
+% =================================================================
+\documentclass{article}
+
+% NeurIPS style in preprint mode: shows the author name instead of "Anonymous" and
+% drops line numbers. nonatbib keeps plain numeric \cite for the ieeetr style.
+% The style sets the page layout, fonts and title format, so this file does not.
+\usepackage[preprint,nonatbib]{neurips_2025}
+
+% Packages kept from the data report (layout and font packages dropped)
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype,graphicx,booktabs,tabularx,array,float,xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
+\graphicspath{{figures/}}
+\setlength{\emergencystretch}{3em}
+
+% Footer notice: the course instead of "Preprint."
+\makeatletter
+\renewcommand{\@noticestring}{TME 6015: AI/ML Workflow Design, November 26, 2026.}
+\makeatother
+
+% Inline code and file names
+\newcommand{\var}[1]{\texttt{\detokenize{#1}}}
+
+% Figure slot: shows figures/<file> once a script has written it, otherwise a framed
+% placeholder naming the file it waits for.
+\newcommand{\figslot}[2][\linewidth]{%
+  \IfFileExists{figures/#2}%
+    {\includegraphics[width=#1]{#2}}%
+    {\fbox{\parbox[c][4cm][c]{\dimexpr#1-2\fboxsep-2\fboxrule\relax}{\centering\small Figure slot: \var{figures/#2}}}}}
+
+% Table slot: inputs tables/<file> once a script has written it, otherwise a placeholder.
+\newcommand{\tabslot}[1]{%
+  \IfFileExists{tables/#1}%
+    {\input{tables/#1}}%
+    {\fbox{\parbox{0.9\linewidth}{\centering\small Table slot: \var{tables/#1}}}}}
+
+% -----------------------------------------------------------------
+\title{An Upload Checker for Album Packaging Images}
+
+% NeurIPS shows no \date, so the course and date sit in the author block.
+\author{%
+  Akinbobola Akin (3784664)\\
+  TME 6015: AI/ML Workflow Design\\
+  November 26, 2026
+}
+
+\begin{document}
+\maketitle
+% The NeurIPS title block is not a float, so [t] floats could land above it.
+% This stops any float from taking the top of the title page.
+\suppressfloats[t]
+
+% -----------------------------------------------------------------
+\begin{abstract}
+% One paragraph: the problem, the two models, the album-level split, the headline
+% result of each experiment, and the audit demo.
+\end{abstract}
+
+% =================================================================
+\section{Introduction}\label{sec:intro}
+% Rubric 1 (2 marks).
+% Problem statement: music databases and marketplaces (MusicBrainz, Cover Art Archive,
+% Discogs) rely on uploaders to tag packaging images by hand. Tags are often wrong and
+% images get attached to the wrong album. Nobody can check millions of uploads by hand.
+% Define the ML problem: a part classifier (front, back, disc, booklet) and an album
+% verifier (image + claimed album -> match or no match), both on albums never seen in
+% training. State the research question: more albums or more editions of a few albums.
+% Business value: stakeholders are platform operators, contributors and sellers, and end
+% users. Say what each one gains.
+
+\subsection{Problem Statement}\label{sec:problem}
+% The ML problem and why it matters.
+
+\subsection{Business Value}\label{sec:value}
+% Impact on the industry and the benefit to each stakeholder.
+
+% =================================================================
+\section{Literature Review}\label{sec:lit}
+% Rubric 2.1 (2 marks).
+% Transfer learning from ImageNet (Deng et al., Yosinski et al., Kornblith et al.).
+% Image verification and similarity learning (FaceNet: embeddings, thresholds, hard
+% negatives). Existing solutions on the platforms (manual tagging and voting).
+% The gap: no work on checking album packaging uploads or on generalising to unseen albums.
+
+% =================================================================
+\section{Model Selection and Justification}\label{sec:models}
+% Rubric 2.2 (2 marks).
+% Frozen Keras ResNet-50 features (ImageNet weights) as the shared backbone.
+% Part classifier: logistic regression with class weights.
+% Verifier: cosine similarity on raw features as the baseline, and a small projection
+% layer trained so images of the same album sit close together. Gallery score = mean of
+% the top 3 similarities (or top 1, whichever wins on validation).
+% Why frozen features suit this data size and timeline, and the expected advantages.
+
+% =================================================================
+\section{Data Preparation}\label{sec:data}
+% Rubric 2.3 (2 marks).
+
+\subsection{Collection}\label{sec:collection}
+% Pipeline: Rolling Stone 500 screen, MusicBrainz release groups and releases, Cover Art
+% Archive images. Tag rules (Back;Spine as Back, Medium;Matrix/Runout as Medium, one image
+% per type per release). Snapshot dates and the gap between the 10 and the other 420.
+
+\subsection{From 10 to 430 Albums}\label{sec:expansion}
+% The change from the data report: following instructor feedback, the dataset grew from
+% 10 to 430 albums and the task changed so it works on unseen albums. Why the old 10-way
+% album classifier could not do that.
+
+% Figure slot: dataset overview (images per part, albums by size, 10 vs all).
+\begin{figure}[t]
+  \centering
+  \figslot[0.8\linewidth]{dataset_overview.pdf}
+  \caption{Placeholder: dataset overview.}
+  \label{fig:dataset}
+\end{figure}
+
+% Table slot: dataset summary (albums, releases, images per part) for 10 and all.
+\begin{table}[t]
+  \centering
+  \caption{Placeholder: dataset summary.}
+  \label{tab:dataset}
+  \tabslot{dataset_summary.tex}
+\end{table}
+
+\subsection{Album-Level Split}\label{sec:split}
+% About 70/15/15 train/validation/test albums, fixed seed, committed split file. The 10
+% albums forced into training. Test albums untouched until final evaluation. Only test
+% albums with at least 2 releases take part in verification.
+
+\subsection{Preprocessing and Class Imbalance}\label{sec:preprocessing}
+% Resize to 224x224 by squashing, Keras preprocess_input, features cached once.
+% No augmentation (frozen features). Fronts are about 40% of images: class weights.
+
+% =================================================================
+\section{Training and Fine-tuning}\label{sec:training}
+% Rubric 2.4 (2 marks).
+% Part classifier: logistic regression settings, regularisation chosen on validation.
+% Verifier projection: architecture, loss, optimiser, epochs, how pairs or triplets are
+% drawn from training albums. Hyperparameters and gallery score chosen on validation.
+% Threshold for accuracy chosen on validation albums. State that no backbone fine-tuning
+% was done (or describe the one optional Colab run if it happened).
+
+% Table slot: hyperparameters and the validation search ranges.
+\begin{table}[t]
+  \centering
+  \caption{Placeholder: hyperparameters chosen on validation.}
+  \label{tab:hparams}
+  \tabslot{hyperparameters.tex}
+\end{table}
+
+% =================================================================
+\section{Integration with Downstream Pipeline}\label{sec:integration}
+% Rubric 2.5 (1 mark).
+% How the audit script uses both models on a platform: for each upload, compare the
+% predicted part with the uploader tag and score the image against its claimed album.
+% Flag mismatches, sort by confidence, send the top of the list to human reviewers.
+% The expected workflow and the value it adds.
+
+% =================================================================
+\section{Results}\label{sec:results}
+% Rubric 3.2 (5 marks). Explain each result, not just report it. Report test set sizes.
+
+\subsection{Experiment 1: Part Classifier on Test Albums}\label{sec:exp1}
+% Accuracy, macro F1 (headline), per-class precision and recall, confusion matrix.
+% Which parts get confused and why.
+
+\begin{table}[t]
+  \centering
+  \caption{Placeholder: part classifier metrics on test albums.}
+  \label{tab:exp1}
+  \tabslot{exp1_part_metrics.tex}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \figslot[0.5\linewidth]{exp1_confusion_matrix.pdf}
+  \caption{Placeholder: part classifier confusion matrix on test albums.}
+  \label{fig:exp1-cm}
+\end{figure}
+
+\subsection{Experiment 2: Album Verifier on Test Albums}\label{sec:exp2}
+% Genuine, random impostor and hard impostor checks per test image. ROC, AUC and
+% accuracy at the validation threshold, split into random vs hard and by query part,
+% for the baseline and the trained verifier. Present it in the FaceNet style.
+
+\begin{figure}[t]
+  \centering
+  \figslot{exp2_roc.pdf}
+  \caption{Placeholder: verifier ROC curves, baseline and trained, random and hard impostors.}
+  \label{fig:exp2-roc}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \caption{Placeholder: verifier AUC and accuracy by impostor type and query part.}
+  \label{tab:exp2}
+  \tabslot{exp2_verifier_metrics.tex}
+\end{table}
+
+\subsection{Experiment 3: Breadth versus Depth}\label{sec:exp3}
+% Part classifier trained on (A) the 10 albums, (B) an equal number of images across all
+% training albums, (C) all training albums. Same test albums. A vs B isolates how the
+% images are spread. C shows what extra data adds. Present it in the Kornblith style.
+
+\begin{figure}[t]
+  \centering
+  \figslot[0.7\linewidth]{exp3_breadth_depth.pdf}
+  \caption{Placeholder: macro F1 on test albums for training sets A, B and C.}
+  \label{fig:exp3}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \caption{Placeholder: breadth versus depth results.}
+  \label{tab:exp3}
+  \tabslot{exp3_breadth_depth.tex}
+\end{table}
+
+% =================================================================
+\section{Downstream Application Demo}\label{sec:demo}
+% Rubric 3.3 (1 mark).
+% The audit report on test albums: tag mismatches and album mismatches sorted by
+% confidence, with examples. Hand-check of the top 50 flags: how many are real
+% mislabels. This replaces the label check promised in the data report.
+
+\begin{figure}[t]
+  \centering
+  \figslot{demo_flagged_examples.pdf}
+  \caption{Placeholder: example images flagged by the audit.}
+  \label{fig:demo}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \caption{Placeholder: hand-check of the top 50 flagged images.}
+  \label{tab:demo}
+  \tabslot{demo_handcheck.tex}
+\end{table}
+
+% =================================================================
+\section{Discussion and Conclusion}\label{sec:discussion}
+% Rubric 4 (2 marks).
+
+\subsection{Interpretation}\label{sec:interpretation}
+% What the three experiments say together. Answer the research question.
+
+\subsection{Limitations}\label{sec:limitations}
+% Albums with more than one cover design (good kid, m.A.A.d city, Thriller anniversary
+% editions) as known hard positives, with examples. Label noise from uploaders.
+% Western-heavy album list. Scans outnumber phone photos. Snapshot date gap.
+
+\begin{figure}[t]
+  \centering
+  \figslot{multi_cover_examples.pdf}
+  \caption{Placeholder: albums with more than one cover design.}
+  \label{fig:multicover}
+\end{figure}
+
+\subsection{Future Work}\label{sec:future}
+% OCR to link different cover designs, retrieval at scale, fine-tuning the backbone.
+
+\subsection{Conclusion}\label{sec:conclusion}
+% Short summary of what the system does and how well.
+
+% =================================================================
+\section{Code and Repository}\label{sec:code}
+% Rubric 3.1 (6 marks).
+% Public repo link. Setup (uv sync, ALBUM_PROJECT_CONTACT), rebuilding the dataset from
+% committed snapshots, training each model, running the audit (inference). Point to the
+% README for detail. Note that images stay out of the repo.
+
+% =================================================================
+% Skeleton only: \nocite{*} lists every entry so BibTeX runs before any prose cites them.
+% Remove it once the text cites its sources.
+\nocite{*}
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
+\end{document}

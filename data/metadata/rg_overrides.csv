@@ -1,0 +1,4 @@
+artist,album,wrong_rg_id,rg_id,note
+The Beatles,The Beatles,71aa4dac-b705-4b6e-be77-ecfa8c238ad0,055be730-dcad-31bf-b550-45ba9c202aa3,"screen matched a 1994 release group with 1 release; correct group first released 1968-11-22 (checked on MusicBrainz 2026-11-20)"
+The Who,Who's Next,2c56c32d-f66c-4e26-bb6b-caed0e0cffa4,9584e28b-66a7-3846-8d52-b3008a283539,"screen matched a 2023 release group with 2 releases; correct group first released 1971-08-14, 73 releases (checked 2026-11-20)"
+Four Tops,Reach Out,f56179b0-5abe-43fb-8f64-3e45648186da,6fdc3cfa-7bac-3b19-aa87-94947ef40ffa,"screen matched an undated release group with 1 release; correct group first released 1967-07, 9 releases (checked 2026-11-20)"

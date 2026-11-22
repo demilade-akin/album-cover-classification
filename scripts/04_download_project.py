@@ -29,6 +29,8 @@ Output
   data/logs/04_failures_<name>.csv              downloads that failed this run (rerun to retry)
 
 Resumable: files are written to .part and renamed, so Ctrl-C or a crash never leaves a broken image.
+Failures never stop the run: an album whose MusicBrainz metadata keeps failing and images that keep failing are
+skipped, listed at the end, and fetched by the next run.
 Needs ALBUM_PROJECT_CONTACT set (see http_client.py) only when something must be fetched.
 """
 import argparse, csv, hashlib, io, random, sys
@@ -137,16 +139,23 @@ def load_releases(albums):
             rows = list(csv.DictReader(f))
     have = {r["album"] for r in rows}
     missing = [(a, rg) for a, rg in albums if a not in have]
+    failed = []
     if missing:
         user_agent()                       # fail early if ALBUM_PROJECT_CONTACT is unset
         print(f"Release metadata: {len(albums) - len(missing)} albums pinned, fetching {len(missing)}")
         try:
             for folder, rg_id in tqdm(missing, desc="release metadata", unit="album", dynamic_ncols=True):
-                rows += fetch_album_releases(folder, rg_id)
+                try:
+                    rows += fetch_album_releases(folder, rg_id)
+                except (requests.RequestException, ValueError, KeyError):
+                    # MusicBrainz kept failing: skip the album, the next run fetches it again.
+                    # Its images still download. Its manifest rows have blank metadata until then.
+                    failed.append(folder)
+                    continue
                 write_csv_atomic(RELEASES_PATH, rows, RELEASE_FIELDS)
         except KeyboardInterrupt:
             sys.exit("\nStopped. Albums fetched so far are saved in releases.csv. Rerun to continue.")
-    return {r["release_id"]: r for r in rows}
+    return {r["release_id"]: r for r in rows}, failed
 
 
 # 3. Download one image, saved as RGB JPEG --------------------------------------------------------
@@ -231,7 +240,7 @@ def main():
     albums = load_albums(DATASETS[name])
     picks = select_images({folder for folder, _ in albums})
     print(f"Dataset {name}: {len(albums)} albums, {len(picks)} images selected from {RAW_PATH.name}")
-    releases = load_releases(albums)
+    releases, meta_failed = load_releases(albums)
     failed = download_all(picks)
 
     # Manifest is rebuilt from disk every run, so it always matches the folder
@@ -263,6 +272,10 @@ def main():
         print(f"{len(no_images)} albums have no usable image: {', '.join(no_images[:10])}"
               + (" ..." if len(no_images) > 10 else ""))
     print(f"\nSaved {manifest_path.relative_to(ROOT)}")
+    if meta_failed:
+        print(f"\nRelease metadata failed for {len(meta_failed)} albums (MusicBrainz errors). Their manifest rows "
+              f"have blank date, country and format. Rerun to fetch them: {', '.join(meta_failed[:10])}"
+              + (" ..." if len(meta_failed) > 10 else ""))
     if failed:
         write_csv_atomic(fail_path, failed, ["album", "type", "release_id", "image_id", "tags", "candidates"])
         print(f"\n{len(failed)} images failed (archive.org errors or missing thumbnails). Rerun to retry. "
