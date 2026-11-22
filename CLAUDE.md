@@ -32,8 +32,8 @@ by hand.
 
 ### Solution: an upload checker with two models
 1. **Part classifier:** image -> front, back, disc (medium) or booklet. 4 classes.
-2. **Album verifier:** image + claimed album -> match or no match. Score = mean of the top 3 similarities between the
-   image and that album's gallery images. Threshold chosen on validation albums.
+2. **Album verifier:** image + claimed album -> match or no match. Score = top-1 similarity between the image and that
+   album's gallery images (chosen over mean of top 3 on validation AUC). Threshold chosen on validation albums.
 
 Both must work on **albums never seen in training**. That is the central claim.
 
@@ -80,7 +80,8 @@ over more variation of the same albums.)
 - A query's gallery is its claimed album's images **minus the query's own release** and minus near-duplicates of the
   query (imagehash), so a scan uploaded to several releases cannot match itself.
 - Only test albums with at least 2 releases take part in verification. The part classifier uses every image.
-- Pick the gallery score (top-1 vs mean of top 3) on validation, not test.
+- Pick the gallery score (top-1 vs mean of top 3) on validation, not test. Validation chose top-1 for both the
+  baseline and the trained verifier (`09_verifier.py`).
 - Albums with more than one cover design (good kid, m.A.A.d city, Thriller anniversary editions) are known hard
   positives. Discuss them as a limitation with examples. Linking different designs needs text (OCR): future work.
 
