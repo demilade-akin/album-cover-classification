@@ -1,4 +1,4 @@
-# TME 6015 final project: album packaging upload checker
+# TME 60    15 final project: album packaging upload checker
 
 Due **Thursday, November 26, 2026**: report, presentation, public GitHub repo (code, models, results).
 Assignment 2 lives in a separate repo (`~/Developer/tme6015-food-classifier`). Nothing here touches it.
