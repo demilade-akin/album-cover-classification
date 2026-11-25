@@ -19,3 +19,4 @@ __pycache__/
 /reports/*/*.log
 /reports/*/*.out
 /reports/*/*.synctex.gz
+reports/final_report/build/

@@ -1,0 +1,54 @@
+{
+  "settings": {
+    "emb_size": 512,
+    "scorer": "top1",
+    "lr": 0.001,
+    "batch": 256,
+    "patience": 5,
+    "max_epochs": 60,
+    "class_weight": "balanced",
+    "init_seed": 42,
+    "b_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "near_duplicate_phash_distance": 2,
+    "threshold_rule": "max balanced accuracy on validation checks"
+  },
+  "val_checks": {
+    "albums": 63,
+    "queries": 3208,
+    "checks": 9624,
+    "dropped_queries_empty_gallery": 2,
+    "hard_same_artist_albums": 2,
+    "hard_most_similar_albums": 61
+  },
+  "test_checks": {
+    "albums": 64,
+    "queries": 3628,
+    "checks": 10884,
+    "dropped_queries_empty_gallery": 1,
+    "hard_same_artist_albums": 6,
+    "hard_most_similar_albums": 58
+  },
+  "test_scorings": {
+    "C": 1,
+    "A": 1,
+    "B": 5,
+    "total": 7,
+    "runs": 7
+  },
+  "sanity_check": {
+    "reference_test_auc": 0.9392996739800328,
+    "reference_best_epoch": 15,
+    "set_c_test_auc": 0.9392996739800328,
+    "set_c_best_epoch": 15,
+    "difference": 0.0,
+    "tolerance": 0.005,
+    "passed": true
+  },
+  "untrained_baseline_test_auc": 0.9242892472974501
+}

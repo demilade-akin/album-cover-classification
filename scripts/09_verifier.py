@@ -209,16 +209,20 @@ def best_threshold(y, s):
 
 
 # ---------------------------------------------------------------- trained projection
-def train_projection(d, X, rows, val_checks, val_gal, log):
-    """Train one projection of size d. Returns (embedding model, best val AUC, best epoch, best scorer)."""
+def train_projection(d, X, rows, val_checks, val_gal, log, train_idx=None, scorers=SCORERS):
+    """Train one projection of size d. Returns (embedding model, best val AUC, best epoch, best scorer).
+
+    train_idx: row indices to train on (default: every train album image). The softmax head covers the albums
+    in train_idx. scorers: scorers considered for early stopping (default: top1 and top3).
+    """
     import keras
     from keras import layers
     keras.utils.set_random_seed(SEED)
 
-    tr = np.array([r["split"] == "train" for r in rows])
-    albums = sorted({r["album"] for r in rows if r["split"] == "train"})
+    tr = np.flatnonzero([r["split"] == "train" for r in rows]) if train_idx is None else np.asarray(train_idx)
+    albums = sorted({rows[i]["album"] for i in tr})
     cls = {a: k for k, a in enumerate(albums)}
-    y_tr = np.array([cls[rows[i]["album"]] for i in np.flatnonzero(tr)])
+    y_tr = np.array([cls[rows[i]["album"]] for i in tr])
     counts = np.bincount(y_tr, minlength=len(albums))
     class_weight = {k: len(y_tr) / (len(albums) * c) for k, c in enumerate(counts)}   # "balanced"
 
@@ -239,17 +243,17 @@ def train_projection(d, X, rows, val_checks, val_gal, log):
         E[val_idx] = embedder.predict(X[val_idx], batch_size=1024, verbose=0)
         sc = album_scores(E, val_checks, val_gal)
         row = {"emb_size": d, "epoch": epoch, "train_loss": h.history["loss"][0]}
-        for s in SCORERS:
+        for s in scorers:
             for k, v in aucs(val_checks, sc[s]).items():
                 row[f"auc_{k}_{s}"] = v
         log.append(row)
-        top = max(SCORERS, key=lambda s: row[f"auc_all_{s}"])
+        top = max(scorers, key=lambda s: row[f"auc_all_{s}"])
         if row[f"auc_all_{top}"] > best[0]:
             best = (row[f"auc_all_{top}"], epoch, top, embedder.get_weights())
         elif epoch - best[1] >= PATIENCE:
             break
-        print(f"  d={d} epoch {epoch:>2}  loss {row['train_loss']:.3f}  val AUC top1 {row['auc_all_top1']:.4f}"
-              f"  top3 {row['auc_all_top3']:.4f}")
+        print(f"  d={d} epoch {epoch:>2}  loss {row['train_loss']:.3f}  val AUC "
+              + "  ".join(f"{s} {row[f'auc_all_{s}']:.4f}" for s in scorers))
     embedder.set_weights(best[3])
     return embedder, best[0], best[1], best[2]
 
