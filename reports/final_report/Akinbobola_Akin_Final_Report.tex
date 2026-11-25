@@ -239,7 +239,7 @@ Training uses the Adam optimiser with a learning rate of 0.001 and batches of 25
 \paragraph{No fine-tuning} The ResNet-50 backbone stays frozen in every run, for the reasons given in Section~\ref{sec:advantages}.
 
 \subsubsection{Hyperparameters and Tuning Strategy}\label{sec:tuning}
-I chose every setting on the validation albums. My scripts also scored the test albums at the end of each tuning round, but no choice used those scores. For the type classifier there were three rounds, because the best value of $C$ twice sat at the edge of the grid on validation, and I widened the grid each time. Table~\ref{tab:hparams} lists the settings I tried and the values I kept.
+I chose every setting on the validation albums. The type classifier's script also scored the test albums at the end of each tuning round, but no choice used those scores. There were three rounds, because the best value of $C$ twice sat at the edge of the grid on validation, and I widened the grid each time. I did not record how often the verifier's script scored the test albums during development, but its log of settings shows that every choice rests on validation AUC alone. Table~\ref{tab:hparams} lists the settings I tried and the values I kept.
 
 \begin{table}[t]
 \caption{Settings tuned on the validation albums}
