@@ -14,10 +14,13 @@ Figures (results/figures/, each as .pdf and .png; the .pdf files are copied to r
                            called a front (same release), and another back of the album that it called a back
   audit_black_sabbath.pdf  the same for Black Sabbath
   audit_bitches_brew.pdf   the same for Bitches Brew
+  audit_verifier_discs.pdf     album flags on two discs, each next to a front of its album (2 by 2)
+  audit_verifier_booklets.pdf  album flags on two booklet pages, each next to a front of its album (2 by 2)
 
 The audit figures show why the type classifier is most confident when it is wrong: backs that carry clean artwork
 look like fronts to it, while a typical back carries text, a barcode and small print. Each label reads the
-prediction and its probability from results/part_classifier/predictions.csv, so no number is typed by hand.
+prediction and its probability from results/part_classifier/predictions.csv, so no number is typed by hand. The verifier figures read each album score and the threshold from
+results/audit/flags.csv.
 
 The releases are chosen by hand from the audit (results/audit/hand_check.csv). The image paths come from
 data/manifest_all.csv, so the script fails clearly if an image is missing.
@@ -50,6 +53,23 @@ AUDIT_ROWS = {
     "audit_dark_side": ("pink_floyd__the_dark_side_of_the_moon", "b84ee12a-09ef-421b-82de-0441a926375b", "10600476-3b48-4709-a91d-3fdf6d2455e6"),
     "audit_black_sabbath": ("black_sabbath__black_sabbath", "9fd196b4-0437-4ce2-9e7e-9966dfa86180", "a55102aa-9658-454b-83d2-22f8bb13c5d6"),
     "audit_bitches_brew": ("miles_davis__bitches_brew", "79bd4086-dc50-47a6-a317-dc73338ed8fe", "e20153d0-4bef-4f4f-963e-71967da294b9"),
+}
+
+# Verifier figures: album flags from the hand-check, each shown next to a front of its album.
+# (flagged image file in data/, front: (album, release) to take the front from)
+VERIFIER_FIGURES = {
+    "audit_verifier_discs": [
+        ("images/al_green__call_me/medium/bc050224-4ded-49c9-bdc9-96f82a374068.jpg",
+         ("al_green__call_me", "bc050224-4ded-49c9-bdc9-96f82a374068")),
+        ("images/madvillain__madvillainy/medium/a5c77262-617b-43dd-947e-e5ff9e938e49.jpg",
+         ("madvillain__madvillainy", "4873c74c-dc5b-4613-8169-d57fe9e37bb3")),   # flagged release has no front
+    ],
+    "audit_verifier_booklets": [
+        ("images/al_green__call_me/booklet/bc050224-4ded-49c9-bdc9-96f82a374068.jpg",
+         ("al_green__call_me", "bc050224-4ded-49c9-bdc9-96f82a374068")),
+        ("images/sleater_kinney__dig_me_out/booklet/5ab2390a-39f0-4163-b7d7-c00e0232d3e3.jpg",
+         ("sleater_kinney__dig_me_out", "5ab2390a-39f0-4163-b7d7-c00e0232d3e3")),
+    ],
 }
 
 THUMB_PX = 900        # longest side of each embedded image, large enough to print clearly at full width
@@ -148,9 +168,41 @@ def audit_figures():
                           (right, prediction_label(pred, right))])
 
 
+def load_album_flags():
+    """Album flags from the audit, keyed by image file: (album score, threshold)."""
+    with open(ROOT / "results" / "audit" / "flags.csv", newline="") as f:
+        return {row["file"]: (float(row["album_score"]), float(row["threshold"]))
+                for row in csv.DictReader(f) if row["flag_type"] == "album"}
+
+
+def verifier_figures():
+    """Each figure is a 2 by 2 grid: a flagged image and a front of its album on each row, with the flagged
+    image's album score against the threshold under it."""
+    flags = load_album_flags()
+    for name, rows in VERIFIER_FIGURES.items():
+        fig, axes = plt.subplots(2, 2, figsize=(FIG_W, FIG_W + 0.9))
+        for (file, (album, release)), row_axes in zip(rows, axes):
+            score, threshold = flags[file]
+            part = Path(file).parent.name
+            front = image_paths(album, release, needed=["front"])["front"]
+            panels = [(DATA / file, f"{LABEL[part]}\nscore {score:.2f} (threshold {threshold:.2f})"),
+                      (front, "Front of the album\n")]
+            for ax, (path, label) in zip(row_axes, panels):
+                if not path.exists():
+                    sys.exit(f"Missing image file: {path}")
+                ax.imshow(thumbnail(path))
+                ax.set_xticks([]); ax.set_yticks([])
+                for spine in ax.spines.values():
+                    spine.set_visible(False)
+                ax.set_xlabel(label, labelpad=6)
+        fig.tight_layout(w_pad=1.5, h_pad=1.5)
+        save(fig, name)
+
+
 if __name__ == "__main__":
     FIG.mkdir(parents=True, exist_ok=True)
     if COPY_TO_REPORT:
         REPORT_FIG.mkdir(parents=True, exist_ok=True)
     image_types()
     audit_figures()
+    verifier_figures()
