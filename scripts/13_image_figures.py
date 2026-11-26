@@ -10,11 +10,10 @@ and the report credits the Cover Art Archive.
 
 Figures (results/figures/, each as .pdf and .png; the .pdf files are copied to reports/final_report/figures/)
   image_types.pdf          the four image types from one release, in a 2 by 2 grid: front, back, disc, booklet
-  audit_dark_side.pdf      a back the type classifier called a front, next to the release's front
+  audit_dark_side.pdf      three images of The Dark Side of the Moon in one row: a front, a back the type classifier
+                           called a front (same release), and another back of the album that it called a back
   audit_black_sabbath.pdf  the same for Black Sabbath
   audit_bitches_brew.pdf   the same for Bitches Brew
-  audit_backs_contrast.pdf two backs of Bitches Brew with the same painting: the clean one called a front, the one
-                           framed by text called a back
 
 The audit figures show why the type classifier is most confident when it is wrong: backs that carry clean artwork
 look like fronts to it, while a typical back carries text, a barcode and small print. Each label reads the
@@ -44,15 +43,14 @@ LABEL = {"front": "Front", "back": "Back", "medium": "Disc", "booklet": "Booklet
 TYPES_ALBUM = "miles_davis__kind_of_blue"
 TYPES_RELEASE = "7d7ebace-0e5a-43c2-bd6d-18b5f35bed0b"
 
-# Audit figures: (album, release) of each back the classifier called a front, and the contrasting back
-AUDIT_PAIRS = {
-    "audit_dark_side": ("pink_floyd__the_dark_side_of_the_moon", "b84ee12a-09ef-421b-82de-0441a926375b"),
-    "audit_black_sabbath": ("black_sabbath__black_sabbath", "9fd196b4-0437-4ce2-9e7e-9966dfa86180"),
-    "audit_bitches_brew": ("miles_davis__bitches_brew", "79bd4086-dc50-47a6-a317-dc73338ed8fe"),
+# Audit figures: for each album, the release whose back the classifier called a front (its front is shown too),
+# and a release whose back it called a back. Both backs come from the test albums' predictions.
+AUDIT_ROWS = {
+    #  figure name            album                                    back called front                       back called back
+    "audit_dark_side": ("pink_floyd__the_dark_side_of_the_moon", "b84ee12a-09ef-421b-82de-0441a926375b", "10600476-3b48-4709-a91d-3fdf6d2455e6"),
+    "audit_black_sabbath": ("black_sabbath__black_sabbath", "9fd196b4-0437-4ce2-9e7e-9966dfa86180", "a55102aa-9658-454b-83d2-22f8bb13c5d6"),
+    "audit_bitches_brew": ("miles_davis__bitches_brew", "79bd4086-dc50-47a6-a317-dc73338ed8fe", "e20153d0-4bef-4f4f-963e-71967da294b9"),
 }
-CONTRAST_ALBUM = "miles_davis__bitches_brew"
-CONTRAST_WRONG = "79bd4086-dc50-47a6-a317-dc73338ed8fe"     # vinyl back, painting fills it, called a front
-CONTRAST_RIGHT = "e20153d0-4bef-4f4f-963e-71967da294b9"     # CD back, painting framed by text, called a back
 
 THUMB_PX = 900        # longest side of each embedded image, large enough to print clearly at full width
 FIG_W = 6.5           # inches, the text width of the single-column report
@@ -117,16 +115,18 @@ def load_predictions():
 
 
 def prediction_label(pred, path):
-    """Short label: the uploader's tag, then the model's prediction and its probability, e.g. "Back, called front (98%)"."""
+    """Short two-line label: the uploader's tag, then the model's prediction and its probability,
+    e.g. "Back" over "called front (98%)"."""
     row = pred[str(path.relative_to(DATA))]
     p = float(row[f"p_{row['pred_part']}"])
-    return f"{LABEL[row['true_part']]}, called {LABEL[row['pred_part']].lower()} ({p:.0%})"
+    return f"{LABEL[row['true_part']]}\ncalled {LABEL[row['pred_part']].lower()} ({p:.0%})"
 
 
-def pair_figure(name, left, right):
-    """Two large images side by side, each with a label under it. left and right are (path, label)."""
-    fig, axes = plt.subplots(1, 2, figsize=(FIG_W, FIG_W / 2 + 0.7))
-    for ax, (path, label) in zip(axes, [left, right]):
+def row_figure(name, panels):
+    """Images side by side, each with a label under it. panels is a list of (path, label)."""
+    n = len(panels)
+    fig, axes = plt.subplots(1, n, figsize=(FIG_W, FIG_W / n + 0.7))
+    for ax, (path, label) in zip(axes, panels):
         ax.imshow(thumbnail(path))
         ax.set_xticks([]); ax.set_yticks([])
         for spine in ax.spines.values():
@@ -137,17 +137,15 @@ def pair_figure(name, left, right):
 
 
 def audit_figures():
-    """One figure per album: the back the classifier called a front, next to the release's front. Then two
-    backs of the same album that share a painting, one called a front and one called a back."""
+    """One figure per album, in one row: the front, the back the classifier called a front (same release), and a
+    back of another release that it called a back."""
     pred = load_predictions()
-    for name, (album, release) in AUDIT_PAIRS.items():
-        paths = image_paths(album, release, needed=["back", "front"])
-        pair_figure(name, (paths["back"], prediction_label(pred, paths["back"])),
-                    (paths["front"], "Front"))
-    wrong = image_paths(CONTRAST_ALBUM, CONTRAST_WRONG, needed=["back"])["back"]
-    right = image_paths(CONTRAST_ALBUM, CONTRAST_RIGHT, needed=["back"])["back"]
-    pair_figure("audit_backs_contrast", (wrong, prediction_label(pred, wrong)),
-                (right, prediction_label(pred, right)))
+    for name, (album, wrong_release, right_release) in AUDIT_ROWS.items():
+        wrong = image_paths(album, wrong_release, needed=["back", "front"])
+        right = image_paths(album, right_release, needed=["back"])["back"]
+        row_figure(name, [(wrong["front"], "Front\n"),
+                          (wrong["back"], prediction_label(pred, wrong["back"])),
+                          (right, prediction_label(pred, right))])
 
 
 if __name__ == "__main__":

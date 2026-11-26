@@ -50,8 +50,8 @@ need the images.
 ## Setup
 
 ```bash
-git clone https://github.com/demilade-akin/album-cover-classification.git
-cd album-cover-classification
+git clone https://github.com/demilade-akin/album-upload-checker.git
+cd album-upload-checker
 uv sync
 ```
 
@@ -72,7 +72,7 @@ Run the steps in order. Step 07 needs the images. Steps 08 to 10 need the featur
 | 10 | `python scripts/10_breadth_vs_depth.py` | Experiment 3. Training sets A, B (5 seeds) and C, each tuned on validation. | `results/breadth_depth/` | under a minute |
 | 11 | `python scripts/11_audit.py` | Downstream audit. Flags test images whose predicted part differs from the uploader tag, and images that fail the verifier against their own album, ranked by confidence. Writes a hand-check sheet of the top 50 part flags and top 20 album flags. | `results/audit/` | seconds |
 | 12 | `python scripts/12_make_figures.py` | Every report chart and table, from `results/` only. | `results/figures/`, `results/tables/` | seconds |
-| 13 | `python scripts/13_image_figures.py` | Report figures built from album images: the four image types (Kind of Blue) and the audit examples of backs the part classifier called fronts (The Dark Side of the Moon, Black Sabbath, Bitches Brew). Labels read predictions from `results/part_classifier/predictions.csv`. | `results/figures/` | seconds |
+| 13 | `python scripts/13_image_figures.py` | Report figures built from album images: the four image types (Kind of Blue) and the audit examples (The Dark Side of the Moon, Black Sabbath, Bitches Brew), each showing a front, a back the part classifier called a front and a back it called a back. Labels read predictions from `results/part_classifier/predictions.csv`. | `results/figures/` | seconds |
 
 Validation albums set every hyperparameter and threshold. Test albums are scored only at the end of each
 experiment. `results/part_classifier/metrics.json` records each time the part classifier's test set was scored
