@@ -118,9 +118,6 @@ results/
                     plus the data report pilot curve
   tables/           one CSV per report table
   pilot_results_10.csv   data report pilot (frozen)
-reports/
-  data_report/      submitted data report (frozen)
-  final_report/     final report source (LaTeX). Build with: latexmk -pdf
 ```
 
 ## Data pipeline (steps 01 to 05)
@@ -169,7 +166,6 @@ data/
   manifest_*.csv, split_*.csv, split_albums.csv, phash.csv   committed
   images/, logs/, features_resnet50.npz                       not in git, rebuilt by scripts 04 and 07
 results/        generated outputs (see above)
-reports/        data report (frozen) and final report
 ```
 
 Assignment 2 (the food image classifier) lives in its own repo, `tme6015-food-classifier`.

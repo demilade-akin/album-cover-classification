@@ -117,10 +117,10 @@ def load_predictions():
 
 
 def prediction_label(pred, path):
-    """Two-line label: the uploader's tag, then the model's prediction and its probability."""
+    """Short label: the uploader's tag, then the model's prediction and its probability, e.g. "Back, called front (98%)"."""
     row = pred[str(path.relative_to(DATA))]
     p = float(row[f"p_{row['pred_part']}"])
-    return f"Tagged {LABEL[row['true_part']].lower()}\nModel: {LABEL[row['pred_part']].lower()} ({p:.0%})"
+    return f"{LABEL[row['true_part']]}, called {LABEL[row['pred_part']].lower()} ({p:.0%})"
 
 
 def pair_figure(name, left, right):
@@ -143,7 +143,7 @@ def audit_figures():
     for name, (album, release) in AUDIT_PAIRS.items():
         paths = image_paths(album, release, needed=["back", "front"])
         pair_figure(name, (paths["back"], prediction_label(pred, paths["back"])),
-                    (paths["front"], "Front of the same release"))
+                    (paths["front"], "Front"))
     wrong = image_paths(CONTRAST_ALBUM, CONTRAST_WRONG, needed=["back"])["back"]
     right = image_paths(CONTRAST_ALBUM, CONTRAST_RIGHT, needed=["back"])["back"]
     pair_figure("audit_backs_contrast", (wrong, prediction_label(pred, wrong)),
