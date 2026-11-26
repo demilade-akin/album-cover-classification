@@ -22,7 +22,7 @@ Taken from `results/tables/`. The test set has 64 albums and 3,629 images.
 | Experiment | Result |
 |---|---|
 | 1. Part classifier | accuracy 0.858, macro F1 0.833 (F1: front 0.877, back 0.782, medium 0.985, booklet 0.687) |
-| 2. Album verifier, AUC (baseline → trained) | random impostors 0.943 → 0.961, hard impostors 0.906 → 0.918, all checks 0.924 → 0.939 |
+| 2. Album verifier, AUC (baseline → trained) | random impostors 0.943 → 0.961, hard impostors 0.906 → 0.917, all checks 0.924 → 0.939 |
 | 2. Album verifier, accuracy at validation threshold | baseline 0.867, trained 0.912 (all checks) |
 | 3. Breadth vs depth, macro F1 | A: 10 albums 0.747. B: same image count over 302 albums 0.817 ± 0.007 (5 seeds). C: all 302 albums 0.833 |
 
@@ -43,8 +43,9 @@ The script reads the committed snapshots, so it picks the same images on every m
 `data/manifest_all.csv` lets you confirm each file. The only difference can come from images deleted from the
 Cover Art Archive since the snapshot.
 
-**You do not need the images to check the results.** `scripts/12_make_figures.py` rebuilds every figure and table
-from the committed files in `results/`.
+**You do not need the images to check the results.** `scripts/12_make_figures.py` rebuilds every chart and table
+from the committed files in `results/`. Only the figures that show album images (`scripts/13_image_figures.py`)
+need the images.
 
 ## Setup
 
@@ -60,7 +61,7 @@ can run it from any folder. TensorFlow runs on CPU, which is fast enough at this
 
 ## Run the experiments
 
-Run the steps in order. Step 07 needs the images. Steps 08 to 10 need the feature cache that step 07 writes. Step 09 reads the committed `data/phash.csv` and hashes images only if that file is missing. Step 12 needs only committed files.
+Run the steps in order. Step 07 needs the images. Steps 08 to 10 need the feature cache that step 07 writes. Step 09 reads the committed `data/phash.csv` and hashes images only if that file is missing. Step 12 needs only committed files. Step 13 needs the images.
 
 | Step | Command | What it does | Output | Time |
 |---|---|---|---|---|
@@ -70,7 +71,8 @@ Run the steps in order. Step 07 needs the images. Steps 08 to 10 need the featur
 | 09 | `python scripts/09_verifier.py` | Experiment 2. pHash near-duplicates, checks, baseline and trained projection, thresholds on validation, tests once. | `results/verifier/`, `data/phash.csv` | several minutes |
 | 10 | `python scripts/10_breadth_vs_depth.py` | Experiment 3. Training sets A, B (5 seeds) and C, each tuned on validation. | `results/breadth_depth/` | under a minute |
 | 11 | `python scripts/11_audit.py` | Downstream audit. Flags test images whose predicted part differs from the uploader tag, and images that fail the verifier against their own album, ranked by confidence. Writes a hand-check sheet of the top 50 part flags and top 20 album flags. | `results/audit/` | seconds |
-| 12 | `python scripts/12_make_figures.py` | Every report figure and table, from `results/` only. | `results/figures/`, `results/tables/` | seconds |
+| 12 | `python scripts/12_make_figures.py` | Every report chart and table, from `results/` only. | `results/figures/`, `results/tables/` | seconds |
+| 13 | `python scripts/13_image_figures.py` | Report figures built from album images: the four image types (Kind of Blue) and the audit examples of backs the part classifier called fronts (The Dark Side of the Moon, Black Sabbath, Bitches Brew). Labels read predictions from `results/part_classifier/predictions.csv`. | `results/figures/` | seconds |
 
 Validation albums set every hyperparameter and threshold. Test albums are scored only at the end of each
 experiment. `results/part_classifier/metrics.json` records each time the part classifier's test set was scored
@@ -112,12 +114,13 @@ results/
   verifier/         tuning.csv, tuning_epochs.csv, metrics.json, checks_test.csv, roc_curves.png, projection.keras
   breadth_depth/    results.csv, summary.csv, breadth_vs_depth.png
   audit/            flags.csv, hand_check.csv (verdict column filled by hand), hand_check.html
-  figures/          report figures (.pdf and .png), plus the data report pilot curve
+  figures/          report figures (.pdf and .png): charts from step 12, album image figures from step 13,
+                    plus the data report pilot curve
   tables/           one CSV per report table
   pilot_results_10.csv   data report pilot (frozen)
 reports/
   data_report/      submitted data report (frozen)
-  final_report/     final report source (LaTeX, NeurIPS style). Build with: latexmk -pdf
+  final_report/     final report source (LaTeX). Build with: latexmk -pdf
 ```
 
 ## Data pipeline (steps 01 to 05)

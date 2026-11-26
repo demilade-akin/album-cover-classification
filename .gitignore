@@ -10,13 +10,4 @@ __pycache__/
 .DS_Store
 /.idea/
 
-# LaTeX build files (keep the .tex, .bib and figures)
-/reports/*/*.aux
-/reports/*/*.bbl
-/reports/*/*.blg
-/reports/*/*.fdb_latexmk
-/reports/*/*.fls
-/reports/*/*.log
-/reports/*/*.out
-/reports/*/*.synctex.gz
-reports/final_report/build/
+/reports
